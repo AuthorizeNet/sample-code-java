@@ -10,6 +10,8 @@ public class CreateSubscription {
   }
 
   public void scheduleSubscription(BigDecimal amt, String startDate, CreditCard card) {
+    Merchant merchant = Merchant.createMerchant(Environment.SANDBOX,
+            apiLoginID, transactionKey);
     PaymentSchedule schedule = PaymentSchedule.createPaymentSchedule();
     schedule.setIntervalLength(1);
     schedule.setSubscriptionUnit(SubscriptionUnitType.MONTHS);
