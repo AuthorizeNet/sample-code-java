@@ -33,7 +33,7 @@ public class CreditCardProcessor {
         card.setExpirationMonth(expMonth);
         card.setExpirationYear(expYear);
 
-        Transaction trans = merchant.createAIMTransaction(
+        Transaction trans = this.merchant.createAIMTransaction(
                 TransactionType.AUTH_CAPTURE, amt);
         trans.setCreditCard(card);
 
