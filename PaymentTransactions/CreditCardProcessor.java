@@ -9,6 +9,7 @@ public class CreditCardProcessor {
 
     private String appId;
     private String transKey;
+    private Merchant merchant;
 
 /* Singleton */
 
@@ -19,11 +20,14 @@ public class CreditCardProcessor {
     }
 
     public void config(String appLoginId, String transactionKey) {
-        CreditCardProcessor.instance().appId = appLoginId;
-        CreditCardProcessor.instance().transKey = transactionKey;
+        this.instance().appId = appLoginId;
+        this.transKey = transactionKey;
+        this.merchant = Merchant.createMerchant(Environment.SANDBOX,
+              apiLoginID, transactionKey);
     }
 
     public void runCreditCardTransaction(String cardNumber, String expMonth, String expYear, BigDecimal amt) {
+
         CreditCard card = new CreditCard();
         card.setCreditCardNumber(cardNumber);
         card.setExpirationMonth(expMonth);
