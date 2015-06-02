@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>net.authorize.sdk</groupId>
+  <groupId>net.authorize.sample</groupId>
   <artifactId>SampleCode</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
@@ -9,10 +9,36 @@
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
+      <groupId>net.authorize</groupId>
+      <artifactId>anet-java-sdk</artifactId>
+      <version>1.8.4</version>
     </dependency>
   </dependencies>
+  <build>
+<plugins>
+    <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>visacheckoutdecrypt</id>
+            <configuration>
+              <archive>
+                <manifest>
+                  <mainClass>net.authorize.sample.visacheckout.VisaCheckoutDecrypt</mainClass>
+                </manifest>
+              </archive>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <finalName>VisaCheckoutDecrypt</finalName>
+            </configuration>
+            <phase>package</phase>
+              <goals>
+                  <goal>assembly</goal>
+              </goals>
+          </execution>
+        </executions>
+    </plugin>
+</plugins>
+</build>
 </project>
