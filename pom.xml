@@ -20,6 +20,24 @@
         <artifactId>maven-assembly-plugin</artifactId>
         <executions>
           <execution>
+            <id>ChargeCreditCard</id>
+            <configuration>
+              <archive>
+                <manifest>
+                  <mainClass>net.authorize.sample.PaymentTransactions.ChargeCreditCard</mainClass>
+                </manifest>
+              </archive>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <finalName>ChargeCreditCard</finalName>
+            </configuration>
+            <phase>package</phase>
+            <goals>
+              <goal>assembly</goal>
+            </goals>
+          </execution>
+          <execution>
             <id>visacheckoutdecrypt</id>
             <configuration>
               <archive>
