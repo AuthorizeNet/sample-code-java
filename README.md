@@ -6,8 +6,8 @@ The goal of this code sample repository is to provide completely self-contained 
 * Run "mvn package" in the root directory.
 * Run the individual samples e.g. 
 
-````java -jar target/VisaCheckoutDecrypt-jar-with-dependencies.jar
-````
+java -jar target/VisaCheckoutDecrypt-jar-with-dependencies.jar
+
 
 ## API Reference
 The code samples are organized just like our API reference which you can access here http://developer.authorize.net/api/reference
