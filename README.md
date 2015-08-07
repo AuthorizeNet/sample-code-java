@@ -9,14 +9,14 @@ The samples are all completely independent and self-contained so you can look at
 
 ##Running the Samples
  Clone this repository.  
- Run "mvn install" in the root directory to create the SampleCode console app.  
+ Run "mvn package" in the root directory to create the SampleCode console app.  
  Then run a sample directly by name:  
 ````
-     > SampleCode [CodeSampleName]
+     > java -jar target/SampleCode.jar [CodeSampleName]
 ````
 e.g.
 ````
-     > SampleCode ChargeACreditCard
+     > java -jar target/SampleCode.jar ChargeCreditCard
 ````
 Running SampleCode without a parameter will give you the list of sample names.  Handy or what!
 
