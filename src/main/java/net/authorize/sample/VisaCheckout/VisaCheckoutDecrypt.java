@@ -1,4 +1,4 @@
-package net.authorize.sample.visacheckout;
+package net.authorize.sample.VisaCheckout;
 
 import net.authorize.Environment;
 import net.authorize.api.controller.base.ApiOperationBase;
@@ -11,7 +11,7 @@ import net.authorize.api.controller.DecryptPaymentDataController;
 
 public class VisaCheckoutDecrypt {
 
-    public static void main(String[] args) {
+	public static void run(String apiLoginId, String transactionKey) {
 
     //Common code to set for all requests
  		ApiOperationBase.setEnvironment(Environment.SANDBOX);

@@ -4,7 +4,7 @@
   <groupId>net.authorize.sample</groupId>
   <artifactId>SampleCode</artifactId>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <name>SampleCode</name>
   <url>http://maven.apache.org</url>
   <dependencies>
@@ -15,66 +15,35 @@
     </dependency>
   </dependencies>
   <build>
-<plugins>
-    <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.1</version>
         <executions>
           <execution>
-            <id>ChargeCreditCard</id>
-            <configuration>
-              <archive>
-                <manifest>
-                  <mainClass>net.authorize.sample.PaymentTransactions.ChargeCreditCard</mainClass>
-                </manifest>
-              </archive>
-              <descriptorRefs>
-                <descriptorRef>jar-with-dependencies</descriptorRef>
-              </descriptorRefs>
-              <finalName>ChargeCreditCard</finalName>
-            </configuration>
             <phase>package</phase>
             <goals>
-              <goal>assembly</goal>
+              <goal>shade</goal>
             </goals>
-          </execution>
-          <execution>
-            <id>visacheckoutdecrypt</id>
             <configuration>
-              <archive>
-                <manifest>
-                  <mainClass>net.authorize.sample.visacheckout.VisaCheckoutDecrypt</mainClass>
-                </manifest>
-              </archive>
-              <descriptorRefs>
-                <descriptorRef>jar-with-dependencies</descriptorRef>
-              </descriptorRefs>
-              <finalName>VisaCheckoutDecrypt</finalName>
+              <finalName>SampleCode</finalName>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>net.authorize.sample.SampleCode</mainClass>
+                </transformer>
+              </transformers>
             </configuration>
-            <phase>package</phase>
-              <goals>
-                  <goal>assembly</goal>
-              </goals>
-          </execution>
-          <execution>
-            <id>visacheckouttransaction</id>
-            <configuration>
-              <archive>
-                <manifest>
-                  <mainClass>net.authorize.sample.visacheckout.VisaCheckoutTransaction</mainClass>
-                </manifest>
-              </archive>
-              <descriptorRefs>
-                <descriptorRef>jar-with-dependencies</descriptorRef>
-              </descriptorRefs>
-              <finalName>VisaCheckoutTransaction</finalName>
-            </configuration>
-            <phase>package</phase>
-              <goals>
-                  <goal>assembly</goal>
-              </goals>
           </execution>
         </executions>
-    </plugin>
-</plugins>
-</build>
+      </plugin>
+    </plugins>
+  </build>
 </project>

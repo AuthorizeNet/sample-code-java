@@ -1,4 +1,4 @@
-package net.authorize.sample.visacheckout;
+package net.authorize.sample.VisaCheckout;
 
 import java.math.BigDecimal;
 
@@ -23,7 +23,7 @@ import net.authorize.api.controller.CreateTransactionController;
 //
 public class VisaCheckoutTransaction {
 
-    public static void main(String[] args) {
+    public static void run(String apiLoginId, String transactionKey) {
         
 
     //Common code to set for all requests
