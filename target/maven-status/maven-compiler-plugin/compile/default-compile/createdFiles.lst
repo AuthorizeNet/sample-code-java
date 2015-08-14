@@ -1,0 +1,7 @@
+net\authorize\sample\VisaCheckout\VisaCheckoutDecrypt.class
+net\authorize\sample\PaymentTransactions\ChargeCreditCard.class
+net\authorize\sample\RecurringBilling\CreateSubscription.class
+net\authorize\sample\VisaCheckout\VisaCheckoutTransaction.class
+net\authorize\sample\SampleCode.class
+net\authorize\sample\TransactionDetails\GetTransactionDetails.class
+net\authorize\sample\TransactionDetails\CreateCustomerPaymentProfile.class

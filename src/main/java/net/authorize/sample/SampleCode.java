@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 
 import net.authorize.sample.VisaCheckout.*;
 import net.authorize.sample.PaymentTransactions.*;
+import net.authorize.sample.RecurringBilling.*;
 
 /**
  * Created by anetdeveloper on 8/5/15.
@@ -71,6 +72,7 @@ public class SampleCode {
         System.out.println("    VisaCheckoutDecrypt");
         System.out.println("    VisaCheckoutTransaction");
         System.out.println("    ChargeCreditCard");
+        System.out.println("    CreateSubscription");
     }
 
     private static void RunMethod(String methodName)
@@ -91,6 +93,9 @@ public class SampleCode {
                 break;
             case "ChargeCreditCard":
                 ChargeCreditCard.run(apiLoginId, transactionKey);
+                break;
+            case "CreateSubscription":
+                CreateSubscription.run(apiLoginId, transactionKey);
                 break;
 
             default:
