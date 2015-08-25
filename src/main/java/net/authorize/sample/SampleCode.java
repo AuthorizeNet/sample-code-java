@@ -86,7 +86,6 @@ public class SampleCode {
         switch (methodName) {
             case "VisaCheckoutDecrypt":
                 VisaCheckoutDecrypt.run(apiLoginId, transactionKey);
-
                 break;
             case "VisaCheckoutTransaction":
                 VisaCheckoutTransaction.run(apiLoginId, transactionKey);
@@ -94,10 +93,16 @@ public class SampleCode {
             case "ChargeCreditCard":
                 ChargeCreditCard.run(apiLoginId, transactionKey);
                 break;
+<<<<<<< HEAD
             case "CreateSubscription":
                 CreateSubscription.run(apiLoginId, transactionKey);
                 break;
 
+=======
+            case "VoidTransaction":
+                VoidTransaction.run(apiLoginId, transactionKey);
+                break;
+>>>>>>> upstream/master
             default:
                 ShowUsage();
                 break;
