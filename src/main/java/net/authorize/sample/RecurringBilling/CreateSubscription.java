@@ -1,11 +1,13 @@
-/*import net.authorize.data.arb.*;
+/*package net.authorize.sample.RecurringBilling;
+
+import net.authorize.data.arb.*;
 import java.math.BigDecimal;
 
 import net.authorize.Environment;
 import net.authorize.data.Customer;
 import net.authorize.api.contract.v1.*;
 import net.authorize.api.controller.base.ApiOperationBase;
-import net.authorize.api.controller.CreateTransactionController;
+import net.authorize.api.controller.ARBCreateSubscriptionController;
 
 
 public class CreateSubscription {
@@ -34,9 +36,9 @@ public class CreateSubscription {
         schedule.setTrialOccurrences(1);
 
         // Set up customer information
-        Customer customer = Customer.createCustomer();
-        customer.setFirstName("John");
-        customer.setLastName("Smith");
+        net.authorize.data.xml.Customer customer = net.authorize.data.xml.Customer.createCustomer();
+        //customer.setFirstName("John");
+        //customer.setLastName("Smith");
 
         // Populate subscription
         Subscription subscription = Subscription.createSubscription();
@@ -56,22 +58,22 @@ public class CreateSubscription {
 
         // Make the API Request
         ARBCreateSubscriptionRequest apiRequest = new ARBCreateSubscriptionRequest();
-        /*apiRequest.setTransactionRequest(txnRequest);
-        CreateTransactionController controller = new CreateTransactionController(apiRequest);
+        //apiRequest.setTransactionRequest(txnRequest);
+        ARBCreateSubscriptionController controller = new ARBCreateSubscriptionController(apiRequest);
         controller.execute();
 
 
-        CreateTransactionResponse response = controller.getApiResponse();
+        ARBCreateSubscriptionResponse response = controller.getApiResponse();
 
         if (response!=null) {
 
             // If API Response is ok, go ahead and check the transaction response
             if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
 
-                TransactionResponse result = response.getTransactionResponse();
+                ARBSubscriptionResponse result = response.getSubscriptionResponse();
                 if (result.getResponseCode().equals("1")) {
                     System.out.println(result.getResponseCode());
-                    System.out.println("Successful Credit Card Transaction");
+                    System.out.println("Success");
                     System.out.println(result.getAuthCode());
                     System.out.println(result.getTransId());
                 }
