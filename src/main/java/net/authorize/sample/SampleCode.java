@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import net.authorize.sample.VisaCheckout.*;
 import net.authorize.sample.PaymentTransactions.*;
 import net.authorize.sample.RecurringBilling.*;
+import net.authorize.sample.TransactionReporting.*;
+import net.authorize.sample.CustomerProfiles.*;
 
 /**
  * Created by anetdeveloper on 8/5/15.
@@ -73,6 +75,16 @@ public class SampleCode {
         System.out.println("    VisaCheckoutTransaction");
         System.out.println("    ChargeCreditCard");
         System.out.println("    CreateSubscription");
+        System.out.println("    AuthorizeCreditCard");
+        System.out.println("    CreateCustomerProfilePaymentProfile");
+        System.out.println("    RefundTransaction");
+        System.out.println("    VoidTransaction");
+        System.out.println("    CreateCustomerProfileFromTransaction");
+        System.out.println("    GetTransactionDetails");
+        System.out.println("    CaptureOnly");
+        System.out.println("    CapturePreviouslyAuthorizedAmount");
+        System.out.println("    DebitBankAccount");
+        System.out.println("    CreditBankAccount");
     }
 
     private static void RunMethod(String methodName)
@@ -93,20 +105,39 @@ public class SampleCode {
             case "ChargeCreditCard":
                 ChargeCreditCard.run(apiLoginId, transactionKey);
                 break;
-<<<<<<< HEAD
-            case "CreateSubscription":
-                CreateSubscription.run(apiLoginId, transactionKey);
-                break;
-
-=======
             case "VoidTransaction":
                 VoidTransaction.run(apiLoginId, transactionKey);
                 break;
->>>>>>> upstream/master
+            case "AuthorizeCreditCard":
+                AuthorizeCreditCard.run(apiLoginId, transactionKey);
+                break;
+            case "CreateCustomerProfilePaymentProfile":
+                CreateCustomerProfilePaymentProfile.run(apiLoginId, transactionKey);
+                break;
+            case "RefundTransaction":
+                RefundTransaction.run(apiLoginId, transactionKey);
+                break;
+            case "CreateCustomerProfileFromTransaction":
+                CreateCustomerProfileFromTransaction.run(apiLoginId, transactionKey);
+                break;
+            case "GetTransactionDetails":
+                GetTransactionDetails.run(apiLoginId, transactionKey);
+                break;
+            case "CaptureOnly":
+                CaptureOnly.run(apiLoginId, transactionKey);
+                break;
+            case "CapturePreviouslyAuthorizedAmount":
+                CapturePreviouslyAuthorizedAmount.run(apiLoginId, transactionKey);
+                break;
+            case "DebitBankAccount":
+                DebitBankAccount.run(apiLoginId, transactionKey);
+                break;
+            case "CreditBankAccount":
+                CreditBankAccount.run(apiLoginId, transactionKey);
+                break;
             default:
                 ShowUsage();
                 break;
         }
     }
-
 }

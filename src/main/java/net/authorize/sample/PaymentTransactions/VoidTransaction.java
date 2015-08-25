@@ -14,29 +14,13 @@ public class VoidTransaction {
     //                 java -jar target/ChargeCreditCard-jar-with-dependencies.jar
     //
     public static void run(String apiLoginId, String transactionKey) {
-
-        // Required: 
-        /*
-         * Merchant Authentication
-         * * name
-         * * transaction key
-         * RefTransId 
-         */
-
-        // Create Transaction Request. 
-        // Fill in Merchant authentication field. 
-        // Ref id
-        // Transation Reuest
-        //   TransactionType = voidTransaction
-        //   refTransId
-
         
         //Common code to set for all requests
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
-        merchantAuthenticationType.setName("5KP3u95bQpv");
-        merchantAuthenticationType.setTransactionKey("4Ktq966gC55GAX7S");
+        merchantAuthenticationType.setName(apiLoginId);
+        merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
         // Create the payment transaction request

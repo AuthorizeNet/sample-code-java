@@ -20,8 +20,8 @@ public class ChargeCreditCard {
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
-        merchantAuthenticationType.setName("5KP3u95bQpv");
-        merchantAuthenticationType.setTransactionKey("4Ktq966gC55GAX7S");
+        merchantAuthenticationType.setName(apiLoginId);
+        merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
         // Populate the payment data
