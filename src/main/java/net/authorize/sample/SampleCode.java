@@ -93,9 +93,16 @@ public class SampleCode {
             case "ChargeCreditCard":
                 ChargeCreditCard.run(apiLoginId, transactionKey);
                 break;
+<<<<<<< HEAD
+            case "CreateSubscription":
+                CreateSubscription.run(apiLoginId, transactionKey);
+                break;
+
+=======
             case "VoidTransaction":
                 VoidTransaction.run(apiLoginId, transactionKey);
                 break;
+>>>>>>> upstream/master
             default:
                 ShowUsage();
                 break;
