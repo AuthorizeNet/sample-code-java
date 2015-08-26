@@ -1,4 +1,4 @@
-package net.authorize.sample.TransactionDetails;
+package net.authorize.sample.CustomerProfiles;
 
 import net.authorize.Environment;
 import net.authorize.api.contract.v1.*;
@@ -24,8 +24,8 @@ public class CreateCustomerProfileFromTransaction {
 		ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
-        merchantAuthenticationType.setName("5KP3u95bQpv");
-        merchantAuthenticationType.setTransactionKey("4Ktq966gC55GAX7S");
+        merchantAuthenticationType.setName(apiLoginId);
+        merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 		
 		String customerprofileId = "36374423" ;

@@ -15,8 +15,8 @@ public class CreateSubscription {
         //Common code to set for all requests
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
-        merchantAuthenticationType.setName("5KP3u95bQpv");
-        merchantAuthenticationType.setTransactionKey("4Ktq966gC55GAX7S");
+        merchantAuthenticationType.setName(apiLoginId);
+        merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
         // Set up payment schedule
         PaymentSchedule schedule = PaymentSchedule.createPaymentSchedule();
