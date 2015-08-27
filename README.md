@@ -1,4 +1,7 @@
 # Sample Java Code for Authorize.Net
+[![Build Status](https://travis-ci.org/AuthorizeNet/sample-code-java.png?branch=master)]
+(https://travis-ci.org/AuthorizeNet/sample-code-java)
+
 This repository contains working code samples which demonstrate Java integration with the Authorize.Net Java SDK
 The samples are organized just like our API, which you can also try out directly here: http://developer.authorize.net/api/reference
 
