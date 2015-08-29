@@ -74,7 +74,6 @@ public class SampleCode {
         System.out.println("    VisaCheckoutDecrypt");
         System.out.println("    VisaCheckoutTransaction");
         System.out.println("    ChargeCreditCard");
-        System.out.println("    CreateSubscription");
         System.out.println("    AuthorizeCreditCard");
         System.out.println("    CreateCustomerProfilePaymentProfile");
         System.out.println("    RefundTransaction");
@@ -85,6 +84,13 @@ public class SampleCode {
         System.out.println("    CapturePreviouslyAuthorizedAmount");
         System.out.println("    DebitBankAccount");
         System.out.println("    CreditBankAccount");
+        System.out.println("    ChargeTokenizedCreditCard");
+        System.out.println("    ChargeCustomerProfile");
+        System.out.println("    CreateSubscription");
+        System.out.println("    GetSubscriptionStatus");
+        System.out.println("    CancelSubscription");
+        System.out.println("    UpdateSubscription");
+        System.out.println("    GetListSubscription");
     }
 
     private static void RunMethod(String methodName)
@@ -134,6 +140,27 @@ public class SampleCode {
                 break;
             case "CreditBankAccount":
                 CreditBankAccount.run(apiLoginId, transactionKey);
+                break;
+            case "ChargeTokenizedCreditCard":
+                ChargeTokenizedCreditCard.run(apiLoginId, transactionKey);
+                break;
+            case "ChargeCustomerProfile":
+                ChargeCustomerProfile.run(apiLoginId, transactionKey);
+                break;
+            case "CreateSubscription":
+                CreateSubscription.run(apiLoginId, transactionKey);
+                break;
+            case "GetSubscriptionStatus":
+                GetSubscriptionStatus.run(apiLoginId, transactionKey);
+                break; 
+            case "CancelSubscription":
+                CancelSubscription.run(apiLoginId, transactionKey);
+                break;
+            case "UpdateSubscription":
+                UpdateSubscription.run(apiLoginId, transactionKey);
+                break;
+            case "GetListSubscription":
+                GetListSubscription.run(apiLoginId, transactionKey);
                 break;
             default:
                 ShowUsage();
