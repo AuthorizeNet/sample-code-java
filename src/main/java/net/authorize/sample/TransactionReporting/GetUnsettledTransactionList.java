@@ -1,10 +1,45 @@
-package TransactionReporting;
+package net.authorize.sample.TransactionReporting;
 
-public class GetUnsettledTransactionList {
 
-	public static void main(String apiLoginId, String transactionKey) {
-		// TODO Auto-generated method stub
-		System.out.println("Get Batch Statistics Sample");
+import net.authorize.Environment;
+import net.authorize.api.contract.v1.*;
+
+import net.authorize.api.controller.GetSettledBatchListController;
+import net.authorize.api.controller.GetUnsettledTransactionListController;
+import net.authorize.api.controller.base.ApiOperationBase;
+
+//author @krgupta
+public class GetUnsettledTransactionList{
+	
+		public static void run(String apiLoginId, String transactionKey) {
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+
+	        MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
+	        merchantAuthenticationType.setName(apiLoginId);
+	        merchantAuthenticationType.setTransactionKey(transactionKey);
+	        ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
+	
+	
+			GetUnsettledTransactionListRequest getRequest = new GetUnsettledTransactionListRequest();
+			getRequest.setMerchantAuthentication(merchantAuthenticationType);
+
+
+  			GetUnsettledTransactionListController controller = new GetUnsettledTransactionListController(getRequest);
+            controller.execute();
+            GetUnsettledTransactionListResponse getResponse = controller.getApiResponse();
+
+            if (getResponse!=null) {
+
+            	 if (getResponse.getMessages().getResultCode() == MessageTypeEnum.OK) {
+
+                	System.out.println(getResponse.getMessages().getMessage().get(0).getCode());
+                	System.out.println(getResponse.getMessages().getMessage().get(0).getText());
+            	}
+            	else
+            	{
+                	System.out.println("Failed to cancel Subscription:  " + getResponse.getMessages().getResultCode());
+            	}
+       	 	}
+
 	}
-
 }
