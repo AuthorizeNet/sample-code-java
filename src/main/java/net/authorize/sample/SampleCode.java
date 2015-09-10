@@ -75,11 +75,9 @@ public class SampleCode {
         System.out.println("    VisaCheckoutTransaction");
         System.out.println("    ChargeCreditCard");
         System.out.println("    AuthorizeCreditCard");
-        System.out.println("    CreateCustomerProfilePaymentProfile");
         System.out.println("    RefundTransaction");
         System.out.println("    VoidTransaction");
         System.out.println("    CreateCustomerProfileFromTransaction");
-        System.out.println("    GetTransactionDetails");
         System.out.println("    CaptureOnly");
         System.out.println("    CapturePreviouslyAuthorizedAmount");
         System.out.println("    DebitBankAccount");
@@ -91,6 +89,19 @@ public class SampleCode {
         System.out.println("    CancelSubscription");
         System.out.println("    UpdateSubscription");
         System.out.println("    GetListSubscription");
+        System.out.println("    GetBatchStatistics");
+        //System.out.println("    GetSettledBatchList");
+        System.out.println("    GetTransactionList");
+        System.out.println("    GetUnsettledTransactionList");
+        System.out.println("    GetTransactionDetails");
+        System.out.println("    CreateCustomerProfile");
+        System.out.println("    CreateCustomerProfilePaymentProfile");
+        System.out.println("    CreateCustomerShippingAddress");
+        System.out.println("    DeleteCustomerPaymentProfile");
+        System.out.println("    DeleteCustomerProfile");
+        System.out.println("    DeleteCustomerShippingAddress");
+        System.out.println("    GetCustomerPaymentProfile");
+        System.out.println("    GetCustomerProfile");
     }
 
     private static void RunMethod(String methodName)
@@ -117,17 +128,11 @@ public class SampleCode {
             case "AuthorizeCreditCard":
                 AuthorizeCreditCard.run(apiLoginId, transactionKey);
                 break;
-            case "CreateCustomerProfilePaymentProfile":
-                CreateCustomerProfilePaymentProfile.run(apiLoginId, transactionKey);
-                break;
             case "RefundTransaction":
                 RefundTransaction.run(apiLoginId, transactionKey);
                 break;
             case "CreateCustomerProfileFromTransaction":
                 CreateCustomerProfileFromTransaction.run(apiLoginId, transactionKey);
-                break;
-            case "GetTransactionDetails":
-                GetTransactionDetails.run(apiLoginId, transactionKey);
                 break;
             case "CaptureOnly":
                 CaptureOnly.run(apiLoginId, transactionKey);
@@ -161,6 +166,45 @@ public class SampleCode {
                 break;
             case "GetListSubscription":
                 GetListSubscription.run(apiLoginId, transactionKey);
+                break;
+            case "GetBatchStatistics":
+                GetBatchStatistics.run(apiLoginId, transactionKey);
+                break;
+            /*case "GetSettledBatchList":
+                GetSettledBatchList.run(apiLoginId, transactionKey);
+                break;*/
+            case "GetTransactionList":
+                GetTransactionList.run(apiLoginId, transactionKey);
+                break;
+            case "GetUnsettledTransactionList":
+                GetUnsettledTransactionList.run(apiLoginId, transactionKey);
+                break;
+            case "GetTransactionDetails":
+                GetTransactionDetails.run(apiLoginId, transactionKey);
+                break;
+            case "CreateCustomerProfile":
+                CreateCustomerProfile.run(apiLoginId, transactionKey);
+                break;
+            case "CreateCustomerProfilePaymentProfile":
+                CreateCustomerProfilePaymentProfile.run(apiLoginId, transactionKey);
+                break;
+            case "CreateCustomerShippingAddress":
+                CreateCustomerShippingAddress.run(apiLoginId, transactionKey);
+                break;
+            case "DeleteCustomerPaymentProfile":
+                DeleteCustomerPaymentProfile.run(apiLoginId, transactionKey);
+                break;
+            case "DeleteCustomerProfile":
+                DeleteCustomerProfile.run(apiLoginId, transactionKey);
+                break;
+            case "DeleteCustomerShippingAddress":
+                DeleteCustomerShippingAddress.run(apiLoginId, transactionKey);
+                break;
+            case "GetCustomerPaymentProfile":
+                GetCustomerPaymentProfile.run(apiLoginId, transactionKey);
+                break;
+            case "GetCustomerProfile":
+                GetCustomerProfile.run(apiLoginId, transactionKey);
                 break;
             default:
                 ShowUsage();

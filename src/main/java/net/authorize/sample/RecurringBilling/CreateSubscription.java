@@ -7,7 +7,8 @@ import net.authorize.data.Customer;
 import net.authorize.api.contract.v1.*;
 import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.api.controller.ARBCreateSubscriptionController;
-import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.datatype.*;
+import java.lang.Exception.*;
 
 public class CreateSubscription {
 
@@ -25,8 +26,18 @@ public class CreateSubscription {
         interval.setLength( (short)1);
         interval.setUnit(ARBSubscriptionUnitEnum.MONTHS);
         schedule.setInterval(interval);
-        //XMLGregorianCalendar startDate = new XMLGregorianCalendar(2020, 8, 30);
-        //schedule.setStartDate(startDate); //2020-08-30
+        
+        try {
+          XMLGregorianCalendar startDate = DatatypeFactory.newInstance().newXMLGregorianCalendar();
+          startDate.setDay(30);
+          startDate.setMonth(8);
+          startDate.setYear(2020);
+          schedule.setStartDate(startDate); //2020-08-30 
+        }
+        catch(Exception e) {
+
+        }
+        
         schedule.setTotalOccurrences((short)12);
         schedule.setTrialOccurrences((short)1);
 
