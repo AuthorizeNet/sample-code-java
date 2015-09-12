@@ -29,6 +29,7 @@ public class CreateCustomerShippingAddress {
 
         CreateCustomerShippingAddressRequest apiRequest = new CreateCustomerShippingAddressRequest();
         apiRequest.setCustomerProfileId("10000");
+        apiRequest.setAddress(customerAddressType);
 
         CreateCustomerShippingAddressController controller = new CreateCustomerShippingAddressController(apiRequest);
         controller.execute();

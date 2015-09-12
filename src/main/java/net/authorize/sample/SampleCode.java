@@ -102,6 +102,10 @@ public class SampleCode {
         System.out.println("    DeleteCustomerShippingAddress");
         System.out.println("    GetCustomerPaymentProfile");
         System.out.println("    GetCustomerProfile");
+        System.out.println("    GetCustomerShippingAddress");
+        System.out.println("    GetHostedProfilePage");
+        System.out.println("    UpdateCustomerPaymentProfile");
+        System.out.println("    UpdateCustomerShippingAddress");
     }
 
     private static void RunMethod(String methodName)
@@ -205,6 +209,18 @@ public class SampleCode {
                 break;
             case "GetCustomerProfile":
                 GetCustomerProfile.run(apiLoginId, transactionKey);
+                break;
+            case "GetCustomerShippingAddress":
+                GetCustomerShippingAddress.run(apiLoginId, transactionKey);
+                break;
+            case "GetHostedProfilePage":
+                GetHostedProfilePage.run(apiLoginId, transactionKey);
+                break;
+            case "UpdateCustomerPaymentProfile":
+                UpdateCustomerPaymentProfile.run(apiLoginId, transactionKey);
+                break;
+            case "UpdateCustomerShippingAddress":
+                UpdateCustomerShippingAddress.run(apiLoginId, transactionKey);
                 break;
             default:
                 ShowUsage();
