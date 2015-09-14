@@ -75,7 +75,7 @@ public class SampleCode {
         System.out.println("    VisaCheckoutTransaction");
         System.out.println("    ChargeCreditCard");
         System.out.println("    AuthorizeCreditCard");
-        System.out.println("    CreateCustomerProfilePaymentProfile");
+        System.out.println("    CreateCustomerPaymentProfile");
         System.out.println("    RefundTransaction");
         System.out.println("    VoidTransaction");
         System.out.println("    CreateCustomerProfileFromTransaction");
@@ -117,8 +117,8 @@ public class SampleCode {
             case "AuthorizeCreditCard":
                 AuthorizeCreditCard.run(apiLoginId, transactionKey);
                 break;
-            case "CreateCustomerProfilePaymentProfile":
-                CreateCustomerProfilePaymentProfile.run(apiLoginId, transactionKey);
+            case "CreateCustomerPaymentProfile":
+                CreateCustomerPaymentProfile.run(apiLoginId, transactionKey);
                 break;
             case "RefundTransaction":
                 RefundTransaction.run(apiLoginId, transactionKey);
