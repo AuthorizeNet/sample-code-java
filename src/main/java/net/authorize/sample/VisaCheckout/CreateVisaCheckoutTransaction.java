@@ -21,7 +21,7 @@ import net.authorize.api.controller.CreateTransactionController;
 //      then
 //            java -jar target/VisaCheckoutTransaction-jar-with-dependencies.jar
 //
-public class VisaCheckoutTransaction {
+public class CreateVisaCheckoutTransaction {
 
     public static void run(String apiLoginId, String transactionKey) {
         

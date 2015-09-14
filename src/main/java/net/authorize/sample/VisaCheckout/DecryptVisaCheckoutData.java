@@ -9,7 +9,7 @@ import net.authorize.api.contract.v1.OpaqueDataType;
 import net.authorize.api.contract.v1.MessageTypeEnum;
 import net.authorize.api.controller.DecryptPaymentDataController;
 
-public class VisaCheckoutDecrypt {
+public class DecryptVisaCheckoutData {
 
 	public static void run(String apiLoginId, String transactionKey) {
 

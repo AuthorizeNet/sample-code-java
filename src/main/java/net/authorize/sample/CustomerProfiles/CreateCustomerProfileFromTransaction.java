@@ -4,15 +4,6 @@ import net.authorize.Environment;
 import net.authorize.api.contract.v1.*;
 import java.math.BigDecimal;
 
-import net.authorize.api.contract.v1.CreateCustomerProfileFromTransactionRequest;
-import net.authorize.api.contract.v1.CreateCustomerProfileResponse;
-import net.authorize.api.contract.v1.CreateTransactionRequest;
-import net.authorize.api.contract.v1.CreateTransactionResponse;
-import net.authorize.api.contract.v1.CreditCardType;
-import net.authorize.api.contract.v1.CustomerDataType;
-import net.authorize.api.contract.v1.MessageTypeEnum;
-import net.authorize.api.contract.v1.PaymentType;
-import net.authorize.api.contract.v1.TransactionRequestType;
 import net.authorize.api.controller.CreateCustomerProfileFromTransactionController;
 import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;

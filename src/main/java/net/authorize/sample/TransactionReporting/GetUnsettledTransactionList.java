@@ -37,7 +37,7 @@ public class GetUnsettledTransactionList{
             	}
             	else
             	{
-                	System.out.println("Failed to cancel Subscription:  " + getResponse.getMessages().getResultCode());
+                	System.out.println("Failed to get unsettled transaction list:  " + getResponse.getMessages().getResultCode());
             	}
        	 	}
 

@@ -34,7 +34,7 @@ public class GetBatchStatistics {
             	}
             	else
             	{
-                	System.out.println("Failed to cancel Subscription:  " + getResponse.getMessages().getResultCode());
+                	System.out.println("Failed to get batch statistics:  " + getResponse.getMessages().getResultCode());
             	}
        	 	}
     	}

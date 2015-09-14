@@ -62,9 +62,7 @@ public class DebitBankAccount {
                 }
                 else
                 {
-                    System.out.println("Failed Transaction: "+response.getMessages().getMessage().get(0).getText());
                     System.out.println("Failed Transaction: "+result.getResponseCode());
-                    System.out.println("Failed Transaction: "+result.getMessages().getMessage().get(0).getCode());
                 }
             }
             else

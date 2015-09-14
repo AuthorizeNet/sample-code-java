@@ -38,7 +38,7 @@ public class GetTransactionDetails {
                 }
                 else
                 {
-                    System.out.println("Failed to cancel Subscription:  " + getResponse.getMessages().getResultCode());
+                    System.out.println("Failed to get transaction details:  " + getResponse.getMessages().getResultCode());
                 }
             }
 }
