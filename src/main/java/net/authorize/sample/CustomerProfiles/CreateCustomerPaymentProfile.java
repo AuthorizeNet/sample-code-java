@@ -4,28 +4,9 @@ import net.authorize.Environment;
 import net.authorize.api.contract.v1.*;
 
 import net.authorize.api.contract.v1.MerchantAuthenticationType;
-//import net.authorize.api.contract.v1.TransactionDetailsType;
-//import net.authorize.api.controller.GetTransactionDetailsController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
 import net.authorize.Transaction;
-import net.authorize.api.contract.v1.CreateCustomerPaymentProfileRequest;
-import net.authorize.api.contract.v1.CreateCustomerPaymentProfileResponse;
-import net.authorize.api.contract.v1.CreateCustomerProfileFromTransactionRequest;
-import net.authorize.api.contract.v1.CreateCustomerProfileRequest;
-import net.authorize.api.contract.v1.CreateCustomerProfileResponse;
-import net.authorize.api.contract.v1.CreditCardType;
-import net.authorize.api.contract.v1.CustomerAddressType;
-import net.authorize.api.contract.v1.CustomerPaymentProfileType;
-import net.authorize.api.contract.v1.CustomerProfileType;
-import net.authorize.api.contract.v1.GetCustomerPaymentProfileRequest;
-import net.authorize.api.contract.v1.GetCustomerPaymentProfileResponse;
-import net.authorize.api.contract.v1.GetTransactionDetailsRequest;
-import net.authorize.api.contract.v1.GetTransactionDetailsResponse;
-import net.authorize.api.contract.v1.MerchantAuthenticationType;
-import net.authorize.api.contract.v1.MessageTypeEnum;
-import net.authorize.api.contract.v1.TransactionDetailsType;
-import net.authorize.api.contract.v1.ValidationModeEnum;
 import net.authorize.api.controller.CreateCustomerProfileController;
 import net.authorize.api.controller.CreateCustomerProfileFromTransactionController;
 import net.authorize.api.controller.CreateCustomerPaymentProfileController;
@@ -39,6 +20,7 @@ public class CreateCustomerPaymentProfile {
 	
 	public static void run(String apiLoginId, String transactionKey) {
 
+<<<<<<< HEAD:src/main/java/net/authorize/sample/CustomerProfiles/CreateCustomerPaymentProfile.java
 		ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
 		MerchantAuthenticationType merchantAuthenticationType = new MerchantAuthenticationType();
@@ -53,6 +35,22 @@ public class CreateCustomerPaymentProfile {
 		CreateCustomerPaymentProfileRequest getRequest = new CreateCustomerPaymentProfileRequest();
 		getRequest.setMerchantAuthentication(merchantAuthenticationType);
 		getRequest.setCustomerProfileId(customerprofileId);
+=======
+        ApiOperationBase.setEnvironment(Environment.SANDBOX);
+
+        MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
+        merchantAuthenticationType.setName(apiLoginId);
+        merchantAuthenticationType.setTransactionKey(transactionKey);
+        ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
+		
+		String customerprofileId = "36374423" ;
+		
+		
+	//private String getPaymentDetails(MerchantAuthenticationType merchantAuthentication, String customerprofileId, ValidationModeEnum validationMode) {
+		CreateCustomerPaymentProfileRequest apiRequest = new CreateCustomerPaymentProfileRequest();
+		apiRequest.setMerchantAuthentication(merchantAuthenticationType);
+		apiRequest.setCustomerProfileId(customerprofileId);	
+>>>>>>> 907affc0b5af4a8b5009879bd21658213eee7bb4:src/main/java/net/authorize/sample/CustomerProfiles/CreateCustomerProfilePaymentProfile.java
 
 		//customer address
 		CustomerAddressType customerAddress = new CustomerAddressType();
@@ -70,6 +68,7 @@ public class CreateCustomerPaymentProfile {
 		creditCard.setCardNumber("4111111111111111");
 		creditCard.setExpirationDate("2023-12");
 		creditCard.setCardCode("");
+<<<<<<< HEAD:src/main/java/net/authorize/sample/CustomerProfiles/CreateCustomerPaymentProfile.java
 
 		CustomerPaymentProfileType profile = new CustomerPaymentProfileType();
 		profile.setBillTo(customerAddress);
@@ -103,3 +102,28 @@ public class CreateCustomerPaymentProfile {
 		}
 	}
 	}
+=======
+	
+        CreateCustomerPaymentProfileController controller = new CreateCustomerPaymentProfileController(apiRequest);
+        controller.execute();
+       
+		CreateCustomerPaymentProfileResponse response = new CreateCustomerPaymentProfileResponse();
+		response = controller.getApiResponse();
+
+		if (response!=null) {
+
+             if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
+
+                System.out.println(response.getCustomerPaymentProfileId());
+ 				System.out.println(response.getMessages().getMessage().get(0).getCode());
+                System.out.println(response.getMessages().getMessage().get(0).getText());
+                System.out.println(response.getValidationDirectResponse());
+            }
+            else
+            {
+                System.out.println("Failed to create customer payment profile:  " + response.getMessages().getResultCode());
+            }
+        }
+	}	
+}
+>>>>>>> 907affc0b5af4a8b5009879bd21658213eee7bb4:src/main/java/net/authorize/sample/CustomerProfiles/CreateCustomerProfilePaymentProfile.java

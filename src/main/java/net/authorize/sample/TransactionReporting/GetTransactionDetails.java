@@ -3,10 +3,6 @@ package net.authorize.sample.TransactionReporting;
 
 import net.authorize.Environment;
 import net.authorize.api.contract.v1.*;
-import net.authorize.api.contract.v1.GetTransactionDetailsRequest;
-import net.authorize.api.contract.v1.GetTransactionDetailsResponse;
-import net.authorize.api.contract.v1.MerchantAuthenticationType;
-import net.authorize.api.contract.v1.TransactionDetailsType;
 import net.authorize.api.controller.GetTransactionDetailsController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
@@ -33,8 +29,18 @@ public class GetTransactionDetails {
         controller.execute();
         GetTransactionDetailsResponse getResponse = controller.getApiResponse();
 
-        System.out.println(" TransactionDetails : " + getResponse.getTransaction());
-  
+       if (getResponse!=null) {
+
+                 if (getResponse.getMessages().getResultCode() == MessageTypeEnum.OK) {
+
+                    System.out.println(getResponse.getMessages().getMessage().get(0).getCode());
+                    System.out.println(getResponse.getMessages().getMessage().get(0).getText());
+                }
+                else
+                {
+                    System.out.println("Failed to get transaction details:  " + getResponse.getMessages().getResultCode());
+                }
+            }
 }
 }
 
