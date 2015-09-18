@@ -8,7 +8,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.api.controller.GetCustomerProfileIdsController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
-public class GetCustomerProfileID {
+public class GetCustomerProfileIds {
 	
 	public static void run(String apiLoginId, String transactionKey) {
 
