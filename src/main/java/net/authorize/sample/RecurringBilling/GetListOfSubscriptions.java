@@ -9,7 +9,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.api.controller.ARBGetSubscriptionListController;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-public class GetListSubscription {
+public class GetListOfSubscriptions {
 
     public static void run(String apiLoginId, String transactionKey) {
         //Common code to set for all requests
