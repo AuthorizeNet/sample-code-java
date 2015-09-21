@@ -88,7 +88,7 @@ public class SampleCode {
         System.out.println("    GetSubscriptionStatus");
         System.out.println("    CancelSubscription");
         System.out.println("    UpdateSubscription");
-        System.out.println("    GetListSubscription");
+        System.out.println("    GetListOfSubscriptions");
         System.out.println("    GetBatchStatistics");
         //System.out.println("    GetSettledBatchList");
         System.out.println("    GetTransactionList");
@@ -168,8 +168,8 @@ public class SampleCode {
             case "UpdateSubscription":
                 UpdateSubscription.run(apiLoginId, transactionKey);
                 break;
-            case "GetListSubscription":
-                GetListSubscription.run(apiLoginId, transactionKey);
+            case "GetListOfSubscriptions":
+                GetListOfSubscriptions.run(apiLoginId, transactionKey);
                 break;
             case "GetBatchStatistics":
                 GetBatchStatistics.run(apiLoginId, transactionKey);
