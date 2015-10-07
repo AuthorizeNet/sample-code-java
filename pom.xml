@@ -19,8 +19,8 @@
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>3.3</source>
+          <target>3.3</target>
         </configuration>
       </plugin>
       <plugin>
