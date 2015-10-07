@@ -9,6 +9,7 @@ import net.authorize.sample.PaymentTransactions.*;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
+import net.authorize.sample.PayPalExpressCheckout.*;
 
 /**
  * Created by anetdeveloper on 8/5/15.
@@ -71,6 +72,7 @@ public class SampleCode {
 
     private static void ShowMethods()
     {
+
         System.out.println("    DecryptVisaCheckoutData");
         System.out.println("    CreateVisaCheckoutTransaction");
         System.out.println("    ChargeCreditCard");
@@ -106,6 +108,8 @@ public class SampleCode {
         System.out.println("    GetHostedProfilePage");
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
+    	//GetDetails
+    	System.out.println("    GetDetails");        
     }
 
     private static void RunMethod(String methodName)
@@ -221,6 +225,16 @@ public class SampleCode {
                 break;
             case "UpdateCustomerShippingAddress":
                 UpdateCustomerShippingAddress.run(apiLoginId, transactionKey);
+                break;
+            case "GetDetails":
+                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                try{
+                	System.out.println("Enter Transaction ID:");
+                	GetDetails.run(apiLoginId, transactionKey, br.readLine());
+                }
+                catch(Exception ex){
+                    System.out.print("Error with transaction ID");
+                }
                 break;
             default:
                 ShowUsage();
