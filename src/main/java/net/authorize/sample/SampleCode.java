@@ -3,9 +3,11 @@ package net.authorize.sample;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 import net.authorize.sample.VisaCheckout.*;
 import net.authorize.sample.PaymentTransactions.*;
+import net.authorize.sample.PaypalExpressCheckout.AuthorizationAndCaptureContinue;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
@@ -106,6 +108,7 @@ public class SampleCode {
         System.out.println("    GetHostedProfilePage");
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
+        System.out.println("    PayPalAuthorizeCaptureContinue");
     }
 
     private static void RunMethod(String methodName)
@@ -114,7 +117,8 @@ public class SampleCode {
         // You can create your own keys in seconds by signing up for a sandbox account here: https://developer.authorize.net/sandbox/
         String apiLoginId           = "5KP3u95bQpv";
         String transactionKey       = "4Ktq966gC55GAX7S";
-        
+        String TransactionID = "";
+        String payerID = "";
 
         switch (methodName) {
             case "VisaCheckoutDecrypt":
@@ -222,6 +226,14 @@ public class SampleCode {
             case "UpdateCustomerShippingAddress":
                 UpdateCustomerShippingAddress.run(apiLoginId, transactionKey);
                 break;
+            case "PayPalAuthorizeCaptureContinue":
+            	Scanner scan = new Scanner(System.in);
+                System.out.print("Enter Transaction ID : ");        
+                TransactionID = scan.nextLine().trim();
+                System.out.print("Enter Payer ID : ");
+                payerID = scan.nextLine().trim();
+            	AuthorizationAndCaptureContinue.run(apiLoginId, transactionKey, TransactionID, payerID);
+            	break;
             default:
                 ShowUsage();
                 break;
