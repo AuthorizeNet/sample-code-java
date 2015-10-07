@@ -32,9 +32,9 @@ public class AuthorizationAndCaptureContinue
         // Get Transaction Code and Payer ID from the User
         Scanner scan = new Scanner(System.in);
         System.out.print("Enter Transaction ID : ");        
-        TransactionID = scan.nextLine();
+        TransactionID = scan.nextLine().trim();
         System.out.print("Enter Payer ID : ");
-        String payerID = scan.nextLine();
+        String payerID = scan.nextLine().trim();
         
         // Set PayPal type and attributes
         PayPalType payPalType = new PayPalType();
