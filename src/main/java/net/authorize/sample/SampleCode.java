@@ -109,6 +109,7 @@ public class SampleCode {
         System.out.println("    GetHostedProfilePage");
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
+        System.out.println("    PayPalAuthorizeCapture");
         System.out.println("    PayPalVoid");
         System.out.println("    PayPalAuthorizationOnly");
     }
