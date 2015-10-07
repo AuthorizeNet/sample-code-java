@@ -58,18 +58,18 @@ public class AuthorizationOnlyContinued {
                 if (result.getResponseCode().equals("1")) {
                     System.out.println(result.getResponseCode());
                     System.out.println("Successful PayPal Transaction");
-                    System.out.println("Reference Transaction ID: " + result.getRefTransID());
-                    System.out.println(result.getMessages().getMessage().get(0).getDescription());
+                    //System.out.println("Reference Transaction ID: " + result.getRefTransID());
+                    System.out.println("Description: "+result.getMessages().getMessage().get(0).getDescription());
                 }
                 else
                 {
                 	System.out.println(result.getResponseCode());
-                    System.out.println("Failed Transaction: "+result.getErrors().getError().get(0).getErrorText());
+                    System.out.println("Failed Transaction Description: "+result.getErrors().getError().get(0).getErrorText());
                 }
             }
             else
             {
-            	System.out.println("Failed Transaction:  "+response.getMessages().getResultCode());
+            	System.out.println("Failed Transaction: "+response.getMessages().getResultCode());
             	System.out.println("Error Code:  "+response.getMessages().getMessage().get(0).getCode());
             }
         }

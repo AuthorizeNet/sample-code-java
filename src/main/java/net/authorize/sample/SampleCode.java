@@ -107,6 +107,8 @@ public class SampleCode {
         System.out.println("    GetHostedProfilePage");
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    PayPalAuthorizeOnlyContinue");
+        System.out.println("    PayPalCredit");
+        
     }
 
     private static void RunMethod(String methodName)
@@ -240,6 +242,16 @@ public class SampleCode {
             	AuthorizationOnlyContinued.run(apiLoginId, transactionKey, transactionId, payerId);
             	        	
                 break;
+            case "PayPalCredit":
+            	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            	System.out.println("Enter transaction ID: ");
+				try {
+					transactionId = reader.readLine();
+				} catch (IOException e){
+					e.printStackTrace();
+					}
+            	Credit.run(apiLoginId, transactionKey, transactionId);
+            	break;
             default:
                 ShowUsage();
                 break;
