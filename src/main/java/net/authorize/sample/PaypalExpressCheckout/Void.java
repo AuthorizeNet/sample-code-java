@@ -39,7 +39,7 @@ public class Void {
 
 		transactionRequest.setTransactionType(TransactionTypeEnum.VOID_TRANSACTION.value());
 		transactionRequest.setPayment(paymentType);
-		transactionRequest.setRefTransId("2241688575");
+		transactionRequest.setRefTransId("2241708879");
 
 		// Make the API Request
 		CreateTransactionRequest apiRequest = new CreateTransactionRequest();
