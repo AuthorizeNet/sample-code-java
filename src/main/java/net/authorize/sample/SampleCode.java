@@ -3,12 +3,14 @@ package net.authorize.sample;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.*;
 
 import net.authorize.sample.VisaCheckout.*;
 import net.authorize.sample.PaymentTransactions.*;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
+import net.authorize.sample.PayPalExpressCheckout.*;
 
 /**
  * Created by anetdeveloper on 8/5/15.
@@ -106,6 +108,7 @@ public class SampleCode {
         System.out.println("    GetHostedProfilePage");
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
+        System.out.println("    PaypalPriorAuthorizationCapture");
     }
 
     private static void RunMethod(String methodName)
@@ -221,6 +224,13 @@ public class SampleCode {
                 break;
             case "UpdateCustomerShippingAddress":
                 UpdateCustomerShippingAddress.run(apiLoginId, transactionKey);
+                break;
+            case "PaypalPriorAuthorizationCapture":
+                Scanner reader = new Scanner(System.in);
+                System.out.println("Enter Transaction ID: ");
+                String transactionId = reader.nextLine();
+                
+                PriorAuthorizationCapture.run(apiLoginId, transactionKey, transactionId);
                 break;
             default:
                 ShowUsage();
