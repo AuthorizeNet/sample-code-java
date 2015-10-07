@@ -1,7 +1,7 @@
 package net.authorize.sample.PaypalExpressCheckout;
 
 import java.math.BigDecimal;
-import java.util.Scanner;
+
 import net.authorize.Environment;
 import net.authorize.TransactionType;
 import net.authorize.api.contract.v1.CreateTransactionRequest;
@@ -18,9 +18,11 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class AuthorizationAndCaptureContinue
 {
-	public static void run(String apiLoginId, String transactionKey, String TransactionID){
+	public static void run(String apiLoginId, String transactionKey, String TransactionID, String payerID){
 		
 		System.out.println("PayPal Authorize Capture-Continue Transaction");
+		
+		//Common code to set for all requests
 		ApiOperationBase.setEnvironment(Environment.SANDBOX);
 		
 		// define the merchant information (authentication / transaction id)
@@ -30,11 +32,7 @@ public class AuthorizationAndCaptureContinue
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
         
         // Get Transaction Code and Payer ID from the User
-        Scanner scan = new Scanner(System.in);
-        System.out.print("Enter Transaction ID : ");        
-        TransactionID = scan.nextLine().trim();
-        System.out.print("Enter Payer ID : ");
-        String payerID = scan.nextLine().trim();
+        
         
         // Set PayPal type and attributes
         PayPalType payPalType = new PayPalType();
@@ -65,7 +63,7 @@ public class AuthorizationAndCaptureContinue
         //validate 
         if(response.getMessages().getResultCode() == MessageTypeEnum.OK){
         	if(response.getTransactionResponse() != null){
-        		System.out.println("Success, " + "\nMessage : "+response.getTransactionResponse().getMessages().getMessage().get(0).getDescription() );
+        		System.out.println("Success, \nMessage : "+response.getTransactionResponse().getMessages().getMessage().get(0).getDescription() );
         		// Get Auth Code By :  response.getTransactionResponse().getAuthCode()
         	}
         }
