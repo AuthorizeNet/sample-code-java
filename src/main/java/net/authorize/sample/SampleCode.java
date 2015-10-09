@@ -9,7 +9,7 @@ import net.authorize.sample.PaymentTransactions.*;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
-import net.authorize.sample.PayPalExpressCheckout.*;
+import net.authorize.sample.PayPalExpressCheckout.PriorAuthorizationCapture;
 import net.authorize.sample.PaypalExpressCheckout.AuthorizationOnly;
 
 /**
@@ -228,11 +228,11 @@ public class SampleCode {
             case "PayPalAuthorizationOnly":
                 AuthorizationOnly.run(apiLoginId, transactionKey);
                 break;
-			case "PaypalPriorAuthorizationCapture":
+            case "PaypalPriorAuthorizationCapture":
                 String transactionId = "2241801682"; // Use a valid transaction ID here
                 
                 PriorAuthorizationCapture.run(apiLoginId, transactionKey, transactionId);
-				break;
+                break;
             default:
                 ShowUsage();
                 break;
