@@ -226,9 +226,7 @@ public class SampleCode {
                 UpdateCustomerShippingAddress.run(apiLoginId, transactionKey);
                 break;
             case "PaypalPriorAuthorizationCapture":
-                Scanner reader = new Scanner(System.in);
-                System.out.println("Enter Transaction ID: ");
-                String transactionId = reader.nextLine();
+                String transactionId = "2241801682"; // Use a valid transaction ID here
                 
                 PriorAuthorizationCapture.run(apiLoginId, transactionKey, transactionId);
                 break;
