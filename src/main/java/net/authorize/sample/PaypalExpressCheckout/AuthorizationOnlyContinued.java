@@ -9,10 +9,7 @@ import net.authorize.api.controller.CreateTransactionController;
 
 public class AuthorizationOnlyContinued {
 
-    //
-    // Run this sample from command line with:
-    //                 java -jar target/ChargeCreditCard-jar-with-dependencies.jar
-    //
+   
     public static void run(String apiLoginId, String transactionKey, String transactionId, String payerId) {
 
     	System.out.println("PayPal Authorize Only-Continue Transaction");
