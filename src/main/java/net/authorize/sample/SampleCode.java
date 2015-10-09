@@ -9,6 +9,7 @@ import net.authorize.sample.PaymentTransactions.*;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
+import net.authorize.sample.PayPalExpressCheckout.*;
 import net.authorize.sample.PaypalExpressCheckout.AuthorizationOnly;
 
 /**
@@ -108,6 +109,7 @@ public class SampleCode {
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
         System.out.println("    PayPalAuthorizationOnly");
+		System.out.println("    PaypalPriorAuthorizationCapture");
     }
 
     private static void RunMethod(String methodName)
@@ -226,6 +228,11 @@ public class SampleCode {
             case "PayPalAuthorizationOnly":
                 AuthorizationOnly.run(apiLoginId, transactionKey);
                 break;
+			case "PaypalPriorAuthorizationCapture":
+                String transactionId = "2241801682"; // Use a valid transaction ID here
+                
+                PriorAuthorizationCapture.run(apiLoginId, transactionKey, transactionId);
+				break;
             default:
                 ShowUsage();
                 break;
