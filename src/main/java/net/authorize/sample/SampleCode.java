@@ -10,6 +10,7 @@ import net.authorize.sample.PaypalExpressCheckout.*;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
+import net.authorize.sample.PaypalExpressCheckout.AuthorizationOnly;
 
 /**
  * Created by anetdeveloper on 8/5/15.
@@ -107,8 +108,8 @@ public class SampleCode {
         System.out.println("    GetHostedProfilePage");
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
+        System.out.println("    PayPalAuthorizationOnly");
         System.out.println("    PayPalAuthorizeOnlyContinue");
-        System.out.println("    PayPalCredit");
     }
 
     private static void RunMethod(String methodName)
@@ -117,7 +118,9 @@ public class SampleCode {
         // You can create your own keys in seconds by signing up for a sandbox account here: https://developer.authorize.net/sandbox/
         String apiLoginId           = "5KP3u95bQpv";
         String transactionKey       = "4Ktq966gC55GAX7S";
+        //Update the payedId with which you want to run the sample code
         String payerId 				= "";
+        //Update the transactionId with which you want to run the sample code
         String transactionId 		= "";
 
         switch (methodName) {
@@ -226,32 +229,12 @@ public class SampleCode {
             case "UpdateCustomerShippingAddress":
                 UpdateCustomerShippingAddress.run(apiLoginId, transactionKey);
                 break;
+            case "PayPalAuthorizationOnly":
+                AuthorizationOnly.run(apiLoginId, transactionKey);
+                break;
             case "PayPalAuthorizeOnlyContinue":
-            	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            	System.out.println("Enter transaction ID: ");
-				try {
-					transactionId = br.readLine();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-            	System.out.println("Enter payer ID: ");
-				try {
-					payerId = br.readLine();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
             	AuthorizationOnlyContinued.run(apiLoginId, transactionKey, transactionId, payerId);
             	break;	
-            case "PayPalCredit":
-    			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    			System.out.println("Enter transaction ID: ");
-    			try {
-    				transactionId = reader.readLine();
-    			} catch (IOException e){
-    				e.printStackTrace();
-    			}
-    			Credit.run(apiLoginId, transactionKey, transactionId);
-    			break;
             default:
                 ShowUsage();
                 break;
