@@ -108,6 +108,7 @@ public class SampleCode {
         System.out.println("    GetHostedProfilePage");
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
+    	//GetDetails
     	System.out.println("    GetDetails");        
     }
 
