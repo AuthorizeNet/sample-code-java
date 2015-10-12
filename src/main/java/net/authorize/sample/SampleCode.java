@@ -9,7 +9,7 @@ import net.authorize.sample.PaymentTransactions.*;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
-import net.authorize.sample.PaypalExpressCheckout.AuthorizationOnly;
+import net.authorize.sample.PayPalExpressCheckout.*;
 
 /**
  * Created by anetdeveloper on 8/5/15.
@@ -72,6 +72,7 @@ public class SampleCode {
 
     private static void ShowMethods()
     {
+
         System.out.println("    DecryptVisaCheckoutData");
         System.out.println("    CreateVisaCheckoutTransaction");
         System.out.println("    ChargeCreditCard");
@@ -108,6 +109,7 @@ public class SampleCode {
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
         System.out.println("    PayPalAuthorizationOnly");
+    	System.out.println("    GetDetails");        
     }
 
     private static void RunMethod(String methodName)
@@ -224,7 +226,10 @@ public class SampleCode {
                 UpdateCustomerShippingAddress.run(apiLoginId, transactionKey);
                 break;
             case "PayPalAuthorizationOnly":
-                AuthorizationOnly.run(apiLoginId, transactionKey);
+            	AuthorizationOnly.run(apiLoginId, transactionKey);
+            	break;
+            case "GetDetails":
+                GetDetails.run(apiLoginId, transactionKey);
                 break;
             default:
                 ShowUsage();
