@@ -109,7 +109,6 @@ public class SampleCode {
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
         System.out.println("    PayPalAuthorizationOnly");
-    	//GetDetails
     	System.out.println("    GetDetails");        
     }
 
@@ -119,7 +118,6 @@ public class SampleCode {
         // You can create your own keys in seconds by signing up for a sandbox account here: https://developer.authorize.net/sandbox/
         String apiLoginId           = "5KP3u95bQpv";
         String transactionKey       = "4Ktq966gC55GAX7S";
-        
 
         switch (methodName) {
             case "VisaCheckoutDecrypt":
