@@ -108,7 +108,6 @@ public class SampleCode {
         System.out.println("    GetHostedProfilePage");
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
-    	//GetDetails
     	System.out.println("    GetDetails");        
     }
 
@@ -227,14 +226,7 @@ public class SampleCode {
                 UpdateCustomerShippingAddress.run(apiLoginId, transactionKey);
                 break;
             case "GetDetails":
-                BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-                try{
-                	System.out.println("Enter Transaction ID:");
-                	GetDetails.run(apiLoginId, transactionKey, br.readLine());
-                }
-                catch(Exception ex){
-                    System.out.print("Error with transaction ID");
-                }
+                GetDetails.run(apiLoginId, transactionKey);
                 break;
             default:
                 ShowUsage();
