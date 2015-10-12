@@ -7,7 +7,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class GetDetails {
 	
-	public static void run(String apiLoginId, String transactionKey, String refTransactionID) {
+	public static void run(String apiLoginId, String transactionKey) {
         //Common code to set for all requests
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
@@ -22,11 +22,11 @@ public class GetDetails {
         PaymentType paymentType = new PaymentType();
         paymentType.setPayPal(payPalType);
         
-        //create transaction request of type GetDetailsTransaction
+        //create GetDetailsTransaction for any valid PayPal transaction Id for the Merchant
         TransactionRequestType transactionRequestType = new TransactionRequestType();
         transactionRequestType.setTransactionType(TransactionTypeEnum.GET_DETAILS_TRANSACTION.value());
         transactionRequestType.setPayment(paymentType);
-        transactionRequestType.setRefTransId(refTransactionID);
+        transactionRequestType.setRefTransId("2241936095");
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();
         apiRequest.setTransactionRequest(transactionRequestType);
         
@@ -59,6 +59,9 @@ public class GetDetails {
             {
                 System.out.println("Failed Transaction:  "+response.getMessages().getResultCode());
             }
+        }
+        else{
+        	System.out.println("Failed Transaction");
         }
 
 	}
