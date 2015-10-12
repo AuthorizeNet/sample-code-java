@@ -9,7 +9,7 @@ import net.authorize.sample.PaymentTransactions.*;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
-import net.authorize.sample.PayPalExpressCheckout.PriorAuthorizationCapture;
+import net.authorize.sample.PaypalExpressCheckout.PriorAuthorizationCapture;
 import net.authorize.sample.PaypalExpressCheckout.AuthorizationOnly;
 
 /**
