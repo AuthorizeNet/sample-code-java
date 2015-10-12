@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package net.authorize.sample.PayPalExpressCheckout;
+package net.authorize.sample.PaypalExpressCheckout;
 
 import java.math.BigDecimal;
 import net.authorize.api.controller.base.ApiOperationBase;
