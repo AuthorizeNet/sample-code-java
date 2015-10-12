@@ -108,6 +108,7 @@ public class SampleCode {
         System.out.println("    GetHostedProfilePage");
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
+        System.out.println("    PayPalAuthorizationOnly");
     	//GetDetails
     	System.out.println("    GetDetails");        
     }
@@ -226,6 +227,9 @@ public class SampleCode {
             case "UpdateCustomerShippingAddress":
                 UpdateCustomerShippingAddress.run(apiLoginId, transactionKey);
                 break;
+            case "PayPalAuthorizationOnly":
+            	AuthorizationOnly.run(apiLoginId, transactionKey);
+            	break;
             case "GetDetails":
                 GetDetails.run(apiLoginId, transactionKey);
                 break;
