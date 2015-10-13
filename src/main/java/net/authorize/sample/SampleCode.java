@@ -7,10 +7,11 @@ import java.io.InputStreamReader;
 import net.authorize.sample.VisaCheckout.*;
 import net.authorize.sample.PaymentTransactions.*;
 import net.authorize.sample.PaypalExpressCheckout.*;
+import net.authorize.sample.PaypalExpressCheckout.Void;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
-import net.authorize.sample.PaypalExpressCheckout.AuthorizationOnly;
+import net.authorize.sample.PaypalExpressCheckout.*;
 
 /**
  * Created by anetdeveloper on 8/5/15.
@@ -108,7 +109,10 @@ public class SampleCode {
         System.out.println("    GetHostedProfilePage");
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
+        System.out.println("    PayPalAuthorizeCapture");
+        System.out.println("    PayPalVoid");
         System.out.println("    PayPalAuthorizationOnly");
+        System.out.println("    PayPalAuthorizeCaptureContinue");
         System.out.println("    PayPalAuthorizeOnlyContinue");
     }
 
@@ -118,10 +122,10 @@ public class SampleCode {
         // You can create your own keys in seconds by signing up for a sandbox account here: https://developer.authorize.net/sandbox/
         String apiLoginId           = "5KP3u95bQpv";
         String transactionKey       = "4Ktq966gC55GAX7S";
-        //Update the payedId with which you want to run the sample code
-        String payerId 				= "";
-        //Update the transactionId with which you want to run the sample code
+        
+        //Set transactionID and payerID here for some function calls
         String transactionId 		= "";
+        String payerId 				= "";
 
         switch (methodName) {
             case "VisaCheckoutDecrypt":
@@ -229,9 +233,18 @@ public class SampleCode {
             case "UpdateCustomerShippingAddress":
                 UpdateCustomerShippingAddress.run(apiLoginId, transactionKey);
                 break;
+            case "PayPalAuthorizeCapture":
+            	AuthorizationAndCapture.run(apiLoginId, transactionKey);
+                break;
+            case "PayPalVoid":
+            	Void.run(apiLoginId, transactionKey);
+                break;
             case "PayPalAuthorizationOnly":
                 AuthorizationOnly.run(apiLoginId, transactionKey);
                 break;
+            case "PayPalAuthorizeCaptureContinue":
+            	AuthorizationAndCaptureContinue.run(apiLoginId, transactionKey, transactionId, payerId);
+            	break;
             case "PayPalAuthorizeOnlyContinue":
             	AuthorizationOnlyContinued.run(apiLoginId, transactionKey, transactionId, payerId);
             	break;	
