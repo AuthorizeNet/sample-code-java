@@ -9,6 +9,7 @@ import net.authorize.sample.PaymentTransactions.*;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
+import net.authorize.sample.PaypalExpressCheckout.AuthorizationAndCaptureContinue;
 import net.authorize.sample.PaypalExpressCheckout.AuthorizationOnly;
 
 /**
@@ -108,6 +109,7 @@ public class SampleCode {
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
         System.out.println("    PayPalAuthorizationOnly");
+        System.out.println("    PayPalAuthorizeCaptureContinue");
     }
 
     private static void RunMethod(String methodName)
@@ -116,6 +118,10 @@ public class SampleCode {
         // You can create your own keys in seconds by signing up for a sandbox account here: https://developer.authorize.net/sandbox/
         String apiLoginId           = "5KP3u95bQpv";
         String transactionKey       = "4Ktq966gC55GAX7S";
+        
+        //Set transactionID and payerID here for some function calls
+        String transactionID 		= "";
+        String payerID 				= "";
 
         switch (methodName) {
             case "VisaCheckoutDecrypt":
@@ -226,6 +232,9 @@ public class SampleCode {
             case "PayPalAuthorizationOnly":
                 AuthorizationOnly.run(apiLoginId, transactionKey);
                 break;
+            case "PayPalAuthorizeCaptureContinue":
+            	AuthorizationAndCaptureContinue.run(apiLoginId, transactionKey, transactionID, payerID);
+            	break;
             default:
                 ShowUsage();
                 break;
