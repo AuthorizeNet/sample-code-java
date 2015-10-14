@@ -1,4 +1,4 @@
-package net.authorize.sample.PayPalExpressCheckout;
+package net.authorize.sample.PaypalExpressCheckout;
 
 import net.authorize.Environment;
 import net.authorize.api.contract.v1.*;
@@ -36,32 +36,23 @@ public class GetDetails {
         
         CreateTransactionResponse response = controller.getApiResponse();
         
-        if (response!=null) {
-            if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
+        if (response!=null && response.getMessages().getResultCode() == MessageTypeEnum.OK) {
 
-                TransactionResponse result = response.getTransactionResponse();
-                if (result.getResponseCode().equals("1")) {
-                    System.out.println("Successful PayPal Get Details Transaction");
-                    System.out.println("Account Type : "+ result.getAccountType());
-                    System.out.println("PayPal PayerID : "+ result.getSecureAcceptance().getPayerID());
-                    System.out.println("Shipping Address : "+ result.getShipTo().getFirstName());
-                    System.out.println(result.getShipTo().getAddress() +" " + result.getShipTo().getCity());
-                    System.out.println(result.getShipTo().getState() +" "+ result.getShipTo().getZip());
-                    System.out.println(result.getShipTo().getCountry());
-                    System.out.println("Transaction ID : " + result.getTransId());
-                }
-                else
-                {
-                    System.out.println("Failed Transaction"+result.getResponseCode());
-                }
-            }
-            else
-            {
-                System.out.println("Failed Transaction:  "+response.getMessages().getResultCode());
+            TransactionResponse result = response.getTransactionResponse();
+            if (result.getResponseCode().equals("1")) {
+                System.out.println("Successful PayPal Get Details Transaction");
+                System.out.println("Account Type : "+ result.getAccountType());
+                System.out.println("PayPal PayerID : "+ result.getSecureAcceptance().getPayerID());
+                System.out.println("Shipping Address : "+ result.getShipTo().getFirstName());
+                System.out.println(result.getShipTo().getAddress() +" " + result.getShipTo().getCity());
+                System.out.println(result.getShipTo().getState() +" "+ result.getShipTo().getZip());
+                System.out.println(result.getShipTo().getCountry());
+                System.out.println("Transaction ID : " + result.getTransId());
             }
         }
-        else{
-        	System.out.println("Failed Transaction");
+        else
+        {
+            System.out.println("Failed Transaction:  "+response.getMessages().getMessage().get(0).getCode()+ "   " + response.getMessages().getMessage().get(0).getText());
         }
 
 	}
