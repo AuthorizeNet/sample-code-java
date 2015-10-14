@@ -7,10 +7,10 @@ import java.io.InputStreamReader;
 import net.authorize.sample.VisaCheckout.*;
 import net.authorize.sample.PaymentTransactions.*;
 import net.authorize.sample.PaypalExpressCheckout.*;
+import net.authorize.sample.PaypalExpressCheckout.Void;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
-import net.authorize.sample.PaypalExpressCheckout.AuthorizationOnly;
 
 /**
  * Created by anetdeveloper on 8/5/15.
@@ -108,7 +108,10 @@ public class SampleCode {
         System.out.println("    GetHostedProfilePage");
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
+        System.out.println("    PayPalAuthorizeCapture");
+        System.out.println("    PayPalVoid");
         System.out.println("    PayPalAuthorizationOnly");
+        System.out.println("    PayPalAuthorizeCaptureContinue");
         System.out.println("    PayPalAuthorizeOnlyContinue");
         System.out.println("    PayPalCredit");
     }
@@ -230,9 +233,18 @@ public class SampleCode {
             case "UpdateCustomerShippingAddress":
                 UpdateCustomerShippingAddress.run(apiLoginId, transactionKey);
                 break;
+            case "PayPalAuthorizeCapture":
+            	AuthorizationAndCapture.run(apiLoginId, transactionKey);
+                break;
+            case "PayPalVoid":
+            	Void.run(apiLoginId, transactionKey);
+                break;
             case "PayPalAuthorizationOnly":
                 AuthorizationOnly.run(apiLoginId, transactionKey);
                 break;
+            case "PayPalAuthorizeCaptureContinue":
+            	AuthorizationAndCaptureContinue.run(apiLoginId, transactionKey, transactionId, payerId);
+            	break;
             case "PayPalAuthorizeOnlyContinue":
             	AuthorizationOnlyContinued.run(apiLoginId, transactionKey, transactionId, payerId);
             	break;	
