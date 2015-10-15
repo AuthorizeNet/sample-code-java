@@ -113,6 +113,7 @@ public class SampleCode {
         System.out.println("    PayPalVoid");
         System.out.println("    PayPalAuthorizationOnly");
         System.out.println("    PayPalAuthorizeCaptureContinue");
+        System.out.println("    PayPalGetDetails");
     }
 
     private static void RunMethod(String methodName)
@@ -244,6 +245,9 @@ public class SampleCode {
             case "PayPalAuthorizeCaptureContinue":
             	AuthorizationAndCaptureContinue.run(apiLoginId, transactionKey, transactionID, payerID);
             	break;
+            case "PayPalGetDetails":
+            	GetDetails.run(apiLoginId, transactionKey);
+                break;
             default:
                 ShowUsage();
                 break;
