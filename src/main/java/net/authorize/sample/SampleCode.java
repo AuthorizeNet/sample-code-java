@@ -114,6 +114,7 @@ public class SampleCode {
         System.out.println("    PayPalAuthorizationOnly");
         System.out.println("    PayPalAuthorizeCaptureContinue");
         System.out.println("    PayPalGetDetails");
+		System.out.println("    PayPalPriorAuthorizationCapture");		
     }
 
     private static void RunMethod(String methodName)
@@ -247,6 +248,9 @@ public class SampleCode {
             	break;
             case "PayPalGetDetails":
             	GetDetails.run(apiLoginId, transactionKey);
+			case "PaypalPriorAuthorizationCapture":
+                String transactionId = "2241801682"; // Use a valid transaction ID here        
+                PriorAuthorizationCapture.run(apiLoginId, transactionKey, transactionId);
                 break;
             default:
                 ShowUsage();
