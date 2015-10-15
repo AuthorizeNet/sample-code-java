@@ -112,7 +112,9 @@ public class SampleCode {
         System.out.println("    PayPalVoid");
         System.out.println("    PayPalAuthorizationOnly");
         System.out.println("    PayPalAuthorizeCaptureContinue");
-        System.out.println("    PayPalAuthorizeOnlyContinue");
+        System.out.println("    PayPalGetDetails");
+		System.out.println("    PayPalPriorAuthorizationCapture");	
+		System.out.println("    PayPalAuthorizeOnlyContinue");
         System.out.println("    PayPalCredit");
     }
 
@@ -251,6 +253,12 @@ public class SampleCode {
             case "PayPalCredit":
     			Credit.run(apiLoginId, transactionKey, transactionId);
     			break;
+            case "PayPalGetDetails":
+            	GetDetails.run(apiLoginId, transactionKey);
+			case "PaypalPriorAuthorizationCapture":
+                transactionId = "2241801682"; // Use a valid transaction ID here        
+                PriorAuthorizationCapture.run(apiLoginId, transactionKey, transactionId);
+                break;
             default:
                 ShowUsage();
                 break;
