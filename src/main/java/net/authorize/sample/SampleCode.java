@@ -11,7 +11,6 @@ import net.authorize.sample.PaypalExpressCheckout.Void;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
-import net.authorize.sample.PaypalExpressCheckout.*;
 
 /**
  * Created by anetdeveloper on 8/5/15.
@@ -114,7 +113,9 @@ public class SampleCode {
         System.out.println("    PayPalAuthorizationOnly");
         System.out.println("    PayPalAuthorizeCaptureContinue");
         System.out.println("    PayPalGetDetails");
-		System.out.println("    PayPalPriorAuthorizationCapture");		
+		System.out.println("    PayPalPriorAuthorizationCapture");	
+		System.out.println("    PayPalAuthorizeOnlyContinue");
+        System.out.println("    PayPalCredit");
     }
 
     private static void RunMethod(String methodName)
@@ -123,10 +124,10 @@ public class SampleCode {
         // You can create your own keys in seconds by signing up for a sandbox account here: https://developer.authorize.net/sandbox/
         String apiLoginId           = "5KP3u95bQpv";
         String transactionKey       = "4Ktq966gC55GAX7S";
-        
-        //Set transactionID and payerID here for some function calls
-        String transactionID 		= "";
-        String payerID 				= "";
+        //Update the payedId with which you want to run the sample code
+        String payerId 				= "";
+        //Update the transactionId with which you want to run the sample code
+        String transactionId 		= "";
 
         switch (methodName) {
             case "VisaCheckoutDecrypt":
@@ -244,12 +245,18 @@ public class SampleCode {
                 AuthorizationOnly.run(apiLoginId, transactionKey);
                 break;
             case "PayPalAuthorizeCaptureContinue":
-            	AuthorizationAndCaptureContinue.run(apiLoginId, transactionKey, transactionID, payerID);
+            	AuthorizationAndCaptureContinue.run(apiLoginId, transactionKey, transactionId, payerId);
             	break;
+            case "PayPalAuthorizeOnlyContinue":
+            	AuthorizationOnlyContinued.run(apiLoginId, transactionKey, transactionId, payerId);
+            	break;	
+            case "PayPalCredit":
+    			Credit.run(apiLoginId, transactionKey, transactionId);
+    			break;
             case "PayPalGetDetails":
             	GetDetails.run(apiLoginId, transactionKey);
 			case "PaypalPriorAuthorizationCapture":
-                String transactionId = "2241801682"; // Use a valid transaction ID here        
+                transactionId = "2241801682"; // Use a valid transaction ID here        
                 PriorAuthorizationCapture.run(apiLoginId, transactionKey, transactionId);
                 break;
             default:
