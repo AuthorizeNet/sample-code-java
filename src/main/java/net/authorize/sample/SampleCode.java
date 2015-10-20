@@ -97,6 +97,7 @@ public class SampleCode {
         System.out.println("    GetUnsettledTransactionList");
         System.out.println("    GetTransactionDetails");
         System.out.println("    CreateCustomerProfile");
+        System.out.println("    CreateCustomerProfileIds");
         System.out.println("    CreateCustomerPaymentProfile");
         System.out.println("    CreateCustomerShippingAddress");
         System.out.println("    DeleteCustomerPaymentProfile");
