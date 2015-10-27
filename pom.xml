@@ -7,6 +7,13 @@
   <version>1.0</version>
   <name>SampleCode</name>
   <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>net.authorize</groupId>
+      <artifactId>anet-java-sdk</artifactId>
+      <version>1.8.4</version>
+    </dependency>
+  </dependencies>
   <build>
     <plugins>
       <plugin>
@@ -39,11 +46,4 @@
       </plugin>
     </plugins>
   </build>
-    <dependencies>
-        <dependency>
-            <groupId>net.authorize</groupId>
-            <artifactId>anet-java-sdk</artifactId>
-            <version>1.8.6-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
 </project>

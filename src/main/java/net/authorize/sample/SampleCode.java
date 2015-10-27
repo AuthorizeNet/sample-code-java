@@ -113,9 +113,10 @@ public class SampleCode {
         System.out.println("    PayPalAuthorizationOnly");
         System.out.println("    PayPalAuthorizeCaptureContinue");
         System.out.println("    PayPalGetDetails");
-		System.out.println("    PayPalPriorAuthorizationCapture");	
-		System.out.println("    PayPalAuthorizeOnlyContinue");
+        System.out.println("    PayPalPriorAuthorizationCapture");	
+        System.out.println("    PayPalAuthorizeOnlyContinue");
         System.out.println("    PayPalCredit");
+        System.out.println("    UpdateSplitTenderGroup");
     }
 
     private static void RunMethod(String methodName)
@@ -251,13 +252,16 @@ public class SampleCode {
             	AuthorizationOnlyContinued.run(apiLoginId, transactionKey, transactionId, payerId);
             	break;	
             case "PayPalCredit":
-    			Credit.run(apiLoginId, transactionKey, transactionId);
-    			break;
+                Credit.run(apiLoginId, transactionKey, transactionId);
+                break;
             case "PayPalGetDetails":
             	GetDetails.run(apiLoginId, transactionKey);
-			case "PaypalPriorAuthorizationCapture":
+            case "PaypalPriorAuthorizationCapture":
                 transactionId = "2241801682"; // Use a valid transaction ID here        
                 PriorAuthorizationCapture.run(apiLoginId, transactionKey, transactionId);
+                break;
+            case "UpdateSplitTenderGroup":
+                UpdateSplitTenderGroup.run(apiLoginId, transactionKey);
                 break;
             default:
                 ShowUsage();
