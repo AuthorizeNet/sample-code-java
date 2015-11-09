@@ -49,6 +49,7 @@ public class GetSettledBatchList {
             else
             {
                 System.out.println("Failed to get settled batch list:  " + getResponse.getMessages().getResultCode());
+                System.out.println(getResponse.getMessages().getMessage().get(0).getText());
             }
         }
 }
