@@ -50,8 +50,8 @@ public class CreateSubscription {
 
         ARBSubscriptionType arbSubscriptionType = new ARBSubscriptionType();
         arbSubscriptionType.setPaymentSchedule(schedule);
-        arbSubscriptionType.setAmount(new BigDecimal(10.29));
-        arbSubscriptionType.setTrialAmount(new BigDecimal(0.00));
+        arbSubscriptionType.setAmount(new BigDecimal("10.29"));
+        arbSubscriptionType.setTrialAmount(new BigDecimal("0.00"));
         arbSubscriptionType.setPayment(paymentType);
 
         NameAndAddressType name = new NameAndAddressType();
