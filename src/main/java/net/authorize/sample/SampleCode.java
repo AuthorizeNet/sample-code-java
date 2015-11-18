@@ -92,7 +92,7 @@ public class SampleCode {
         System.out.println("    UpdateSubscription");
         System.out.println("    GetListOfSubscriptions");
         System.out.println("    GetBatchStatistics");
-        //System.out.println("    GetSettledBatchList");
+        System.out.println("    GetSettledBatchList");
         System.out.println("    GetTransactionList");
         System.out.println("    GetUnsettledTransactionList");
         System.out.println("    GetTransactionDetails");
@@ -104,6 +104,7 @@ public class SampleCode {
         System.out.println("    DeleteCustomerShippingAddress");
         System.out.println("    GetCustomerPaymentProfile");
         System.out.println("    GetCustomerProfile");
+        System.out.println("    GetCustomerProfileIds");
         System.out.println("    GetCustomerShippingAddress");
         System.out.println("    GetHostedProfilePage");
         System.out.println("    UpdateCustomerPaymentProfile");
@@ -188,9 +189,9 @@ public class SampleCode {
             case "GetBatchStatistics":
                 GetBatchStatistics.run(apiLoginId, transactionKey);
                 break;
-            /*case "GetSettledBatchList":
+            case "GetSettledBatchList":
                 GetSettledBatchList.run(apiLoginId, transactionKey);
-                break;*/
+                break;
             case "GetTransactionList":
                 GetTransactionList.run(apiLoginId, transactionKey);
                 break;
@@ -223,6 +224,9 @@ public class SampleCode {
                 break;
             case "GetCustomerProfile":
                 GetCustomerProfile.run(apiLoginId, transactionKey);
+                break;
+            case "GetCustomerProfileIds":
+                GetCustomerProfileIds.run(apiLoginId, transactionKey);
                 break;
             case "GetCustomerShippingAddress":
                 GetCustomerShippingAddress.run(apiLoginId, transactionKey);
