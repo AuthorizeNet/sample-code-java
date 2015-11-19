@@ -87,6 +87,7 @@ public class SampleCode {
         System.out.println("    ChargeTokenizedCreditCard");
         System.out.println("    ChargeCustomerProfile");
         System.out.println("    CreateSubscription");
+        System.out.println("    GetSubscription");
         System.out.println("    GetSubscriptionStatus");
         System.out.println("    CancelSubscription");
         System.out.println("    UpdateSubscription");
@@ -103,6 +104,7 @@ public class SampleCode {
         System.out.println("    DeleteCustomerProfile");
         System.out.println("    DeleteCustomerShippingAddress");
         System.out.println("    GetCustomerPaymentProfile");
+        System.out.println("    GetCustomerPaymentProfileList");
         System.out.println("    GetCustomerProfile");
         System.out.println("    GetCustomerProfileIds");
         System.out.println("    GetCustomerShippingAddress");
@@ -174,6 +176,9 @@ public class SampleCode {
             case "CreateSubscription":
                 CreateSubscription.run(apiLoginId, transactionKey);
                 break;
+            case "GetSubscription":
+                GetSubscription.run(apiLoginId, transactionKey);
+                break; 
             case "GetSubscriptionStatus":
                 GetSubscriptionStatus.run(apiLoginId, transactionKey);
                 break; 
@@ -221,6 +226,9 @@ public class SampleCode {
                 break;
             case "GetCustomerPaymentProfile":
                 GetCustomerPaymentProfile.run(apiLoginId, transactionKey);
+                break;
+            case "GetCustomerPaymentProfileList":
+                GetCustomerPaymentProfileList.run(apiLoginId, transactionKey);
                 break;
             case "GetCustomerProfile":
                 GetCustomerProfile.run(apiLoginId, transactionKey);
