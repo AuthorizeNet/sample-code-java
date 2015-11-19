@@ -11,7 +11,7 @@ import net.authorize.sample.PaypalExpressCheckout.Void;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
-import net.authorize.sample.PaypalExpressCheckout.*;
+
 
 /**
  * Created by anetdeveloper on 8/5/15.
@@ -88,6 +88,7 @@ public class SampleCode {
         System.out.println("    ChargeTokenizedCreditCard");
         System.out.println("    ChargeCustomerProfile");
         System.out.println("    CreateSubscription");
+        System.out.println("    GetSubscription");
         System.out.println("    GetSubscriptionStatus");
         System.out.println("    CancelSubscription");
         System.out.println("    UpdateSubscription");
@@ -104,6 +105,7 @@ public class SampleCode {
         System.out.println("    DeleteCustomerProfile");
         System.out.println("    DeleteCustomerShippingAddress");
         System.out.println("    GetCustomerPaymentProfile");
+        System.out.println("    GetCustomerPaymentProfileList");
         System.out.println("    GetCustomerProfile");
         System.out.println("    GetCustomerShippingAddress");
         System.out.println("    GetHostedProfilePage");
@@ -114,7 +116,7 @@ public class SampleCode {
         System.out.println("    PayPalAuthorizationOnly");
         System.out.println("    PayPalAuthorizeCaptureContinue");
         System.out.println("    PayPalGetDetails");
-		System.out.println("    PayPalPriorAuthorizationCapture");		
+	System.out.println("    PayPalPriorAuthorizationCapture");		
     }
 
     private static void RunMethod(String methodName)
@@ -171,6 +173,9 @@ public class SampleCode {
             case "CreateSubscription":
                 CreateSubscription.run(apiLoginId, transactionKey);
                 break;
+            case "GetSubscription":
+                GetSubscription.run(apiLoginId, transactionKey);
+                break; 
             case "GetSubscriptionStatus":
                 GetSubscriptionStatus.run(apiLoginId, transactionKey);
                 break; 
@@ -218,6 +223,9 @@ public class SampleCode {
                 break;
             case "GetCustomerPaymentProfile":
                 GetCustomerPaymentProfile.run(apiLoginId, transactionKey);
+                break;
+            case "GetCustomerPaymentProfileList":
+                GetCustomerPaymentProfileList.run(apiLoginId, transactionKey);
                 break;
             case "GetCustomerProfile":
                 GetCustomerProfile.run(apiLoginId, transactionKey);
