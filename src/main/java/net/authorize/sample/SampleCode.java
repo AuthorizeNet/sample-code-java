@@ -3,6 +3,7 @@ package net.authorize.sample;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import net.authorize.sample.ApplePayTransactions.CreateAnApplePayTransaction;
 
 import net.authorize.sample.VisaCheckout.*;
 import net.authorize.sample.PaymentTransactions.*;
@@ -11,7 +12,7 @@ import net.authorize.sample.PaypalExpressCheckout.Void;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
-
+import net.authorize.sample.ApplePayTransactions.*;
 /**
  * Created by anetdeveloper on 8/5/15.
  */
@@ -85,6 +86,7 @@ public class SampleCode {
         System.out.println("    DebitBankAccount");
         System.out.println("    CreditBankAccount");
         System.out.println("    ChargeTokenizedCreditCard");
+        System.out.println("    CreateAnApplePayTransaction");
         System.out.println("    ChargeCustomerProfile");
         System.out.println("    CreateSubscription");
         System.out.println("    GetSubscription");
@@ -169,6 +171,9 @@ public class SampleCode {
                 break;
             case "ChargeTokenizedCreditCard":
                 ChargeTokenizedCreditCard.run(apiLoginId, transactionKey);
+                break;
+            case "CreateAnApplePayTransaction":
+                CreateAnApplePayTransaction.run(apiLoginId, transactionKey);
                 break;
             case "ChargeCustomerProfile":
                 ChargeCustomerProfile.run(apiLoginId, transactionKey);
