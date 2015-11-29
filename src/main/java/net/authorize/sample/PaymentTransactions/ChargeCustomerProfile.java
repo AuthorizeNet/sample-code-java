@@ -24,21 +24,20 @@ public class ChargeCustomerProfile {
         merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
-        // Populate the payment data
-        PaymentType paymentType = new PaymentType();
-        CreditCardType creditCard = new CreditCardType();
-        creditCard.setCardNumber("4242424242424242");
-        creditCard.setExpirationDate("0822");
-        paymentType.setCreditCard(creditCard);
+
+        // Set the profile ID to charge
+        CustomerProfilePaymentType profileToCharge = new CustomerProfilePaymentType();
+        profileToCharge.setCustomerProfileId("36731856");
+        PaymentProfile paymentProfile = new PaymentProfile();
+        paymentProfile.setPaymentProfileId("33211899");
+        profileToCharge.setPaymentProfile(paymentProfile);
 
         // Create the payment transaction request
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.AUTH_CAPTURE_TRANSACTION.value());
-        txnRequest.setPayment(paymentType);
+        txnRequest.setProfile(profileToCharge);
         txnRequest.setAmount(new BigDecimal(500.00));
 
-        PaymentProfile paymentProfile = new PaymentProfile();
-        paymentProfile.setPaymentProfileId("25000332");
 
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();
         apiRequest.setTransactionRequest(txnRequest);
