@@ -136,10 +136,10 @@ public class SampleCode {
         String transactionId 		= "";
 
         switch (methodName) {
-            case "VisaCheckoutDecrypt":
+            case "DecryptVisaCheckoutData":
                 DecryptVisaCheckoutData.run(apiLoginId, transactionKey);
                 break;
-            case "VisaCheckoutTransaction":
+            case "CreateVisaCheckoutTransaction":
                 CreateVisaCheckoutTransaction.run(apiLoginId, transactionKey);
                 break;
             case "ChargeCreditCard":
