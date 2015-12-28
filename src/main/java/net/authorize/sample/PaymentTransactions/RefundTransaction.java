@@ -23,10 +23,19 @@ public class RefundTransaction {
         merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
+        // Create a payment object, last 4 of the credit card and expiration date are required
+        PaymentType paymentType = new PaymentType();
+        CreditCardType creditCard = new CreditCardType();
+        creditCard.setCardNumber("0015");
+        creditCard.setExpirationDate("1220");
+        paymentType.setCreditCard(creditCard);
+
         // Create the payment transaction request
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.REFUND_TRANSACTION.value());
-        txnRequest.setRefTransId("2238786428");
+        txnRequest.setRefTransId("2245803597");
+        txnRequest.setAmount(new BigDecimal(1.00));
+        txnRequest.setPayment(paymentType);
 
         // Make the API Request
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();
@@ -57,6 +66,12 @@ public class RefundTransaction {
             else
             {
                 System.out.println("Failed Transaction:  "+response.getMessages().getResultCode());
+                if(!response.getMessages().getMessage().isEmpty())
+                    System.out.println("Error: " + response.getMessages().getMessage().get(0).getCode() + "  " + response.getMessages().getMessage().get(0).getText());
+
+                if (response.getTransactionResponse() != null)
+                    if(!response.getTransactionResponse().getErrors().getError().isEmpty())
+                        System.out.println("Transaction Error : " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode() + " " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
             }
         }
 
