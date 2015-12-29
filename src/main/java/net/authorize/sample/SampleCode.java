@@ -113,6 +113,7 @@ public class SampleCode {
         System.out.println("    GetHostedProfilePage");
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
+        System.out.println("    ValidateCustomerPaymentProfile");
         System.out.println("    PayPalAuthorizeCapture");
         System.out.println("    PayPalVoid");
         System.out.println("    PayPalAuthorizationOnly");
@@ -252,6 +253,9 @@ public class SampleCode {
                 break;
             case "UpdateCustomerShippingAddress":
                 UpdateCustomerShippingAddress.run(apiLoginId, transactionKey);
+                break;
+            case "ValidateCustomerPaymentProfile":
+                ValidateCustomerPaymentProfile.run(apiLoginId, transactionKey);
                 break;
             case "PayPalAuthorizeCapture":
             	AuthorizationAndCapture.run(apiLoginId, transactionKey);
