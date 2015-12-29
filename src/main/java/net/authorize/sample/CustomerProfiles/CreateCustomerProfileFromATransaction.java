@@ -8,7 +8,7 @@ import net.authorize.api.controller.CreateCustomerProfileFromTransactionControll
 import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
-public class CreateCustomerProfileFromTransaction {
+public class CreateCustomerProfileFromATransaction {
 
 	public static void run(String apiLoginId, String transactionKey) {
 
