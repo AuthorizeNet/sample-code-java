@@ -80,8 +80,8 @@ public class SampleCode {
         System.out.println("    AuthorizeCreditCard");
         System.out.println("    RefundTransaction");
         System.out.println("    VoidTransaction");
-        System.out.println("    CreateCustomerProfileFromTransaction");
-        System.out.println("    CaptureOnly");
+        System.out.println("    CreateCustomerProfileFromATransaction");
+        System.out.println("    CaptureFundsAuthorizedThroughAnotherChannel");
         System.out.println("    CapturePreviouslyAuthorizedAmount");
         System.out.println("    DebitBankAccount");
         System.out.println("    CreditBankAccount");
@@ -113,7 +113,6 @@ public class SampleCode {
         System.out.println("    GetHostedProfilePage");
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
-        System.out.println("    ValidateCustomerPaymentProfile");
         System.out.println("    PayPalAuthorizeCapture");
         System.out.println("    PayPalVoid");
         System.out.println("    PayPalAuthorizationOnly");
@@ -155,11 +154,11 @@ public class SampleCode {
             case "RefundTransaction":
                 RefundTransaction.run(apiLoginId, transactionKey);
                 break;
-            case "CreateCustomerProfileFromTransaction":
-                CreateCustomerProfileFromTransaction.run(apiLoginId, transactionKey);
+            case "CreateCustomerProfileFromATransaction":
+                CreateCustomerProfileFromATransaction.run(apiLoginId, transactionKey);
                 break;
-            case "CaptureOnly":
-                CaptureOnly.run(apiLoginId, transactionKey);
+            case "CaptureFundsAuthorizedThroughAnotherChannel":
+                CaptureFundsAuthorizedThroughAnotherChannel.run(apiLoginId, transactionKey);
                 break;
             case "CapturePreviouslyAuthorizedAmount":
                 CapturePreviouslyAuthorizedAmount.run(apiLoginId, transactionKey);
@@ -253,9 +252,6 @@ public class SampleCode {
                 break;
             case "UpdateCustomerShippingAddress":
                 UpdateCustomerShippingAddress.run(apiLoginId, transactionKey);
-                break;
-            case "ValidateCustomerPaymentProfile":
-                ValidateCustomerPaymentProfile.run(apiLoginId, transactionKey);
                 break;
             case "PayPalAuthorizeCapture":
             	AuthorizationAndCapture.run(apiLoginId, transactionKey);

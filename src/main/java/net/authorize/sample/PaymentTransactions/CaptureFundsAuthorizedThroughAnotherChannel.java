@@ -7,7 +7,7 @@ import net.authorize.api.contract.v1.*;
 import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.api.controller.CreateTransactionController;
 
-public class CaptureOnly {
+public class CaptureFundsAuthorizedThroughAnotherChannel {
 
     //
     // Run this sample from command line with:
