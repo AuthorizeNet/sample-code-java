@@ -7,12 +7,9 @@ import net.authorize.api.contract.v1.*;
 import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.api.controller.CreateTransactionController;
 
-public class CaptureOnly {
+public class CaptureFundsAuthorizedThroughAnotherChannel {
 
-    //
-    // Run this sample from command line with:
-    //                 java -jar target/ChargeCreditCard-jar-with-dependencies.jar
-    //
+   
     public static void run(String apiLoginId, String transactionKey) {
         
         //Common code to set for all requests
