@@ -81,7 +81,7 @@ public class SampleCode {
         System.out.println("    RefundTransaction");
         System.out.println("    VoidTransaction");
         System.out.println("    CreateCustomerProfileFromTransaction");
-        System.out.println("    CaptureOnly");
+        System.out.println("    CaptureFundsAuthorizedThroughAnotherChannel");
         System.out.println("    CapturePreviouslyAuthorizedAmount");
         System.out.println("    DebitBankAccount");
         System.out.println("    CreditBankAccount");
@@ -158,8 +158,8 @@ public class SampleCode {
             case "CreateCustomerProfileFromTransaction":
                 CreateCustomerProfileFromTransaction.run(apiLoginId, transactionKey);
                 break;
-            case "CaptureOnly":
-                CaptureOnly.run(apiLoginId, transactionKey);
+            case "CaptureFundsAuthorizedThroughAnotherChannel":
+                CaptureFundsAuthorizedThroughAnotherChannel.run(apiLoginId, transactionKey);
                 break;
             case "CapturePreviouslyAuthorizedAmount":
                 CapturePreviouslyAuthorizedAmount.run(apiLoginId, transactionKey);
