@@ -173,7 +173,7 @@ public class SampleCode {
                 CreditBankAccount.run(apiLoginId, transactionKey, transactionId);
                 break;
             case "ChargeTokenizedCreditCard":
-                ChargeTokenizedCreditCard.run(apiLoginId, transactionKey);
+                ChargeTokenizedCreditCard.run(apiLoginId, transactionKey, 12.89);
                 break;
             case "CreateAnApplePayTransaction":
                 CreateAnApplePayTransaction.run(apiLoginId, transactionKey);

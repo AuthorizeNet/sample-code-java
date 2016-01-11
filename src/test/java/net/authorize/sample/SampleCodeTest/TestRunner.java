@@ -50,6 +50,7 @@ import net.authorize.sample.PaymentTransactions.CaptureFundsAuthorizedThroughAno
 import net.authorize.sample.PaymentTransactions.CapturePreviouslyAuthorizedAmount;
 import net.authorize.sample.PaymentTransactions.ChargeCreditCard;
 import net.authorize.sample.PaymentTransactions.ChargeCustomerProfile;
+import net.authorize.sample.PaymentTransactions.ChargeTokenizedCreditCard;
 import net.authorize.sample.PaymentTransactions.CreditBankAccount;
 import net.authorize.sample.PaymentTransactions.DebitBankAccount;
 import net.authorize.sample.PaymentTransactions.RefundTransaction;
@@ -330,6 +331,12 @@ public class TestRunner {
 	public ANetApiResponse TestDebitBankAccount()
 	{
 		CreateTransactionResponse response = (CreateTransactionResponse)DebitBankAccount.run(apiLoginId, transactionKey, getAmount());
+		return response;
+	}
+	
+	public ANetApiResponse TestChargeTokenizedCreditCard()
+	{
+		CreateTransactionResponse response = (CreateTransactionResponse)ChargeTokenizedCreditCard.run(apiLoginId, transactionKey, getAmount());
 		return response;
 	}
 
