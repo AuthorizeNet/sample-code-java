@@ -46,6 +46,7 @@ import net.authorize.sample.CustomerProfiles.UpdateCustomerProfile;
 import net.authorize.sample.CustomerProfiles.UpdateCustomerShippingAddress;
 import net.authorize.sample.CustomerProfiles.ValidateCustomerPaymentProfile;
 import net.authorize.sample.PaymentTransactions.AuthorizeCreditCard;
+import net.authorize.sample.PaymentTransactions.CaptureFundsAuthorizedThroughAnotherChannel;
 import net.authorize.sample.PaymentTransactions.CapturePreviouslyAuthorizedAmount;
 import net.authorize.sample.PaymentTransactions.ChargeCreditCard;
 import net.authorize.sample.PaymentTransactions.ChargeCustomerProfile;
@@ -374,7 +375,7 @@ public class TestRunner {
 		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
 		CreateCustomerPaymentProfileResponse paymentProfileResponse = (CreateCustomerPaymentProfileResponse)CreateCustomerPaymentProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 		CreateTransactionResponse chargeResponse = (CreateTransactionResponse) ChargeCustomerProfile.run(apiLoginId, transactionKey,
-				response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId());
+				response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), getAmount());
 		DeleteCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 
 		return chargeResponse;
@@ -468,6 +469,11 @@ public class TestRunner {
 	public ANetApiResponse TestCreateCustomerProfile()
 	{
 		return CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
+	}
+	
+	public ANetApiResponse TestCaptureFundsAuthorizedThroughAnotherChannel()
+	{
+		return CaptureFundsAuthorizedThroughAnotherChannel.run(apiLoginId, transactionKey, getAmount());
 	}
 
 	public ANetApiResponse TestCreateCustomerPaymentProfile()

@@ -35,12 +35,12 @@ PaymentTransactions.CapturePreviouslyAuthorizedAmount	1	1
 PaymentTransactions.RefundTransaction	1	0
 PaymentTransactions.VoidTransaction	1	1
 PaymentTransactions.CreditBankAccount	1	0
-PaymentTransactions.ChargeCustomerProfile	1	0
-PaymentTransactions.CaptureFundsAuthorizedThroughAnotherChannel	0	0
-PaymentTransactions.AuthorizeCreditCard	1	0
+PaymentTransactions.ChargeCustomerProfile	1	1
+PaymentTransactions.CaptureFundsAuthorizedThroughAnotherChannel	1	1
+PaymentTransactions.AuthorizeCreditCard	1	1
 PaymentTransactions.DebitBankAccount	0	1
 PaymentTransactions.ChargeTokenizedCreditCard	0	1
-PaymentTransactions.UpdateSplitTenderGroup	0	0
+PaymentTransactions.UpdateSplitTenderGroup	0	1
 TransactionReporting.GetTransactionList	0	1
 TransactionReporting.GetUnsettledTransactionList	0	1
 TransactionReporting.GetBatchStatistics	0	1

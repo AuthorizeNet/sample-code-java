@@ -24,7 +24,7 @@ public class UpdateSplitTenderGroup {
 
         // Provide a split tender Id
         // To get a split Tender ID in sandbox, authorize any transaction with amount = 462.25 [if card present] and set allowPartialAuth = true
-        String splitTenderId = "SPLIT_TENDER_ID"; 
+        String splitTenderId = "115901"; 
         
         // Create a request
         UpdateSplitTenderGroupRequest request = new UpdateSplitTenderGroupRequest();

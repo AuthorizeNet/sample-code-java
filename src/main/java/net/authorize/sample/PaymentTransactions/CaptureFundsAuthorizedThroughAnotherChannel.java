@@ -13,7 +13,7 @@ public class CaptureFundsAuthorizedThroughAnotherChannel {
     // Run this sample from command line with:
     //                 java -jar target/ChargeCreditCard-jar-with-dependencies.jar
     //
-    public static ANetApiResponse run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey, Double amount) {
         
         //Common code to set for all requests
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
@@ -22,11 +22,20 @@ public class CaptureFundsAuthorizedThroughAnotherChannel {
         merchantAuthenticationType.setName(apiLoginId);
         merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
+        
+        CreditCardType cc = new CreditCardType();
+        cc.setCardNumber("4111111111111111");
+        cc.setExpirationDate("2020-12");
+        
+        PaymentType payment = new PaymentType();
+        payment.setCreditCard(cc);
 
         // Create the payment transaction request
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.CAPTURE_ONLY_TRANSACTION.value());
-        txnRequest.setRefTransId("2238786428");
+        txnRequest.setAmount(new BigDecimal(amount.toString()));
+        txnRequest.setPayment(payment);
+        txnRequest.setAuthCode("ROHNFQ");
 
         // Make the API Request
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();

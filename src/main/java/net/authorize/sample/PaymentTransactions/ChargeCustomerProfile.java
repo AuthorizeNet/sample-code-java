@@ -14,7 +14,7 @@ public class ChargeCustomerProfile {
     //                 java -jar target/ChargeCreditCard-jar-with-dependencies.jar
     //
     public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileId,
-    		String customerPaymentProfileId) {
+    		String customerPaymentProfileId, Double amount) {
 
 
         //Common code to set for all requests
@@ -37,7 +37,7 @@ public class ChargeCustomerProfile {
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.AUTH_CAPTURE_TRANSACTION.value());
         txnRequest.setProfile(profileToCharge);
-        txnRequest.setAmount(new BigDecimal(500.00));
+        txnRequest.setAmount(new BigDecimal(amount.toString()));
 
 
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();

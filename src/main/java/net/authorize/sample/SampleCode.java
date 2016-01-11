@@ -161,7 +161,7 @@ public class SampleCode {
                 CreateCustomerProfileFromTransaction.run(apiLoginId, transactionKey);
                 break;
             case "CaptureFundsAuthorizedThroughAnotherChannel":
-                CaptureFundsAuthorizedThroughAnotherChannel.run(apiLoginId, transactionKey);
+                CaptureFundsAuthorizedThroughAnotherChannel.run(apiLoginId, transactionKey, 12.34);
                 break;
             case "CapturePreviouslyAuthorizedAmount":
                 CapturePreviouslyAuthorizedAmount.run(apiLoginId, transactionKey, transactionId);
@@ -179,7 +179,7 @@ public class SampleCode {
                 CreateAnApplePayTransaction.run(apiLoginId, transactionKey);
                 break;
             case "ChargeCustomerProfile":
-                ChargeCustomerProfile.run(apiLoginId, transactionKey, "36731856", "33211899");
+                ChargeCustomerProfile.run(apiLoginId, transactionKey, "36731856", "33211899" , 10.23);
                 break;
             case "CreateSubscription":
                 CreateSubscription.run(apiLoginId, transactionKey, (short)12, 10.21);
