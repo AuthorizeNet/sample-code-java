@@ -11,7 +11,7 @@ import net.authorize.api.controller.UpdateSplitTenderGroupController;
  * @author gnongsie
  */
 public class UpdateSplitTenderGroup {
-    public static void run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey) {
         System.out.println("Update Split Tender Group Sample Code");
         
         //Common code to set for all requests
@@ -48,5 +48,6 @@ public class UpdateSplitTenderGroup {
             System.out.println("Error: " + response.getMessages().getMessage().get(0).getCode() + 
                                     " " + response.getMessages().getMessage().get(0).getText());
         }
+		return response;
     }
 }

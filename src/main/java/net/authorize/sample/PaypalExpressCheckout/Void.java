@@ -1,6 +1,7 @@
 package net.authorize.sample.PaypalExpressCheckout;
 
 import net.authorize.Environment;
+import net.authorize.api.contract.v1.ANetApiResponse;
 import net.authorize.api.contract.v1.CreateTransactionRequest;
 import net.authorize.api.contract.v1.CreateTransactionResponse;
 import net.authorize.api.contract.v1.MerchantAuthenticationType;
@@ -14,7 +15,7 @@ import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
 public class Void {
-	public static void run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String transactionID) {
 
 		System.out.println("PayPal Void Transaction");
 
@@ -39,7 +40,7 @@ public class Void {
 
 		transactionRequest.setTransactionType(TransactionTypeEnum.VOID_TRANSACTION.value());
 		transactionRequest.setPayment(paymentType);
-		transactionRequest.setRefTransId("2241708879");
+		transactionRequest.setRefTransId(transactionID);
 
 		// Make the API Request
 		CreateTransactionRequest apiRequest = new CreateTransactionRequest();
@@ -69,6 +70,7 @@ public class Void {
 				if(!response.getTransactionResponse().getErrors().getError().isEmpty())
 					System.out.println("Transaction Error : " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode() + " " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
 		}
+		return response;
 	}
 
 }

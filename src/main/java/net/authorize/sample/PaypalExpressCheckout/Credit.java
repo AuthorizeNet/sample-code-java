@@ -9,7 +9,7 @@ import net.authorize.api.controller.CreateTransactionController;
 
 public class Credit {
 
-	public static void run(String apiLoginId, String transactionKey, String transactionId) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String transactionId) {
 
 		System.out.println("PayPal Credit Transaction");
 		//Common code to set for all requests
@@ -68,6 +68,7 @@ public class Credit {
 
 			}
 		}
+		return response;
 
 	}
 

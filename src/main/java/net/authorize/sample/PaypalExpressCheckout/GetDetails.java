@@ -7,7 +7,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class GetDetails {
 	
-	public static void run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String transactionID) {
         //Common code to set for all requests
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
@@ -26,7 +26,7 @@ public class GetDetails {
         TransactionRequestType transactionRequestType = new TransactionRequestType();
         transactionRequestType.setTransactionType(TransactionTypeEnum.GET_DETAILS_TRANSACTION.value());
         transactionRequestType.setPayment(paymentType);
-        transactionRequestType.setRefTransId("2241936095");
+        transactionRequestType.setRefTransId(transactionID);
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();
         apiRequest.setTransactionRequest(transactionRequestType);
         
@@ -54,6 +54,7 @@ public class GetDetails {
         {
             System.out.println("Failed Transaction:  "+response.getMessages().getMessage().get(0).getCode()+ "   " + response.getMessages().getMessage().get(0).getText());
         }
+		return response;
 
 	}
 

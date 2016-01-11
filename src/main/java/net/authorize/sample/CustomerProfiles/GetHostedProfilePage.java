@@ -10,7 +10,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class GetHostedProfilePage {
 	
-	public static void run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileId) {
 
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
@@ -27,7 +27,7 @@ public class GetHostedProfilePage {
         alist.getSetting().add(setting);
 
         GetHostedProfilePageRequest apiRequest = new GetHostedProfilePageRequest();
-        apiRequest.setCustomerProfileId("YourProfileID");
+        apiRequest.setCustomerProfileId(customerProfileId);
         apiRequest.setHostedProfileSettings(alist);
 
         GetHostedProfilePageController controller = new GetHostedProfilePageController(apiRequest);
@@ -50,5 +50,6 @@ public class GetHostedProfilePage {
                 System.out.println("Failed to get hosted profile page:  " + response.getMessages().getResultCode());
             }
         }
+		return response;
     }
 }

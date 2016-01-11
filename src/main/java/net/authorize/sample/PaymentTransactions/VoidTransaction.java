@@ -13,7 +13,7 @@ public class VoidTransaction {
     // Run this sample from command line with:
     //                 java -jar target/ChargeCreditCard-jar-with-dependencies.jar
     //
-    public static void run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey, String transactionID) {
         
         //Common code to set for all requests
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
@@ -26,7 +26,7 @@ public class VoidTransaction {
         // Create the payment transaction request
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.VOID_TRANSACTION.value());
-        txnRequest.setRefTransId("2238786428");
+        txnRequest.setRefTransId(transactionID);
 
         // Make the API Request
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();
@@ -59,6 +59,7 @@ public class VoidTransaction {
                 System.out.println("Failed Transaction:  "+response.getMessages().getResultCode());
             }
         }
+		return response;
 
     }
 

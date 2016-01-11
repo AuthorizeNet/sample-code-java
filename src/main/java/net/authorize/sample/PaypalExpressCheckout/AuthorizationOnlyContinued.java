@@ -10,7 +10,7 @@ import net.authorize.api.controller.CreateTransactionController;
 public class AuthorizationOnlyContinued {
 
    
-    public static void run(String apiLoginId, String transactionKey, String transactionId, String payerId) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey, String transactionId, String payerId, Double amount) {
 
     	System.out.println("PayPal Authorize Only-Continue Transaction");
         //Common code to set for all requests
@@ -34,7 +34,7 @@ public class AuthorizationOnlyContinued {
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.AUTH_ONLY_CONTINUE_TRANSACTION.value());
         txnRequest.setPayment(paymentType);
-        txnRequest.setAmount(new BigDecimal(500.00));
+        txnRequest.setAmount(new BigDecimal(amount.toString()));
         txnRequest.setRefTransId(transactionId);
 
         // Make the API Request
@@ -70,6 +70,7 @@ public class AuthorizationOnlyContinued {
             	System.out.println("Error Code:  "+response.getMessages().getMessage().get(0).getCode());
             }
         }
+		return response;
 
     }
 

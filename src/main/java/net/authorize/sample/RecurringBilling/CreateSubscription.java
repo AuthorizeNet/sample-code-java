@@ -12,7 +12,7 @@ import java.lang.Exception.*;
 
 public class CreateSubscription {
 
-    public static void run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey, short intervalLength, Double amount) {
         //Common code to set for all requests
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
@@ -23,8 +23,8 @@ public class CreateSubscription {
         // Set up payment schedule
         PaymentScheduleType schedule = new PaymentScheduleType();
         PaymentScheduleType.Interval interval = new PaymentScheduleType.Interval();
-        interval.setLength( (short)1);
-        interval.setUnit(ARBSubscriptionUnitEnum.MONTHS);
+        interval.setLength(intervalLength);
+        interval.setUnit(ARBSubscriptionUnitEnum.DAYS);
         schedule.setInterval(interval);
         
         try {
@@ -50,7 +50,7 @@ public class CreateSubscription {
 
         ARBSubscriptionType arbSubscriptionType = new ARBSubscriptionType();
         arbSubscriptionType.setPaymentSchedule(schedule);
-        arbSubscriptionType.setAmount(new BigDecimal("10.29"));
+        arbSubscriptionType.setAmount(new BigDecimal(amount.toString()));
         arbSubscriptionType.setTrialAmount(new BigDecimal("0.00"));
         arbSubscriptionType.setPayment(paymentType);
 
@@ -77,7 +77,10 @@ public class CreateSubscription {
             else
             {
                 System.out.println("Failed to create Subscription:  " + response.getMessages().getResultCode());
+                System.out.println(response.getMessages().getMessage().get(0).getText());
             }
         }
+        
+        return response;
     }
 }

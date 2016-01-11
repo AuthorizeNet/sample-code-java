@@ -13,7 +13,7 @@ public class AuthorizeCreditCard {
     // Run this sample from command line with:
     //                 java -jar target/ChargeCreditCard-jar-with-dependencies.jar
     //
-    public static void run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey, Double amount) {
 
 
         //Common code to set for all requests
@@ -35,7 +35,7 @@ public class AuthorizeCreditCard {
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.AUTH_ONLY_TRANSACTION.value());
         txnRequest.setPayment(paymentType);
-        txnRequest.setAmount(new BigDecimal(500.00));
+        txnRequest.setAmount(new BigDecimal(amount));
 
         // Make the API Request
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();
@@ -68,6 +68,7 @@ public class AuthorizeCreditCard {
                 System.out.println("Failed Transaction:  "+response.getMessages().getResultCode());
             }
         }
+		return response;
 
     }
 

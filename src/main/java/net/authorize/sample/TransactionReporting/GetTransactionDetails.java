@@ -9,7 +9,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 //author @krgupta
 public class GetTransactionDetails {
 
-    public static void run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey, String transactionId) {
 
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
@@ -18,12 +18,9 @@ public class GetTransactionDetails {
         merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
     
-        //need valid transacaction Id to run  
-        String transId = "2238248926";
-    
         GetTransactionDetailsRequest getRequest = new GetTransactionDetailsRequest();
         getRequest.setMerchantAuthentication(merchantAuthenticationType);
-        getRequest.setTransId(transId);
+        getRequest.setTransId(transactionId);
        
         GetTransactionDetailsController controller = new GetTransactionDetailsController(getRequest);
         controller.execute();
@@ -41,6 +38,7 @@ public class GetTransactionDetails {
                     System.out.println("Failed to get transaction details:  " + getResponse.getMessages().getResultCode());
                 }
             }
+	return getResponse;
 }
 }
 

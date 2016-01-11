@@ -3,6 +3,7 @@ package net.authorize.sample.PaypalExpressCheckout;
 import java.math.BigDecimal;
 
 import net.authorize.Environment;
+import net.authorize.api.contract.v1.ANetApiResponse;
 import net.authorize.api.contract.v1.CreateTransactionRequest;
 import net.authorize.api.contract.v1.CreateTransactionResponse;
 import net.authorize.api.contract.v1.MerchantAuthenticationType;
@@ -17,7 +18,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class AuthorizationAndCapture {
 
-	public static void run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, Double amount) {
 
 		System.out.println("PayPal Authorize Capture Transaction");
 
@@ -42,7 +43,7 @@ public class AuthorizationAndCapture {
 
 		transactionRequest.setTransactionType(TransactionTypeEnum.AUTH_CAPTURE_TRANSACTION.value());
 		transactionRequest.setPayment(paymentType);
-		transactionRequest.setAmount(new BigDecimal("123.89"));
+		transactionRequest.setAmount(new BigDecimal(amount));
 
 		// Make the API Request
 		CreateTransactionRequest apiRequest = new CreateTransactionRequest();
@@ -74,5 +75,6 @@ public class AuthorizationAndCapture {
 				if(!response.getTransactionResponse().getErrors().getError().isEmpty())
 					System.out.println("Transaction Error : " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode() + " " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
 		}
+		return response;
 	}
 }

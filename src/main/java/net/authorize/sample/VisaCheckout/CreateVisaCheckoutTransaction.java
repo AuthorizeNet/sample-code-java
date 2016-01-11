@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import net.authorize.Environment;
 import net.authorize.api.controller.base.ApiOperationBase;
+import net.authorize.api.contract.v1.ANetApiResponse;
 import net.authorize.api.contract.v1.CreateTransactionRequest;
 import net.authorize.api.contract.v1.CreateTransactionResponse;
 import net.authorize.api.contract.v1.MerchantAuthenticationType;
@@ -23,7 +24,7 @@ import net.authorize.api.controller.CreateTransactionController;
 //
 public class CreateVisaCheckoutTransaction {
 
-    public static void run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey) {
         
 
     //Common code to set for all requests
@@ -74,6 +75,7 @@ public class CreateVisaCheckoutTransaction {
          }
        }
      }
+	return response;
  		
    } 
 }

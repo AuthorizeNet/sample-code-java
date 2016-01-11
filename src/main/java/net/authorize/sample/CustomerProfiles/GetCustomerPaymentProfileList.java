@@ -9,7 +9,7 @@ import net.authorize.api.controller.*;
 
 public class GetCustomerPaymentProfileList 
 {
-    public static void run(String apiLoginId,String transactionKey)
+    public static ANetApiResponse run(String apiLoginId,String transactionKey)
     {
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
         
@@ -83,5 +83,6 @@ public class GetCustomerPaymentProfileList
             if(!errorResponse.getMessages().getMessage().isEmpty())
                 System.out.println("Error: "+errorResponse.getMessages().getMessage().get(0).getCode()+" \n"+ errorResponse.getMessages().getMessage().get(0).getText());
         }
+		return response;
     }
 }

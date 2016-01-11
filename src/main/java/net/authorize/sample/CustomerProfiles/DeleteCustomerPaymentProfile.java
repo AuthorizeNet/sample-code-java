@@ -10,7 +10,8 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class DeleteCustomerPaymentProfile {
 	
-	public static void run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileId,
+			String customerPaymentProfileId) {
 
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
@@ -20,8 +21,8 @@ public class DeleteCustomerPaymentProfile {
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
         DeleteCustomerPaymentProfileRequest apiRequest = new DeleteCustomerPaymentProfileRequest();
-        apiRequest.setCustomerProfileId("10000");
-        apiRequest.setCustomerPaymentProfileId("20000");
+        apiRequest.setCustomerProfileId(customerProfileId);
+        apiRequest.setCustomerPaymentProfileId(customerPaymentProfileId);
 
         DeleteCustomerPaymentProfileController controller = new DeleteCustomerPaymentProfileController(apiRequest);
         controller.execute();
@@ -41,5 +42,6 @@ public class DeleteCustomerPaymentProfile {
                 System.out.println("Failed to delete customer payment profile:  " + response.getMessages().getResultCode());
             }
         }
+		return response;
     }
 }

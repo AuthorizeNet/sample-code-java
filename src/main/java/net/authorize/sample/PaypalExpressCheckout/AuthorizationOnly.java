@@ -8,7 +8,7 @@ import net.authorize.api.controller.CreateTransactionController;
 
 public class AuthorizationOnly {
 
-    public static void run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey, Double amount) {
         System.out.println("PayPal Authorize Only Transaction");
         
         //Common code to set for all requests
@@ -30,7 +30,7 @@ public class AuthorizationOnly {
         TransactionRequestType transactionRequest = new TransactionRequestType();
         transactionRequest.setTransactionType(TransactionTypeEnum.AUTH_ONLY_TRANSACTION.value());
         transactionRequest.setPayment(paymentType);
-        transactionRequest.setAmount(new BigDecimal("19.44"));
+        transactionRequest.setAmount(new BigDecimal(amount.toString()));
 
         CreateTransactionRequest request = new CreateTransactionRequest();
         request.setTransactionRequest(transactionRequest);
@@ -57,5 +57,6 @@ public class AuthorizationOnly {
                 System.out.println("Transaction Error : " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode() + " : " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
             }
         }
+		return response;
     }
 }

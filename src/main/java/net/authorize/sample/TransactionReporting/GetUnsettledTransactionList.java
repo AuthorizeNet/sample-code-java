@@ -11,7 +11,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 //author @krgupta
 public class GetUnsettledTransactionList{
 	
-		public static void run(String apiLoginId, String transactionKey) {
+		public static ANetApiResponse run(String apiLoginId, String transactionKey) {
 			ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
 	        MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
@@ -40,6 +40,7 @@ public class GetUnsettledTransactionList{
                 	System.out.println("Failed to get unsettled transaction list:  " + getResponse.getMessages().getResultCode());
             	}
        	 	}
+			return getResponse;
 
 	}
 }

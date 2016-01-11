@@ -10,7 +10,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class GetCustomerProfile {
 	
-	public static void run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileId) {
 
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
@@ -20,7 +20,7 @@ public class GetCustomerProfile {
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
         GetCustomerProfileRequest apiRequest = new GetCustomerProfileRequest();
-        apiRequest.setCustomerProfileId("10000");
+        apiRequest.setCustomerProfileId(customerProfileId);
 
         GetCustomerProfileController controller = new GetCustomerProfileController(apiRequest);
         controller.execute();
@@ -72,5 +72,6 @@ public class GetCustomerProfile {
                 System.out.println("Failed to get customer profile:  " + response.getMessages().getResultCode());
             }
         }
+		return response;
     }
 }

@@ -2,6 +2,7 @@ package net.authorize.sample.VisaCheckout;
 
 import net.authorize.Environment;
 import net.authorize.api.controller.base.ApiOperationBase;
+import net.authorize.api.contract.v1.ANetApiResponse;
 import net.authorize.api.contract.v1.DecryptPaymentDataRequest;
 import net.authorize.api.contract.v1.DecryptPaymentDataResponse;
 import net.authorize.api.contract.v1.MerchantAuthenticationType;
@@ -11,7 +12,7 @@ import net.authorize.api.controller.DecryptPaymentDataController;
 
 public class DecryptVisaCheckoutData {
 
-	public static void run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey) {
 
     //Common code to set for all requests
  		ApiOperationBase.setEnvironment(Environment.SANDBOX);
@@ -52,6 +53,7 @@ public class DecryptVisaCheckoutData {
            System.out.println("Error : " + response.getMessages().getMessage().get(0).getText());
        }
  		}
+		return response;
  		
    } 
 }

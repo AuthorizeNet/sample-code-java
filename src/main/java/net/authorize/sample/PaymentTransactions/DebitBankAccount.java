@@ -13,7 +13,7 @@ public class DebitBankAccount {
     // Run this sample from command line with:
     //                 java -jar target/ChargeCreditCard-jar-with-dependencies.jar
     //
-    public static void run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey) {
 
 
         //Common code to set for all requests
@@ -70,5 +70,6 @@ public class DebitBankAccount {
                 System.out.println("Failed Transaction:  "+response.getMessages().getResultCode());
             }
         }
+		return response;
     }
 }

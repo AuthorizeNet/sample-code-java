@@ -13,7 +13,7 @@ public class CreditBankAccount {
     // Run this sample from command line with:
     //                 java -jar target/ChargeCreditCard-jar-with-dependencies.jar
     //
-    public static void run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey, String transactionID) {
 
 
         //Common code to set for all requests
@@ -36,7 +36,7 @@ public class CreditBankAccount {
         // Create the payment transaction request
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.REFUND_TRANSACTION.value());
-        txnRequest.setRefTransId("2148889729");
+        txnRequest.setRefTransId(transactionID);
         txnRequest.setPayment(paymentType);
         txnRequest.setAmount(new BigDecimal(500.00));
 
@@ -71,5 +71,6 @@ public class CreditBankAccount {
                 System.out.println("Failed Transaction:  "+response.getMessages().getResultCode());
             }
         }
+		return response;
     }
 }

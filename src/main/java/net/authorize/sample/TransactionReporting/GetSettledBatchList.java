@@ -11,7 +11,7 @@ import javax.xml.datatype.DatatypeFactory;
 //author @krgupta modified @kikmak42
 public class GetSettledBatchList {
 
-    public static void run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey) {
 
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
@@ -60,5 +60,6 @@ public class GetSettledBatchList {
                 System.out.println(getResponse.getMessages().getMessage().get(0).getText());
             }
         }
+		return getResponse;
     }
 }

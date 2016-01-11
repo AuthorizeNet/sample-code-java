@@ -10,7 +10,8 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class DeleteCustomerShippingAddress {
 	
-	public static void run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileId,
+			String customerAddressId) {
 
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
@@ -20,8 +21,8 @@ public class DeleteCustomerShippingAddress {
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
         DeleteCustomerShippingAddressRequest apiRequest = new DeleteCustomerShippingAddressRequest();
-        apiRequest.setCustomerProfileId("10000");
-        apiRequest.setCustomerAddressId("30000");
+        apiRequest.setCustomerProfileId(customerProfileId);
+        apiRequest.setCustomerAddressId(customerAddressId);
 
         DeleteCustomerShippingAddressController controller = new DeleteCustomerShippingAddressController(apiRequest);
         controller.execute();
@@ -41,5 +42,6 @@ public class DeleteCustomerShippingAddress {
                 System.out.println("Failed to delete customer shipping address:  " + response.getMessages().getResultCode());
             }
         }
+		return response;
     }
 }

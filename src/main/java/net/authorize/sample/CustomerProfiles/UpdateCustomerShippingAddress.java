@@ -7,7 +7,7 @@ import net.authorize.api.controller.UpdateCustomerShippingAddressController;
 
 public class UpdateCustomerShippingAddress {
 	
-	public static void run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileID, String customerAddressId) {
 
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
@@ -25,10 +25,10 @@ public class UpdateCustomerShippingAddress {
         customer.setZip("98004");
         customer.setCountry("USA");
         customer.setPhoneNumber("000-000-0000");
-        customer.setCustomerAddressId("30000");
+        customer.setCustomerAddressId(customerAddressId);
 
 		UpdateCustomerShippingAddressRequest apiRequest = new UpdateCustomerShippingAddressRequest();
-		apiRequest.setCustomerProfileId("10000");
+		apiRequest.setCustomerProfileId(customerProfileID);
 		apiRequest.setAddress(customer);
 	
         UpdateCustomerShippingAddressController controller = new UpdateCustomerShippingAddressController(apiRequest);
@@ -49,5 +49,6 @@ public class UpdateCustomerShippingAddress {
                 System.out.println("Failed to update customer shipping address:  " + response.getMessages().getResultCode());
             }
         }
+		return response;
 	}	
 }

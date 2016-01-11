@@ -13,7 +13,7 @@ public class RefundTransaction {
     // Run this sample from command line with:
     //                 java -jar target/ChargeCreditCard-jar-with-dependencies.jar
     //
-    public static void run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey, Double transactionAmount, String transactionID) {
         
         //Common code to set for all requests
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
@@ -33,8 +33,8 @@ public class RefundTransaction {
         // Create the payment transaction request
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.REFUND_TRANSACTION.value());
-        txnRequest.setRefTransId("2245803597");
-        txnRequest.setAmount(new BigDecimal(1.00));
+        txnRequest.setRefTransId(transactionID);
+        txnRequest.setAmount(new BigDecimal(transactionAmount));
         txnRequest.setPayment(paymentType);
 
         // Make the API Request
@@ -74,6 +74,7 @@ public class RefundTransaction {
                         System.out.println("Transaction Error : " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode() + " " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
             }
         }
+		return response;
 
     }
 

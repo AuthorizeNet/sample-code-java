@@ -13,7 +13,8 @@ public class ChargeCustomerProfile {
     // Run this sample from command line with:
     //                 java -jar target/ChargeCreditCard-jar-with-dependencies.jar
     //
-    public static void run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileId,
+    		String customerPaymentProfileId) {
 
 
         //Common code to set for all requests
@@ -27,9 +28,9 @@ public class ChargeCustomerProfile {
 
         // Set the profile ID to charge
         CustomerProfilePaymentType profileToCharge = new CustomerProfilePaymentType();
-        profileToCharge.setCustomerProfileId("36731856");
+        profileToCharge.setCustomerProfileId(customerProfileId);
         PaymentProfile paymentProfile = new PaymentProfile();
-        paymentProfile.setPaymentProfileId("33211899");
+        paymentProfile.setPaymentProfileId(customerPaymentProfileId);
         profileToCharge.setPaymentProfile(paymentProfile);
 
         // Create the payment transaction request
@@ -69,5 +70,6 @@ public class ChargeCustomerProfile {
                 System.out.println("Failed Transaction:  "+response.getMessages().getResultCode());
             }
         }
+		return response;
     }
 }

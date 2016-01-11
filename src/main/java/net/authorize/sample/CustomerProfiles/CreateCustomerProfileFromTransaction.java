@@ -10,7 +10,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class CreateCustomerProfileFromTransaction {
 
-	public static void run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey) {
 
 		ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
@@ -19,8 +19,6 @@ public class CreateCustomerProfileFromTransaction {
         merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 		
-		String customerprofileId = "36374423" ;
-
 		CreditCardType creditCard = new CreditCardType();
 		creditCard.setCardNumber("4111111111111111");
 	    creditCard.setExpirationDate("0616");
@@ -54,5 +52,6 @@ public class CreateCustomerProfileFromTransaction {
 		if(customer_response != null) {
 			System.out.println(transaction_request.getTransId());
 		}
+		return customer_response;
 	}
 }
