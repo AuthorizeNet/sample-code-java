@@ -167,7 +167,7 @@ public class SampleCode {
                 CapturePreviouslyAuthorizedAmount.run(apiLoginId, transactionKey, transactionId);
                 break;
             case "DebitBankAccount":
-                DebitBankAccount.run(apiLoginId, transactionKey);
+                DebitBankAccount.run(apiLoginId, transactionKey, 12.93);
                 break;
             case "CreditBankAccount":
                 CreditBankAccount.run(apiLoginId, transactionKey, transactionId);

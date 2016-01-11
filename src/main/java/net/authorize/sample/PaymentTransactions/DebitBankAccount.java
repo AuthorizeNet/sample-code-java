@@ -13,7 +13,7 @@ public class DebitBankAccount {
     // Run this sample from command line with:
     //                 java -jar target/ChargeCreditCard-jar-with-dependencies.jar
     //
-    public static ANetApiResponse run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey, Double amount) {
 
 
         //Common code to set for all requests
@@ -37,7 +37,7 @@ public class DebitBankAccount {
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.AUTH_CAPTURE_TRANSACTION.value());
         txnRequest.setPayment(paymentType);
-        txnRequest.setAmount(new BigDecimal(500.00));
+        txnRequest.setAmount(new BigDecimal(amount.toString()));
 
         // Make the API Request
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();

@@ -51,6 +51,7 @@ import net.authorize.sample.PaymentTransactions.CapturePreviouslyAuthorizedAmoun
 import net.authorize.sample.PaymentTransactions.ChargeCreditCard;
 import net.authorize.sample.PaymentTransactions.ChargeCustomerProfile;
 import net.authorize.sample.PaymentTransactions.CreditBankAccount;
+import net.authorize.sample.PaymentTransactions.DebitBankAccount;
 import net.authorize.sample.PaymentTransactions.RefundTransaction;
 import net.authorize.sample.PaymentTransactions.VoidTransaction;
 import net.authorize.sample.PaypalExpressCheckout.AuthorizationAndCapture;
@@ -325,15 +326,12 @@ public class TestRunner {
 		CreateTransactionResponse response = (CreateTransactionResponse)AuthorizeCreditCard.run(apiLoginId, transactionKey, getAmount());
 		return response;
 	}
-
-	//    public ANetApiResponse TestCreateCustomerProfileFromTransaction()
-	//    {
-	//    	CreateTransactionResponse response = (CreateTransactionResponse)AuthorizeCreditCard.run(apiLoginId, transactionKey, getAmount());
-	//    	CreateCustomerProfileResponse profileResponse = (CreateCustomerProfileResponse)CreateCustomerProfileFromTransaction.run(apiLoginId, transactionKey, response.getTransactionResponse().getTransId());
-	//        DeleteCustomerProfile.run(apiLoginId, transactionKey, profileResponse.getCustomerProfileId());
-	//                
-	//        return profileResponse;
-	//    }
+	
+	public ANetApiResponse TestDebitBankAccount()
+	{
+		CreateTransactionResponse response = (CreateTransactionResponse)DebitBankAccount.run(apiLoginId, transactionKey, getAmount());
+		return response;
+	}
 
 	public ANetApiResponse TestGetTransactionDetails()
 	{

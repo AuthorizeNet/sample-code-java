@@ -38,7 +38,7 @@ PaymentTransactions.CreditBankAccount	1	0
 PaymentTransactions.ChargeCustomerProfile	1	1
 PaymentTransactions.CaptureFundsAuthorizedThroughAnotherChannel	1	1
 PaymentTransactions.AuthorizeCreditCard	1	1
-PaymentTransactions.DebitBankAccount	0	1
+PaymentTransactions.DebitBankAccount	1	1
 PaymentTransactions.ChargeTokenizedCreditCard	0	1
 PaymentTransactions.UpdateSplitTenderGroup	0	1
 TransactionReporting.GetTransactionList	0	1
