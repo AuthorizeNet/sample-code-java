@@ -43,7 +43,7 @@ public class AuthorizationAndCapture {
 
 		transactionRequest.setTransactionType(TransactionTypeEnum.AUTH_CAPTURE_TRANSACTION.value());
 		transactionRequest.setPayment(paymentType);
-		transactionRequest.setAmount(new BigDecimal(amount));
+		transactionRequest.setAmount(new BigDecimal(amount.toString()));
 
 		// Make the API Request
 		CreateTransactionRequest apiRequest = new CreateTransactionRequest();
