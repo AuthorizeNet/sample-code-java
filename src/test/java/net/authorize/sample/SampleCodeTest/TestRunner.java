@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.security.SecureRandom;
+import java.text.DecimalFormat;
 
 import org.junit.Test;
 
@@ -85,7 +86,11 @@ public class TestRunner {
 
 	private static Double getAmount()
 	{
-		return (double)(1.05 + (15.0 *rgenerator.nextDouble()));
+		double d = (double)(1.05 + (15.0 * rgenerator.nextDouble()));
+		DecimalFormat df = new DecimalFormat("#.##");      
+		d = Double.valueOf(df.format(d));
+		System.out.println("Amount : " + d);
+		return d;
 	}
 
 	private static short getDays()
