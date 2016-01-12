@@ -85,7 +85,7 @@ public class TestRunner {
 
 	private static Double getAmount()
 	{
-		return (double)(rgenerator.nextInt(1000));
+		return (double)(rgenerator.nextInt(1000) + rgenerator.nextDouble());
 	}
 
 	private static short getDays()
