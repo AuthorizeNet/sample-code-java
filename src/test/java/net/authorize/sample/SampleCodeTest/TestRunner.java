@@ -34,6 +34,7 @@ import net.authorize.api.contract.v1.UpdateCustomerShippingAddressResponse;
 import net.authorize.api.contract.v1.ValidateCustomerPaymentProfileResponse;
 import net.authorize.sample.CustomerProfiles.CreateCustomerPaymentProfile;
 import net.authorize.sample.CustomerProfiles.CreateCustomerProfile;
+import net.authorize.sample.CustomerProfiles.CreateCustomerProfileFromTransaction;
 import net.authorize.sample.CustomerProfiles.CreateCustomerShippingAddress;
 import net.authorize.sample.CustomerProfiles.DeleteCustomerPaymentProfile;
 import net.authorize.sample.CustomerProfiles.DeleteCustomerProfile;
@@ -354,6 +355,11 @@ public class TestRunner {
 	public ANetApiResponse TestChargeCreditCard()
 	{
 		return ChargeCreditCard.run(apiLoginId, transactionKey, getAmount());
+	}
+	
+	public ANetApiResponse TestCreateCustomerProfileFromTransaction()
+	{
+		return CreateCustomerProfileFromTransaction.run(apiLoginId, transactionKey, getAmount(), getEmail());
 	}
 
 	public ANetApiResponse TestCapturePreviouslyAuthorizedAmount()

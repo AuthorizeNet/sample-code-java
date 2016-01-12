@@ -158,7 +158,7 @@ public class SampleCode {
                 RefundTransaction.run(apiLoginId, transactionKey , amount, transactionId);
                 break;
             case "CreateCustomerProfileFromTransaction":
-                CreateCustomerProfileFromTransaction.run(apiLoginId, transactionKey);
+                CreateCustomerProfileFromTransaction.run(apiLoginId, transactionKey, 12.34, "test@test.com");
                 break;
             case "CaptureFundsAuthorizedThroughAnotherChannel":
                 CaptureFundsAuthorizedThroughAnotherChannel.run(apiLoginId, transactionKey, 12.34);

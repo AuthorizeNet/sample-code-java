@@ -18,7 +18,7 @@ CustomerProfiles.DeleteCustomerShippingAddress	1	1
 CustomerProfiles.DeleteCustomerProfile	1	1
 CustomerProfiles.DeleteCustomerPaymentProfile	1	1
 CustomerProfiles.CreateCustomerShippingAddress	1	1
-CustomerProfiles.CreateCustomerProfileFromTransaction	0	1
+CustomerProfiles.CreateCustomerProfileFromTransaction	1	1
 CustomerProfiles.GetCustomerPaymentProfileList	0	1
 CustomerProfiles.CreateCustomerProfile	1	1
 CustomerProfiles.CreateCustomerPaymentProfile	1	1

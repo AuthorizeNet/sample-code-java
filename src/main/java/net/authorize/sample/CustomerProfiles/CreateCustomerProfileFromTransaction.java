@@ -10,7 +10,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class CreateCustomerProfileFromTransaction {
 
-	public static ANetApiResponse run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, Double amount, String email) {
 
 		ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
@@ -29,10 +29,10 @@ public class CreateCustomerProfileFromTransaction {
 		TransactionRequestType requestInternal = new TransactionRequestType();
 		requestInternal.setTransactionType("authOnlyTransaction");
 		requestInternal.setPayment(paymentType);
-		requestInternal.setAmount(new BigDecimal(System.currentTimeMillis() % 100));
+		requestInternal.setAmount(new BigDecimal(amount.toString()));
 		
 		CustomerDataType customer = new CustomerDataType();
-		customer.setEmail(System.currentTimeMillis()+"@b.bla");
+		customer.setEmail(email);
 		requestInternal.setCustomer(customer);
 				
 		CreateTransactionRequest request = new CreateTransactionRequest();
