@@ -86,7 +86,7 @@ public class TestRunner {
 
 	private static Double getAmount()
 	{
-		double d = (double)(1.05 + (15.0 * rgenerator.nextDouble()));
+		double d = (double)(1.05 + (450.0 * rgenerator.nextDouble()));
 		DecimalFormat df = new DecimalFormat("#.##");      
 		d = Double.valueOf(df.format(d));
 		System.out.println("Amount : " + d);
