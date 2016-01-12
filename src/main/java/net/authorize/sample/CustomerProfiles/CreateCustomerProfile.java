@@ -29,7 +29,7 @@ public class CreateCustomerProfile {
 		customerPaymentProfileType.setPayment(paymentType);
 
         CustomerProfileType customerProfileType = new CustomerProfileType();
-        customerProfileType.setMerchantCustomerId("Merchant_Customer_ID");
+        customerProfileType.setMerchantCustomerId("Merchant_Customer_ID_" + System.currentTimeMillis());
         customerProfileType.setDescription("Profile description here");
         customerProfileType.setEmail(eMail);
         customerProfileType.getPaymentProfiles().add(customerPaymentProfileType);
