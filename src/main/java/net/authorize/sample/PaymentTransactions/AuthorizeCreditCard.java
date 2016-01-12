@@ -35,7 +35,7 @@ public class AuthorizeCreditCard {
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.AUTH_ONLY_TRANSACTION.value());
         txnRequest.setPayment(paymentType);
-        txnRequest.setAmount(new BigDecimal(amount));
+        txnRequest.setAmount(new BigDecimal(amount.toString()));
 
         // Make the API Request
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();
