@@ -34,7 +34,7 @@ public class RefundTransaction {
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.REFUND_TRANSACTION.value());
         txnRequest.setRefTransId(transactionID);
-        txnRequest.setAmount(new BigDecimal(transactionAmount));
+        txnRequest.setAmount(new BigDecimal(transactionAmount.toString()));
         txnRequest.setPayment(paymentType);
 
         // Make the API Request

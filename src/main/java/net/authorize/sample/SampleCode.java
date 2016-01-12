@@ -170,7 +170,7 @@ public class SampleCode {
                 DebitBankAccount.run(apiLoginId, transactionKey, 12.93);
                 break;
             case "CreditBankAccount":
-                CreditBankAccount.run(apiLoginId, transactionKey, transactionId);
+                CreditBankAccount.run(apiLoginId, transactionKey, transactionId, 12.23);
                 break;
             case "ChargeTokenizedCreditCard":
                 ChargeTokenizedCreditCard.run(apiLoginId, transactionKey, 12.89);

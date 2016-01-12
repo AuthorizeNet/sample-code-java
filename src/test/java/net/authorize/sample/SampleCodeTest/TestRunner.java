@@ -90,7 +90,6 @@ public class TestRunner {
 		double d = (double)(1.05 + (450.0 * rgenerator.nextDouble()));
 		DecimalFormat df = new DecimalFormat("#.##");      
 		d = Double.valueOf(df.format(d));
-		System.out.println("Amount : " + d);
 		return d;
 	}
 
@@ -257,11 +256,6 @@ public class TestRunner {
 		return getResponse;
 	}
 
-	//    public ANetApiResponse TestGetCustomerProfileIds()
-	//    {
-	//        return GetCustomerProfileIds.run(apiLoginId, transactionKey);
-	//    }
-
 	public ANetApiResponse TestGetCustomerProfile()
 	{
 		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
@@ -383,7 +377,7 @@ public class TestRunner {
 
 	public ANetApiResponse TestCreditBankAccount()
 	{
-		return CreditBankAccount.run(apiLoginId, transactionKey, TransactionID);
+		return CreditBankAccount.run(apiLoginId, transactionKey, TransactionID, getAmount());
 	}
 
 	public ANetApiResponse TestChargeCustomerProfile()
