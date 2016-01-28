@@ -1,6 +1,7 @@
 package net.authorize.sample.PaypalExpressCheckout;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import net.authorize.Environment;
 import net.authorize.api.contract.v1.ANetApiResponse;
@@ -43,7 +44,7 @@ public class AuthorizationAndCapture {
 
 		transactionRequest.setTransactionType(TransactionTypeEnum.AUTH_CAPTURE_TRANSACTION.value());
 		transactionRequest.setPayment(paymentType);
-		transactionRequest.setAmount(new BigDecimal(amount.toString()));
+		transactionRequest.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
 
 		// Make the API Request
 		CreateTransactionRequest apiRequest = new CreateTransactionRequest();

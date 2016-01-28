@@ -1,9 +1,19 @@
 package net.authorize.sample.CustomerProfiles;
 
-import net.authorize.Environment;
-import net.authorize.api.contract.v1.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
+import net.authorize.Environment;
+import net.authorize.api.contract.v1.ANetApiResponse;
+import net.authorize.api.contract.v1.CreateCustomerProfileFromTransactionRequest;
+import net.authorize.api.contract.v1.CreateCustomerProfileResponse;
+import net.authorize.api.contract.v1.CreateTransactionRequest;
+import net.authorize.api.contract.v1.CreateTransactionResponse;
+import net.authorize.api.contract.v1.CreditCardType;
+import net.authorize.api.contract.v1.CustomerDataType;
+import net.authorize.api.contract.v1.MerchantAuthenticationType;
+import net.authorize.api.contract.v1.PaymentType;
+import net.authorize.api.contract.v1.TransactionRequestType;
 import net.authorize.api.controller.CreateCustomerProfileFromTransactionController;
 import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;
@@ -29,7 +39,7 @@ public class CreateCustomerProfileFromTransaction {
 		TransactionRequestType requestInternal = new TransactionRequestType();
 		requestInternal.setTransactionType("authOnlyTransaction");
 		requestInternal.setPayment(paymentType);
-		requestInternal.setAmount(new BigDecimal(amount.toString()));
+		requestInternal.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
 		
 		CustomerDataType customer = new CustomerDataType();
 		customer.setEmail(email);

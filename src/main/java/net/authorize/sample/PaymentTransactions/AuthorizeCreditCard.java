@@ -1,6 +1,7 @@
 package net.authorize.sample.PaymentTransactions;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import net.authorize.Environment;
 import net.authorize.api.contract.v1.*;
@@ -35,7 +36,7 @@ public class AuthorizeCreditCard {
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.AUTH_ONLY_TRANSACTION.value());
         txnRequest.setPayment(paymentType);
-        txnRequest.setAmount(new BigDecimal(amount.toString()));
+        txnRequest.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
 
         // Make the API Request
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();

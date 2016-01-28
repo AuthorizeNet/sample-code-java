@@ -1,11 +1,21 @@
 package net.authorize.sample.PaymentTransactions;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import net.authorize.Environment;
-import net.authorize.api.contract.v1.*;
-import net.authorize.api.controller.base.ApiOperationBase;
+import net.authorize.api.contract.v1.ANetApiResponse;
+import net.authorize.api.contract.v1.CreateTransactionRequest;
+import net.authorize.api.contract.v1.CreateTransactionResponse;
+import net.authorize.api.contract.v1.CustomerProfilePaymentType;
+import net.authorize.api.contract.v1.MerchantAuthenticationType;
+import net.authorize.api.contract.v1.MessageTypeEnum;
+import net.authorize.api.contract.v1.PaymentProfile;
+import net.authorize.api.contract.v1.TransactionRequestType;
+import net.authorize.api.contract.v1.TransactionResponse;
+import net.authorize.api.contract.v1.TransactionTypeEnum;
 import net.authorize.api.controller.CreateTransactionController;
+import net.authorize.api.controller.base.ApiOperationBase;
 
 public class ChargeCustomerProfile {
 
@@ -37,7 +47,7 @@ public class ChargeCustomerProfile {
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.AUTH_CAPTURE_TRANSACTION.value());
         txnRequest.setProfile(profileToCharge);
-        txnRequest.setAmount(new BigDecimal(amount.toString()));
+        txnRequest.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
 
 
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();
