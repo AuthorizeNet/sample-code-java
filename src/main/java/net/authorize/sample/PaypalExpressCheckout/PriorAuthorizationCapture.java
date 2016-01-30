@@ -17,7 +17,7 @@ import net.authorize.Environment;
  * @author gnongsie
  */
 public class PriorAuthorizationCapture {
-    public static void run(String apiLoginId, String apiTransactionKey, String transactionId){
+    public static ANetApiResponse run(String apiLoginId, String apiTransactionKey, String transactionId){
         System.out.println("Paypal Prior Authorization Transaction");
         
         //Common code to set for all requests
@@ -65,5 +65,6 @@ public class PriorAuthorizationCapture {
             System.out.println("Error: " + response.getMessages().getMessage().get(0).getCode() + 
                                     " " + response.getMessages().getMessage().get(0).getText());
         }
+		return response;
     }
 }

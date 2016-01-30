@@ -9,7 +9,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class CreateAnApplePayTransaction
 {
-    public static void run(String apiLoginId, String transactionKey)
+    public static ANetApiResponse run(String apiLoginId, String transactionKey)
     {
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
         
@@ -61,5 +61,6 @@ public class CreateAnApplePayTransaction
                         System.out.println("Transaction Error : " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode() + " " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
             }
         }
+		return response;
     }
 }

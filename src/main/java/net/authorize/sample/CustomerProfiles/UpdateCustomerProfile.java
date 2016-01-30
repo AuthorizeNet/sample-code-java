@@ -7,7 +7,7 @@ import net.authorize.api.controller.UpdateCustomerProfileController;
 
 public class UpdateCustomerProfile {
 	
-	public static void run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileId) {
 
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
@@ -20,7 +20,7 @@ public class UpdateCustomerProfile {
 		customer.setMerchantCustomerId("custId123");
 		customer.setDescription("some description");
 		customer.setEmail("newaddress@example.com");
-		customer.setCustomerProfileId("10000");
+		customer.setCustomerProfileId(customerProfileId);
 
 		UpdateCustomerProfileRequest apiRequest = new UpdateCustomerProfileRequest();
 		apiRequest.setProfile(customer);
@@ -43,5 +43,6 @@ public class UpdateCustomerProfile {
                 System.out.println("Failed to update customer profile:  " + response.getMessages().getResultCode());
             }
         }
+		return response;
 	}	
 }

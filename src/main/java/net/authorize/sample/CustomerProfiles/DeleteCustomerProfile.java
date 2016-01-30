@@ -10,7 +10,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class DeleteCustomerProfile {
 	
-	public static void run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileId) {
 
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
@@ -20,7 +20,7 @@ public class DeleteCustomerProfile {
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
         DeleteCustomerProfileRequest apiRequest = new DeleteCustomerProfileRequest();
-        apiRequest.setCustomerProfileId("10000");
+        apiRequest.setCustomerProfileId(customerProfileId);
 
         DeleteCustomerProfileController controller = new DeleteCustomerProfileController(apiRequest);
         controller.execute();
@@ -40,5 +40,6 @@ public class DeleteCustomerProfile {
                 System.out.println("Failed to delete customer profile:  " + response.getMessages().getResultCode());
             }
         }
+		return response;
     }
 }

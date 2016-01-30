@@ -18,7 +18,7 @@ import net.authorize.cim.ValidationModeType;
 //author @krgupta
 public class CreateCustomerPaymentProfile {
 	
-	public static void run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileId) {
 
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
@@ -27,13 +27,10 @@ public class CreateCustomerPaymentProfile {
         merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 		
-		String customerprofileId = "36374423" ;
-		
-		
 	//private String getPaymentDetails(MerchantAuthenticationType merchantAuthentication, String customerprofileId, ValidationModeEnum validationMode) {
 		CreateCustomerPaymentProfileRequest apiRequest = new CreateCustomerPaymentProfileRequest();
 		apiRequest.setMerchantAuthentication(merchantAuthenticationType);
-		apiRequest.setCustomerProfileId(customerprofileId);	
+		apiRequest.setCustomerProfileId(customerProfileId);	
 
 		//customer address
 		CustomerAddressType customerAddress = new CustomerAddressType();
@@ -50,7 +47,7 @@ public class CreateCustomerPaymentProfile {
 		CreditCardType creditCard = new CreditCardType();
 		creditCard.setCardNumber("4111111111111111");
 		creditCard.setExpirationDate("2023-12");
-		creditCard.setCardCode("");
+		creditCard.setCardCode("122");
 
 		CustomerPaymentProfileType profile = new CustomerPaymentProfileType();
 		profile.setBillTo(customerAddress);
@@ -60,26 +57,27 @@ public class CreateCustomerPaymentProfile {
 		profile.setPayment(payment);
 
 		apiRequest.setPaymentProfile(profile);
-
-        CreateCustomerPaymentProfileController controller = new CreateCustomerPaymentProfileController(apiRequest);
-        controller.execute();
+		
+		CreateCustomerPaymentProfileController controller = new CreateCustomerPaymentProfileController(apiRequest);
+		controller.execute();
        
 		CreateCustomerPaymentProfileResponse response = new CreateCustomerPaymentProfileResponse();
 		response = controller.getApiResponse();
-
 		if (response!=null) {
-
              if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
-
+            	
                 System.out.println(response.getCustomerPaymentProfileId());
  				System.out.println(response.getMessages().getMessage().get(0).getCode());
                 System.out.println(response.getMessages().getMessage().get(0).getText());
-                System.out.println(response.getValidationDirectResponse());
+                if(response.getValidationDirectResponse() != null)
+                	System.out.println(response.getValidationDirectResponse());
             }
             else
             {
                 System.out.println("Failed to create customer payment profile:  " + response.getMessages().getResultCode());
             }
         }
+
+		return response;
 	}	
 }

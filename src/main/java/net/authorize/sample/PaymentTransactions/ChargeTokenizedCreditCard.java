@@ -1,11 +1,21 @@
 package net.authorize.sample.PaymentTransactions;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import net.authorize.Environment;
-import net.authorize.api.contract.v1.*;
-import net.authorize.api.controller.base.ApiOperationBase;
+import net.authorize.api.contract.v1.ANetApiResponse;
+import net.authorize.api.contract.v1.CreateTransactionRequest;
+import net.authorize.api.contract.v1.CreateTransactionResponse;
+import net.authorize.api.contract.v1.CreditCardType;
+import net.authorize.api.contract.v1.MerchantAuthenticationType;
+import net.authorize.api.contract.v1.MessageTypeEnum;
+import net.authorize.api.contract.v1.PaymentType;
+import net.authorize.api.contract.v1.TransactionRequestType;
+import net.authorize.api.contract.v1.TransactionResponse;
+import net.authorize.api.contract.v1.TransactionTypeEnum;
 import net.authorize.api.controller.CreateTransactionController;
+import net.authorize.api.controller.base.ApiOperationBase;
 
 public class ChargeTokenizedCreditCard {
 
@@ -13,7 +23,7 @@ public class ChargeTokenizedCreditCard {
     // Run this sample from command line with:
     //                 java -jar target/ChargeCreditCard-jar-with-dependencies.jar
     //
-    public static void run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey, Double amount) {
 
 
         //Common code to set for all requests
@@ -36,7 +46,7 @@ public class ChargeTokenizedCreditCard {
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.AUTH_CAPTURE_TRANSACTION.value());
         txnRequest.setPayment(paymentType);
-        txnRequest.setAmount(new BigDecimal(500.00));
+        txnRequest.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
 
         // Make the API Request
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();
@@ -69,6 +79,7 @@ public class ChargeTokenizedCreditCard {
                 System.out.println("Failed Transaction:  "+response.getMessages().getResultCode());
             }
         }
+		return response;
 
     }
 

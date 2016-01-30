@@ -8,7 +8,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class CreateCustomerShippingAddress {
 
-	public static void run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileId) {
 
 		ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
@@ -28,7 +28,7 @@ public class CreateCustomerShippingAddress {
         customerAddressType.setPhoneNumber("000-000-0000");
 
         CreateCustomerShippingAddressRequest apiRequest = new CreateCustomerShippingAddressRequest();
-        apiRequest.setCustomerProfileId("10000");
+        apiRequest.setCustomerProfileId(customerProfileId);
         apiRequest.setAddress(customerAddressType);
 
         CreateCustomerShippingAddressController controller = new CreateCustomerShippingAddressController(apiRequest);
@@ -48,6 +48,7 @@ public class CreateCustomerShippingAddress {
                 System.out.println("Failed to create customer shipping address:  " + response.getMessages().getResultCode());
             }
         }
+		return response;
  
     }
 }

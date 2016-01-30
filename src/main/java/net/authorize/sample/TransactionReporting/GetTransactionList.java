@@ -8,7 +8,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 //author @krgupta
 public class GetTransactionList{
 	
-		public static void run(String apiLoginId, String transactionKey) {
+		public static ANetApiResponse run(String apiLoginId, String transactionKey) {
 			ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
 	        MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
@@ -37,6 +37,7 @@ public class GetTransactionList{
 			            System.out.println("Failed to get transaction list:  " + getResponse.getMessages().getResultCode());
 			        }
 			}
+			return getResponse;
 		
 	}	
 }

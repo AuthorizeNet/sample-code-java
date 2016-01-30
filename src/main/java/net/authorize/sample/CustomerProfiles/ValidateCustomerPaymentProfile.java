@@ -7,8 +7,8 @@ import net.authorize.api.controller.ValidateCustomerPaymentProfileController;
 
 public class ValidateCustomerPaymentProfile {
 	
-	public static void run(String apiLoginId, String transactionKey) {
-
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileId, String customerPaymentProfileId) {
+		
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
@@ -17,13 +17,16 @@ public class ValidateCustomerPaymentProfile {
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
 		ValidateCustomerPaymentProfileRequest apiRequest = new ValidateCustomerPaymentProfileRequest();
-		apiRequest.setCustomerProfileId("10000");	
-		apiRequest.setCustomerPaymentProfileId("20000");
+		apiRequest.setCustomerProfileId(customerProfileId);	
+		apiRequest.setCustomerPaymentProfileId(customerPaymentProfileId);
 		apiRequest.setValidationMode(ValidationModeEnum.LIVE_MODE);
+		apiRequest.setCardCode("122");
+		apiRequest.setCustomerShippingAddressId("1");
+		
 	
-        ValidateCustomerPaymentProfileController controller = new ValidateCustomerPaymentProfileController(apiRequest);
+		ValidateCustomerPaymentProfileController  controller = new ValidateCustomerPaymentProfileController(apiRequest);
         controller.execute();
-       
+
 		ValidateCustomerPaymentProfileResponse response = new ValidateCustomerPaymentProfileResponse();
 		response = controller.getApiResponse();
 
@@ -40,5 +43,6 @@ public class ValidateCustomerPaymentProfile {
                 System.out.println("Failed to validate customer payment profile:  " + response.getMessages().getResultCode());
             }
         }
+		return response;
 	}	
 }

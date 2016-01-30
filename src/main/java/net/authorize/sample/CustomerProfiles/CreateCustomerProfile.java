@@ -8,7 +8,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class CreateCustomerProfile {
 
-	public static void run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String eMail) {
 
 		ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
@@ -29,9 +29,9 @@ public class CreateCustomerProfile {
 		customerPaymentProfileType.setPayment(paymentType);
 
         CustomerProfileType customerProfileType = new CustomerProfileType();
-        customerProfileType.setMerchantCustomerId("Merchant_Customer_ID");
+        customerProfileType.setMerchantCustomerId("M_" + eMail);
         customerProfileType.setDescription("Profile description here");
-        customerProfileType.setEmail("customer-profile-email@here.com");
+        customerProfileType.setEmail(eMail);
         customerProfileType.getPaymentProfiles().add(customerPaymentProfileType);
 
         CreateCustomerProfileRequest apiRequest = new CreateCustomerProfileRequest();
@@ -45,15 +45,19 @@ public class CreateCustomerProfile {
              if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
 
                 System.out.println(response.getCustomerProfileId());
-                System.out.println(response.getCustomerPaymentProfileIdList().getNumericString().get(0));
-                System.out.println(response.getCustomerShippingAddressIdList().getNumericString().get(0));
-                System.out.println(response.getValidationDirectResponseList().getString().get(0));
+                if(!response.getCustomerPaymentProfileIdList().getNumericString().isEmpty())
+                	System.out.println(response.getCustomerPaymentProfileIdList().getNumericString().get(0));
+                if(!response.getCustomerShippingAddressIdList().getNumericString().isEmpty())
+                	System.out.println(response.getCustomerShippingAddressIdList().getNumericString().get(0));
+                if(!response.getValidationDirectResponseList().getString().isEmpty())
+                	System.out.println(response.getValidationDirectResponseList().getString().get(0));
             }
             else
             {
                 System.out.println("Failed to create customer profile:  " + response.getMessages().getResultCode());
             }
         }
+		return response;
 
     }
 }

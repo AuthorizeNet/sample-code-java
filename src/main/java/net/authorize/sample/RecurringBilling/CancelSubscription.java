@@ -11,7 +11,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 public class CancelSubscription {
 
-    public static void run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey, String subscriptionId) {
         //Common code to set for all requests
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
@@ -21,7 +21,7 @@ public class CancelSubscription {
 
         // Make the API Request
         ARBCancelSubscriptionRequest apiRequest = new ARBCancelSubscriptionRequest();
-        apiRequest.setSubscriptionId("100748");
+        apiRequest.setSubscriptionId(subscriptionId);
         ARBCancelSubscriptionController controller = new ARBCancelSubscriptionController(apiRequest);
         controller.execute();
         ARBCancelSubscriptionResponse response = controller.getApiResponse();
@@ -37,5 +37,6 @@ public class CancelSubscription {
                 System.out.println("Failed to cancel Subscription:  " + response.getMessages().getResultCode());
             }
         }
+		return response;
     }
 }

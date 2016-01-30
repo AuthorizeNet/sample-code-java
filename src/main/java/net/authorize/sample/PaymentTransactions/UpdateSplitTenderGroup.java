@@ -11,7 +11,7 @@ import net.authorize.api.controller.UpdateSplitTenderGroupController;
  * @author gnongsie
  */
 public class UpdateSplitTenderGroup {
-    public static void run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey) {
         System.out.println("Update Split Tender Group Sample Code");
         
         //Common code to set for all requests
@@ -24,7 +24,7 @@ public class UpdateSplitTenderGroup {
 
         // Provide a split tender Id
         // To get a split Tender ID in sandbox, authorize any transaction with amount = 462.25 [if card present] and set allowPartialAuth = true
-        String splitTenderId = "SPLIT_TENDER_ID"; 
+        String splitTenderId = "115901"; 
         
         // Create a request
         UpdateSplitTenderGroupRequest request = new UpdateSplitTenderGroupRequest();
@@ -48,5 +48,6 @@ public class UpdateSplitTenderGroup {
             System.out.println("Error: " + response.getMessages().getMessage().get(0).getCode() + 
                                     " " + response.getMessages().getMessage().get(0).getText());
         }
+		return response;
     }
 }

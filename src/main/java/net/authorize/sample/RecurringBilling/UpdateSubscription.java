@@ -11,7 +11,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 public class UpdateSubscription {
 
-    public static void run(String apiLoginId, String transactionKey) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey, String subscriptionId) {
         //Common code to set for all requests
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
@@ -31,7 +31,7 @@ public class UpdateSubscription {
 
         // Make the API Request
         ARBUpdateSubscriptionRequest apiRequest = new ARBUpdateSubscriptionRequest();
-        apiRequest.setSubscriptionId("100748");
+        apiRequest.setSubscriptionId(subscriptionId);
         apiRequest.setSubscription(arbSubscriptionType);
         ARBUpdateSubscriptionController controller = new ARBUpdateSubscriptionController(apiRequest);
         controller.execute();
@@ -48,5 +48,6 @@ public class UpdateSubscription {
                 System.out.println("Failed to update Subscription:  " + response.getMessages().getResultCode());
             }
         }
+		return response;
     }
 }

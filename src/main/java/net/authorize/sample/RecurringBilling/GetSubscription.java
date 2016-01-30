@@ -12,7 +12,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class GetSubscription 
 {
-        public static void run(String apiLoginId,String transactionKey)
+        public static ANetApiResponse run(String apiLoginId,String transactionKey, String subscriptionId)
     {
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
         // Giving the merchant authentication information
@@ -23,7 +23,7 @@ public class GetSubscription
         // Making the API request
         ARBGetSubscriptionRequest apiRequest = new ARBGetSubscriptionRequest();
         apiRequest.setRefId("Sample");
-        apiRequest.setSubscriptionId("2930242");
+        apiRequest.setSubscriptionId(subscriptionId);
         // Calling the controller
         ARBGetSubscriptionController controller = new ARBGetSubscriptionController(apiRequest);
         controller.execute();
@@ -64,5 +64,6 @@ public class GetSubscription
             if(!errorResponse.getMessages().getMessage().isEmpty())
                 System.out.println("Error: "+errorResponse.getMessages().getMessage().get(0).getCode()+" \n"+ errorResponse.getMessages().getMessage().get(0).getText());
         }
+		return response;
     }
 }

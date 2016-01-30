@@ -1,9 +1,10 @@
 package net.authorize.sample.PaypalExpressCheckout;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import net.authorize.Environment;
-import net.authorize.TransactionType;
+import net.authorize.api.contract.v1.ANetApiResponse;
 import net.authorize.api.contract.v1.CreateTransactionRequest;
 import net.authorize.api.contract.v1.CreateTransactionResponse;
 import net.authorize.api.contract.v1.MerchantAuthenticationType;
@@ -18,7 +19,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class AuthorizationAndCaptureContinue
 {
-	public static void run(String apiLoginId, String transactionKey, String TransactionID, String payerID){
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String TransactionID, String payerID , Double amount){
 		
 		System.out.println("PayPal Authorize Capture-Continue Transaction");
 		
@@ -47,7 +48,7 @@ public class AuthorizationAndCaptureContinue
         TransactionRequestType transactionRequest = new TransactionRequestType();
         transactionRequest.setTransactionType(TransactionTypeEnum.AUTH_CAPTURE_CONTINUE_TRANSACTION.value().toString());
         transactionRequest.setPayment(paymentType);
-        transactionRequest.setAmount(new BigDecimal("19.45"));
+        transactionRequest.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
         transactionRequest.setRefTransId(TransactionID);
         
         CreateTransactionRequest request = new CreateTransactionRequest();
@@ -63,7 +64,8 @@ public class AuthorizationAndCaptureContinue
         //validate 
         if(response.getMessages().getResultCode() == MessageTypeEnum.OK){
         	if(response.getTransactionResponse() != null){
-        		System.out.println("Success, \nMessage : "+response.getTransactionResponse().getMessages().getMessage().get(0).getDescription() );
+        		if(!response.getTransactionResponse().getMessages().getMessage().isEmpty())
+        			System.out.println("Success, \nMessage : "+response.getTransactionResponse().getMessages().getMessage().get(0).getDescription() );
         		// Get Auth Code By :  response.getTransactionResponse().getAuthCode()
         	}
         }
@@ -72,6 +74,7 @@ public class AuthorizationAndCaptureContinue
 			if(response.getTransactionResponse() != null){
 				System.out.println("Transaction Error : "+ response.getTransactionResponse().getErrors().getError().get(0).getErrorCode() + "    "  +  response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
 			}
-		} 
+		}
+		return response; 
 	}
 }

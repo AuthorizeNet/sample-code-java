@@ -7,7 +7,7 @@ import net.authorize.api.controller.UpdateCustomerPaymentProfileController;
 
 public class UpdateCustomerPaymentProfile {
 	
-	public static void run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileId, String customerPaymentProfileId) {
 
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
@@ -37,11 +37,11 @@ public class UpdateCustomerPaymentProfile {
 
 		CustomerPaymentProfileExType customer = new CustomerPaymentProfileExType();
 		customer.setPayment(paymentType);
-		customer.setCustomerPaymentProfileId("20000");
+		customer.setCustomerPaymentProfileId(customerPaymentProfileId);
 		customer.setBillTo(customerAddress);
 
 		UpdateCustomerPaymentProfileRequest apiRequest = new UpdateCustomerPaymentProfileRequest();
-		apiRequest.setCustomerProfileId("10000");	
+		apiRequest.setCustomerProfileId(customerProfileId);	
 		apiRequest.setPaymentProfile(customer);
 		apiRequest.setValidationMode(ValidationModeEnum.LIVE_MODE);
 	
@@ -63,5 +63,6 @@ public class UpdateCustomerPaymentProfile {
                 System.out.println("Failed to update customer payment profile:  " + response.getMessages().getResultCode());
             }
         }
+		return response;
 	}	
 }

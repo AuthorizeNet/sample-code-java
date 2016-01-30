@@ -10,7 +10,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class GetCustomerProfileIds {
 	
-	public static void run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey) {
 
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
@@ -44,5 +44,6 @@ public class GetCustomerProfileIds {
                 System.out.println("Failed to get customer payment profile:  " + response.getMessages().getResultCode());
             }
         }
+		return response;
     }
 }
