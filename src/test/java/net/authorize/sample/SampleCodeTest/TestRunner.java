@@ -66,6 +66,7 @@ import net.authorize.sample.PaypalExpressCheckout.GetDetails;
 import net.authorize.sample.PaypalExpressCheckout.PriorAuthorizationCapture;
 import net.authorize.sample.RecurringBilling.CancelSubscription;
 import net.authorize.sample.RecurringBilling.CreateSubscription;
+import net.authorize.sample.RecurringBilling.CreateSubscriptionFromCustomerProfile;
 import net.authorize.sample.RecurringBilling.GetSubscription;
 import net.authorize.sample.RecurringBilling.GetSubscriptionStatus;
 import net.authorize.sample.RecurringBilling.UpdateSubscription;
@@ -447,6 +448,24 @@ public class TestRunner {
 		ARBCreateSubscriptionResponse response = (ARBCreateSubscriptionResponse)CreateSubscription.run(apiLoginId, transactionKey,  getDays(), getAmount());
 		CancelSubscription.run(apiLoginId, transactionKey, response.getSubscriptionId());
 
+		return response;
+	}
+	
+	public ANetApiResponse TestCreateSubscriptionFromCustomerProfile()
+	{
+		CreateCustomerProfileResponse profileResponse = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
+		CreateCustomerPaymentProfileResponse paymentResponse = (CreateCustomerPaymentProfileResponse) CreateCustomerPaymentProfile.
+				run(apiLoginId, transactionKey, profileResponse.getCustomerProfileId());
+
+		CreateCustomerShippingAddressResponse shippingResponse = (CreateCustomerShippingAddressResponse)CreateCustomerShippingAddress.
+				run(apiLoginId, transactionKey, profileResponse.getCustomerProfileId());
+		
+		ARBCreateSubscriptionResponse response = (ARBCreateSubscriptionResponse) CreateSubscriptionFromCustomerProfile.run(apiLoginId, transactionKey, getDays(), getAmount(), profileResponse.getCustomerProfileId(), 
+				paymentResponse.getCustomerPaymentProfileId(), shippingResponse.getCustomerAddressId());
+
+		CancelSubscription.run(apiLoginId, transactionKey, response.getSubscriptionId());
+		DeleteCustomerProfile.run(apiLoginId, transactionKey, profileResponse.getCustomerProfileId());
+		
 		return response;
 	}
 

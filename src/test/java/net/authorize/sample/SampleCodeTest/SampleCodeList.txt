@@ -1,5 +1,6 @@
 SampleCode	IsDependent	RunApi
 RecurringBilling.CreateSubscription	1	1
+RecurringBilling.CreateSubscriptionFromCustomerProfile	1	1
 RecurringBilling.GetListOfSubscriptions	0	1
 RecurringBilling.CancelSubscription	1	1
 RecurringBilling.GetSubscriptionStatus	1	1
