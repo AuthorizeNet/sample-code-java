@@ -89,6 +89,7 @@ public class SampleCode {
         System.out.println("    CreateAnApplePayTransaction");
         System.out.println("    ChargeCustomerProfile");
         System.out.println("    CreateSubscription");
+        System.out.println("    CreateSubscriptionFromCustomerProfile");
         System.out.println("    GetSubscription");
         System.out.println("    GetSubscriptionStatus");
         System.out.println("    CancelSubscription");
@@ -192,6 +193,9 @@ public class SampleCode {
             case "CreateSubscription":
                 CreateSubscription.run(apiLoginId, transactionKey, (short)12, amount);
                 break;
+            case "CreateSubscriptionFromCustomerProfile":
+            	CreateSubscriptionFromCustomerProfile.run(apiLoginId, transactionKey, (short)12, amount, "123212", "123213", "123213");
+                break;                
             case "GetSubscription":
                 GetSubscription.run(apiLoginId, transactionKey, subscriptionId);
                 break; 

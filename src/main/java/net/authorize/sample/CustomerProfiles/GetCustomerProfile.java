@@ -40,32 +40,38 @@ public class GetCustomerProfile {
                 System.out.println(response.getProfile().getEmail());
                 System.out.println(response.getProfile().getCustomerProfileId());
 
-                System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getFirstName());
-                System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getLastName());
-                System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getCompany());
-                System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getAddress());
-                System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getCity());
-                System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getState());
-                System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getZip());
-                System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getCountry());
-                System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getPhoneNumber());
-                System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getFaxNumber());
+                if((!response.getProfile().getPaymentProfiles().isEmpty()) &&
+                		(response.getProfile().getPaymentProfiles().get(0).getBillTo() != null)){
+                    System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getFirstName());
+                    System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getLastName());
+                    System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getCompany());
+                    System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getAddress());
+                    System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getCity());
+                    System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getState());
+                    System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getZip());
+                    System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getCountry());
+                    System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getPhoneNumber());
+                    System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getFaxNumber());
 
-                System.out.println(response.getProfile().getPaymentProfiles().get(0).getCustomerPaymentProfileId());
+                    System.out.println(response.getProfile().getPaymentProfiles().get(0).getCustomerPaymentProfileId());
 
-                System.out.println(response.getProfile().getPaymentProfiles().get(0).getPayment().getCreditCard().getCardNumber());
-                System.out.println(response.getProfile().getPaymentProfiles().get(0).getPayment().getCreditCard().getExpirationDate());
+                    System.out.println(response.getProfile().getPaymentProfiles().get(0).getPayment().getCreditCard().getCardNumber());
+                    System.out.println(response.getProfile().getPaymentProfiles().get(0).getPayment().getCreditCard().getExpirationDate());
+                }
 
-                System.out.println(response.getProfile().getShipToList().get(0).getFirstName());
-                System.out.println(response.getProfile().getShipToList().get(0).getLastName());
-                System.out.println(response.getProfile().getShipToList().get(0).getCompany());
-                System.out.println(response.getProfile().getShipToList().get(0).getAddress());
-                System.out.println(response.getProfile().getShipToList().get(0).getCity());
-                System.out.println(response.getProfile().getShipToList().get(0).getState());
-                System.out.println(response.getProfile().getShipToList().get(0).getZip());
-                System.out.println(response.getProfile().getShipToList().get(0).getCountry());
-                System.out.println(response.getProfile().getShipToList().get(0).getPhoneNumber());
-                System.out.println(response.getProfile().getShipToList().get(0).getFaxNumber());
+                if(!response.getProfile().getShipToList().isEmpty()){
+                    System.out.println(response.getProfile().getShipToList().get(0).getFirstName());
+                    System.out.println(response.getProfile().getShipToList().get(0).getLastName());
+                    System.out.println(response.getProfile().getShipToList().get(0).getCompany());
+                    System.out.println(response.getProfile().getShipToList().get(0).getAddress());
+                    System.out.println(response.getProfile().getShipToList().get(0).getCity());
+                    System.out.println(response.getProfile().getShipToList().get(0).getState());
+                    System.out.println(response.getProfile().getShipToList().get(0).getZip());
+                    System.out.println(response.getProfile().getShipToList().get(0).getCountry());
+                    System.out.println(response.getProfile().getShipToList().get(0).getPhoneNumber());
+                    System.out.println(response.getProfile().getShipToList().get(0).getFaxNumber());
+                }
+
             }
             else
             {

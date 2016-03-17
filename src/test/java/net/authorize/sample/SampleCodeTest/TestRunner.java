@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.SecureRandom;
 import java.text.DecimalFormat;
 
@@ -66,6 +68,7 @@ import net.authorize.sample.PaypalExpressCheckout.GetDetails;
 import net.authorize.sample.PaypalExpressCheckout.PriorAuthorizationCapture;
 import net.authorize.sample.RecurringBilling.CancelSubscription;
 import net.authorize.sample.RecurringBilling.CreateSubscription;
+import net.authorize.sample.RecurringBilling.CreateSubscriptionFromCustomerProfile;
 import net.authorize.sample.RecurringBilling.GetSubscription;
 import net.authorize.sample.RecurringBilling.GetSubscriptionStatus;
 import net.authorize.sample.RecurringBilling.UpdateSubscription;
@@ -130,10 +133,12 @@ public class TestRunner {
 				if (!shouldApiRun.equals("1"))
 					continue;
 
+				ANetApiResponse response = null;
+				
 				try
 				{
 					cnt++;
-					ANetApiResponse response = null;
+					
 					if (isDependent.equals("0"))
 					{
 						response = InvokeRunMethod(apiName); 
@@ -154,6 +159,8 @@ public class TestRunner {
 				{
 					System.out.println("Exception in " + apiName + " " + e.toString());
 					System.out.println(e.getMessage());
+					Assert.assertNotNull(response);
+					Assert.assertEquals(response.getMessages().getResultCode(), MessageTypeEnum.OK);
 				}
 			}
 		} catch (IOException e) {
@@ -447,6 +454,24 @@ public class TestRunner {
 		ARBCreateSubscriptionResponse response = (ARBCreateSubscriptionResponse)CreateSubscription.run(apiLoginId, transactionKey,  getDays(), getAmount());
 		CancelSubscription.run(apiLoginId, transactionKey, response.getSubscriptionId());
 
+		return response;
+	}
+	
+	public ANetApiResponse TestCreateSubscriptionFromCustomerProfile()
+	{
+		CreateCustomerProfileResponse profileResponse = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
+		CreateCustomerPaymentProfileResponse paymentResponse = (CreateCustomerPaymentProfileResponse) CreateCustomerPaymentProfile.
+				run(apiLoginId, transactionKey, profileResponse.getCustomerProfileId());
+
+		CreateCustomerShippingAddressResponse shippingResponse = (CreateCustomerShippingAddressResponse)CreateCustomerShippingAddress.
+				run(apiLoginId, transactionKey, profileResponse.getCustomerProfileId());
+		
+		ARBCreateSubscriptionResponse response = (ARBCreateSubscriptionResponse) CreateSubscriptionFromCustomerProfile.run(apiLoginId, transactionKey, getDays(), getAmount(), profileResponse.getCustomerProfileId(), 
+				paymentResponse.getCustomerPaymentProfileId(), shippingResponse.getCustomerAddressId());
+
+		CancelSubscription.run(apiLoginId, transactionKey, response.getSubscriptionId());
+		DeleteCustomerProfile.run(apiLoginId, transactionKey, profileResponse.getCustomerProfileId());
+		
 		return response;
 	}
 
