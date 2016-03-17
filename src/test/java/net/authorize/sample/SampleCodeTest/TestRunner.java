@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.SecureRandom;
 import java.text.DecimalFormat;
 
@@ -131,10 +133,12 @@ public class TestRunner {
 				if (!shouldApiRun.equals("1"))
 					continue;
 
+				ANetApiResponse response = null;
+				
 				try
 				{
 					cnt++;
-					ANetApiResponse response = null;
+					
 					if (isDependent.equals("0"))
 					{
 						response = InvokeRunMethod(apiName); 
@@ -155,6 +159,8 @@ public class TestRunner {
 				{
 					System.out.println("Exception in " + apiName + " " + e.toString());
 					System.out.println(e.getMessage());
+					Assert.assertNotNull(response);
+					Assert.assertEquals(response.getMessages().getResultCode(), MessageTypeEnum.OK);
 				}
 			}
 		} catch (IOException e) {

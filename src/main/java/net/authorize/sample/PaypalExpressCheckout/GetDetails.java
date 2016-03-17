@@ -42,11 +42,16 @@ public class GetDetails {
             if (result.getResponseCode().equals("1")) {
                 System.out.println("Successful PayPal Get Details Transaction");
                 System.out.println("Account Type : "+ result.getAccountType());
-                System.out.println("PayPal PayerID : "+ result.getSecureAcceptance().getPayerID());
-                System.out.println("Shipping Address : "+ result.getShipTo().getFirstName());
-                System.out.println(result.getShipTo().getAddress() +" " + result.getShipTo().getCity());
-                System.out.println(result.getShipTo().getState() +" "+ result.getShipTo().getZip());
-                System.out.println(result.getShipTo().getCountry());
+                if(result.getSecureAcceptance() != null)
+                	System.out.println("PayPal PayerID : "+ result.getSecureAcceptance().getPayerID());
+                
+                if(result.getShipTo() != null) {
+                	System.out.println("Shipping Address : "+ result.getShipTo().getFirstName());
+	                System.out.println(result.getShipTo().getAddress() +" " + result.getShipTo().getCity());
+	                System.out.println(result.getShipTo().getState() +" "+ result.getShipTo().getZip());
+	                System.out.println(result.getShipTo().getCountry());
+                }
+
                 System.out.println("Transaction ID : " + result.getTransId());
             }
         }

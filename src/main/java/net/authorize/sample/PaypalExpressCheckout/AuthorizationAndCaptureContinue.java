@@ -61,20 +61,25 @@ public class AuthorizationAndCaptureContinue
         // get the response from the service (errors contained if any)
         CreateTransactionResponse response = controller.getApiResponse();
         
-        //validate 
-        if(response.getMessages().getResultCode() == MessageTypeEnum.OK){
-        	if(response.getTransactionResponse() != null){
-        		if(!response.getTransactionResponse().getMessages().getMessage().isEmpty())
-        			System.out.println("Success, \nMessage : "+response.getTransactionResponse().getMessages().getMessage().get(0).getDescription() );
-        		// Get Auth Code By :  response.getTransactionResponse().getAuthCode()
-        	}
+        //validate
+        if(response != null){
+            if(response.getMessages().getResultCode() == MessageTypeEnum.OK){
+            	if(response.getTransactionResponse() != null){
+            		if((response.getTransactionResponse().getMessages() != null) && 
+            				(!response.getTransactionResponse().getMessages().getMessage().isEmpty())) {
+            			System.out.println("Success, \nMessage : "+response.getTransactionResponse().getMessages().getMessage().get(0).getDescription() );
+            			// Get Auth Code By :  response.getTransactionResponse().getAuthCode()
+            		}
+            	}
+            }
+            else {
+    			System.out.println("Error: " + response.getMessages().getMessage().get(0).getCode()+ "   " + response.getMessages().getMessage().get(0).getText() ); 
+    			if(response.getTransactionResponse() != null){
+    				System.out.println("Transaction Error : "+ response.getTransactionResponse().getErrors().getError().get(0).getErrorCode() + "    "  +  response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
+    			}
+    		}
         }
-        else {
-			System.out.println("Error: " + response.getMessages().getMessage().get(0).getCode()+ "   " + response.getMessages().getMessage().get(0).getText() ); 
-			if(response.getTransactionResponse() != null){
-				System.out.println("Transaction Error : "+ response.getTransactionResponse().getErrors().getError().get(0).getErrorCode() + "    "  +  response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
-			}
-		}
+
 		return response; 
 	}
 }

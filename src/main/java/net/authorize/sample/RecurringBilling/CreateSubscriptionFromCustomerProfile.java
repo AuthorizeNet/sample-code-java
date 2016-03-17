@@ -1,6 +1,7 @@
 package net.authorize.sample.RecurringBilling;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -55,8 +56,8 @@ public class CreateSubscriptionFromCustomerProfile {
 
 		ARBSubscriptionType arbSubscriptionType = new ARBSubscriptionType();
 		arbSubscriptionType.setPaymentSchedule(schedule);
-		arbSubscriptionType.setAmount(new BigDecimal("10.29"));
-		arbSubscriptionType.setTrialAmount(new BigDecimal("0.00"));
+		arbSubscriptionType.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
+		arbSubscriptionType.setTrialAmount(new BigDecimal(0.0).setScale(2, RoundingMode.CEILING));
 		arbSubscriptionType.setProfile(profile);
         
         // Make the API Request
