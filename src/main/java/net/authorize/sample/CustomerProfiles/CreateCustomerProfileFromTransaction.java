@@ -11,6 +11,7 @@ import net.authorize.api.contract.v1.CreateTransactionRequest;
 import net.authorize.api.contract.v1.CreateTransactionResponse;
 import net.authorize.api.contract.v1.CreditCardType;
 import net.authorize.api.contract.v1.CustomerDataType;
+import net.authorize.api.contract.v1.CustomerProfileBaseType;
 import net.authorize.api.contract.v1.MerchantAuthenticationType;
 import net.authorize.api.contract.v1.PaymentType;
 import net.authorize.api.contract.v1.TransactionRequestType;
@@ -53,8 +54,19 @@ public class CreateCustomerProfileFromTransaction {
 				
 		CreateTransactionResponse response = controller.getApiResponse();
 
+		CustomerProfileBaseType customerProfile = new CustomerProfileBaseType();
+		customerProfile.setMerchantCustomerId("123213");
+		customerProfile.setEmail("johnsnow@castleblack.com");
+		customerProfile.setDescription("This is a sample customer profile");		
+		
 		CreateCustomerProfileFromTransactionRequest transaction_request = new CreateCustomerProfileFromTransactionRequest();
 		transaction_request.setTransId(response.getTransactionResponse().getTransId());
+		// You can either specify the customer information in form of customerProfileBaseType object
+		transaction_request.setCustomer(customerProfile);
+		//  OR   
+		// You can just provide the customer Profile ID
+		// transaction_request.setCustomerProfileId("1232132");
+		
 		CreateCustomerProfileFromTransactionController createProfileController = new CreateCustomerProfileFromTransactionController(transaction_request);
 		createProfileController.execute();
 		CreateCustomerProfileResponse customer_response = createProfileController.getApiResponse();
