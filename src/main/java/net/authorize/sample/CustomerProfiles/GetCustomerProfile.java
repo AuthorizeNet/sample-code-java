@@ -71,6 +71,13 @@ public class GetCustomerProfile {
                     System.out.println(response.getProfile().getShipToList().get(0).getPhoneNumber());
                     System.out.println(response.getProfile().getShipToList().get(0).getFaxNumber());
                 }
+                
+                if((response.getSubscriptionIds() != null) && (response.getSubscriptionIds().getSubscriptionId() != null) && 
+                		(!response.getSubscriptionIds().getSubscriptionId().isEmpty())){
+                	System.out.println("List of subscriptions:");
+                	for(String subscriptionid : response.getSubscriptionIds().getSubscriptionId())
+                		System.out.println(subscriptionid);
+                }
 
             }
             else
