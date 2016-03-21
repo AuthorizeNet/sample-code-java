@@ -25,9 +25,17 @@ public class UpdateSubscription {
         creditCard.setCardNumber("4111111111111111");
         creditCard.setExpirationDate("1220");
         paymentType.setCreditCard(creditCard);
+        
+        //set profile information
+		CustomerProfileIdType profile = new CustomerProfileIdType();
+		profile.setCustomerProfileId("121212");
+		profile.setCustomerPaymentProfileId("131313");
+		profile.setCustomerAddressId("141414");
 
         ARBSubscriptionType arbSubscriptionType = new ARBSubscriptionType();
         arbSubscriptionType.setPayment(paymentType);
+        //to update profile
+        //arbSubscriptionType.setProfile(profile);
 
         // Make the API Request
         ARBUpdateSubscriptionRequest apiRequest = new ARBUpdateSubscriptionRequest();

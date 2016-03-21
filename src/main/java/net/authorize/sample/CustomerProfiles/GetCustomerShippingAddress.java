@@ -49,6 +49,13 @@ public class GetCustomerShippingAddress {
                 System.out.println(response.getAddress().getFaxNumber());
 
                 System.out.println(response.getAddress().getCustomerAddressId());
+                
+                if((response.getSubscriptionIds() != null) && (response.getSubscriptionIds().getSubscriptionId() != null) && 
+                		(!response.getSubscriptionIds().getSubscriptionId().isEmpty())){
+                	System.out.println("List of subscriptions:");
+                	for(String subscriptionid : response.getSubscriptionIds().getSubscriptionId())
+                		System.out.println(subscriptionid);
+                }
             }
             else
             {
