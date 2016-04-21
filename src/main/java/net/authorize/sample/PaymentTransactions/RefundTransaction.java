@@ -27,7 +27,7 @@ public class RefundTransaction {
         PaymentType paymentType = new PaymentType();
         CreditCardType creditCard = new CreditCardType();
         creditCard.setCardNumber("0015");
-        creditCard.setExpirationDate("1220");
+        creditCard.setExpirationDate("XXXX");
         paymentType.setCreditCard(creditCard);
 
         // Create the payment transaction request
