@@ -105,6 +105,7 @@ public class TestRunner {
 	public void TestAllSampleCodes()
 	{
 		String fileName = Constants.CONFIG_FILE;
+		int numRetries = 3;
 
 		BufferedReader reader = null;
 
@@ -132,36 +133,39 @@ public class TestRunner {
 
 				if (!shouldApiRun.equals("1"))
 					continue;
-
-				ANetApiResponse response = null;
 				
-				try
-				{
-					cnt++;
-					
-					if (isDependent.equals("0"))
-					{
-						response = InvokeRunMethod(apiName); 
-					}
-					else
-					{
-						String[] namespace = apiName.split("\\.");
-						
-						String className = namespace[1];
-						Class classType = this.getClass();
-						response = (ANetApiResponse)classType.getMethod("Test" + className).invoke(tr);
-					}
+				ANetApiResponse response = null;
 
-					Assert.assertNotNull(response);
-					Assert.assertEquals(response.getMessages().getResultCode(), MessageTypeEnum.OK);
-				}
-				catch (Exception e)
+				cnt++;
+				
+				for(int i = 0;i<numRetries;++i)
 				{
-					System.out.println("Exception in " + apiName + " " + e.toString());
-					System.out.println(e.getMessage());
-					Assert.assertNotNull(response);
-					Assert.assertEquals(response.getMessages().getResultCode(), MessageTypeEnum.OK);
+					try
+					{
+						if (isDependent.equals("0"))
+						{
+							response = InvokeRunMethod(apiName); 
+						}
+						else
+						{
+							String[] namespace = apiName.split("\\.");
+							
+							String className = namespace[1];
+							Class classType = this.getClass();
+							response = (ANetApiResponse)classType.getMethod("Test" + className).invoke(tr);
+						}
+
+						if((response != null) && (response.getMessages().getResultCode() == MessageTypeEnum.OK))
+							break;
+					}
+					catch (Exception e)
+					{
+						System.out.println("Exception in " + apiName + " " + e.toString());
+						System.out.println(e.getMessage());
+					}
 				}
+				Assert.assertNotNull(response);
+				Assert.assertEquals(response.getMessages().getResultCode(), MessageTypeEnum.OK);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
