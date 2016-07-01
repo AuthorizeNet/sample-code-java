@@ -6,8 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.security.SecureRandom;
 import java.text.DecimalFormat;
 
@@ -134,6 +132,11 @@ public class TestRunner {
 				if (!shouldApiRun.equals("1"))
 					continue;
 				
+				
+				System.out.println("-------------------");
+				System.out.println("Running test case for :: " + apiName);
+				System.out.println("-------------------");
+				 
 				ANetApiResponse response = null;
 
 				cnt++;
@@ -469,6 +472,15 @@ public class TestRunner {
 
 		CreateCustomerShippingAddressResponse shippingResponse = (CreateCustomerShippingAddressResponse)CreateCustomerShippingAddress.
 				run(apiLoginId, transactionKey, profileResponse.getCustomerProfileId());
+		
+		try
+		{
+			Thread.sleep(10000);
+		} 
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
 		
 		ARBCreateSubscriptionResponse response = (ARBCreateSubscriptionResponse) CreateSubscriptionFromCustomerProfile.run(apiLoginId, transactionKey, getDays(), getAmount(), profileResponse.getCustomerProfileId(), 
 				paymentResponse.getCustomerPaymentProfileId(), shippingResponse.getCustomerAddressId());
