@@ -23,4 +23,6 @@ e.g.
 ````
 Running SampleCode without a parameter will give you the list of sample names.  Handy or what!
 
+**NOTE You can update to your Sandbox credentials in SampleCode.java**
+
 *PLEASE NOTE THIS PROJECT IS CURRENTLY UNDER DEVELOPMENT*
