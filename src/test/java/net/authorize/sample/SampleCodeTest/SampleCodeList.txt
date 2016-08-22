@@ -47,6 +47,8 @@ TransactionReporting.GetUnsettledTransactionList	0	1
 TransactionReporting.GetBatchStatistics	0	1
 TransactionReporting.GetSettledBatchList	0	1
 TransactionReporting.GetTransactionDetails	1	1
-ApplePayTransactions.CreateAnApplePayTransaction	0	0
+MobileInAppTransactions.CreateAnApplePayTransaction	0	0
+MobileInAppTransactions.CreateAnAndroidPayTransaction	0	0
+MobileInAppTransactions.CreateAnAcceptTransaction	0	0
 VisaCheckout.DecryptVisaCheckoutData	0	1
 VisaCheckout.CreateVisaCheckoutTransaction	0	0
