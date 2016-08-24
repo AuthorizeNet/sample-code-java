@@ -11,7 +11,7 @@ import net.authorize.sample.PaypalExpressCheckout.Void;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
-import net.authorize.sample.MobileInAppTransactions.*;
+import net.authorize.sample.MobileInappTransactions.*;
 /**
  * Created by anetdeveloper on 8/5/15.
  */
