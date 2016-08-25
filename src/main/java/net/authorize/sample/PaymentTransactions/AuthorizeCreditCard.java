@@ -31,12 +31,24 @@ public class AuthorizeCreditCard {
         creditCard.setCardNumber("4242424242424242");
         creditCard.setExpirationDate("0822");
         paymentType.setCreditCard(creditCard);
+        
+
+        CustomerAddressType customerAddressType = new CustomerAddressType();
+        customerAddressType.setFirstName("John");
+        customerAddressType.setLastName("Doe");
+        customerAddressType.setAddress("123 Main St.");
+        customerAddressType.setCity("Bellevue");
+        customerAddressType.setState("WA");
+        customerAddressType.setZip("46282");
+        customerAddressType.setCountry("USA");
+        customerAddressType.setPhoneNumber("000-000-0000");
 
         // Create the payment transaction request
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.AUTH_ONLY_TRANSACTION.value());
         txnRequest.setPayment(paymentType);
         txnRequest.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
+        txnRequest.setBillTo(customerAddressType);
 
         // Make the API Request
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();
@@ -48,27 +60,38 @@ public class AuthorizeCreditCard {
         CreateTransactionResponse response = controller.getApiResponse();
 
         if (response!=null) {
-
-            // If API Response is ok, go ahead and check the transaction response
-            if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
-
-                TransactionResponse result = response.getTransactionResponse();
-                if (result.getResponseCode().equals("1")) {
-                    System.out.println(result.getResponseCode());
-                    System.out.println("Successful Credit Card Transaction");
-                    System.out.println(result.getAuthCode());
-                    System.out.println(result.getTransId());
-                }
-                else
-                {
-                    System.out.println("Failed Transaction"+result.getResponseCode());
-                }
-            }
-            else
-            {
-                System.out.println("Failed Transaction:  "+response.getMessages().getResultCode());
-            }
+        	// If API Response is ok, go ahead and check the transaction response
+        	if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
+        		TransactionResponse result = response.getTransactionResponse();
+        		if(result.getMessages() != null){
+        			System.out.println("Successfully created transaction with Transaction ID: " + result.getTransId());
+        			System.out.println("Description: " + result.getMessages().getMessage().get(0).getDescription());
+        			System.out.println("Auth code: " + result.getAuthCode());
+        		}
+        		else {
+        			System.out.println("Failed Transaction.");
+        			if(response.getTransactionResponse().getErrors() != null){
+        				System.out.println("Error Code: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode());
+        				System.out.println("Error message: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
+        			}
+        		}
+        	}
+        	else {
+        		System.out.println("Failed Transaction.");
+        		if(response.getTransactionResponse() != null && response.getTransactionResponse().getErrors() != null){
+        			System.out.println("Error Code: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode());
+        			System.out.println("Error message: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
+        		}
+        		else {
+        			System.out.println("Error Code: " + response.getMessages().getMessage().get(0).getCode());
+        			System.out.println("Error message: " + response.getMessages().getMessage().get(0).getText());
+        		}
+        	}
         }
+        else {
+        	System.out.println("Null Response.");
+        }
+        
 		return response;
 
     }

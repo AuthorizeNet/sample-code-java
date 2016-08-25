@@ -37,30 +37,40 @@ public class CreateAnApplePayTransaction
         controller.execute();
         // Getting the response
         CreateTransactionResponse response = controller.getApiResponse();
-        if(response!=null)
-        {
-            if (response.getMessages().getResultCode() == MessageTypeEnum.OK)
-            {
-                if (response.getTransactionResponse() != null)
-                {
-                        TransactionResponse result = response.getTransactionResponse();
-                        System.out.println("Successful: Create an ApplePay Transaction");
-                        System.out.println("Response Code : " + result.getResponseCode());
-                        System.out.println("Transaction ID : " + result.getTransId());
-                        System.out.println("Auth code : " + result.getAuthCode());
-                }
-            }
-            else
-            {
-                System.out.println("Failed: Create ApplePay  Transaction");
-                if(!response.getMessages().getMessage().isEmpty())
-                        System.out.println("Error: " + response.getMessages().getMessage().get(0).getCode() + "  " + response.getMessages().getMessage().get(0).getText());
-
-                if (response.getTransactionResponse() != null)
-                    if(response.getTransactionResponse().getErrors() != null && !response.getTransactionResponse().getErrors().getError().isEmpty())
-                        System.out.println("Transaction Error : " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode() + " " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
-            }
+        
+        if (response!=null) {
+        	// If API Response is ok, go ahead and check the transaction response
+        	if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
+        		TransactionResponse result = response.getTransactionResponse();
+        		if(result.getMessages() != null){
+        			System.out.println("Successfully created transaction with Transaction ID: " + result.getTransId());
+        			System.out.println("Description: " + result.getMessages().getMessage().get(0).getDescription());
+        			System.out.println("Auth code : " + result.getAuthCode());
+        		}
+        		else {
+        			System.out.println("Failed Transaction.");
+        			if(response.getTransactionResponse().getErrors() != null){
+        				System.out.println("Error Code: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode());
+        				System.out.println("Error message: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
+        			}
+        		}
+        	}
+        	else {
+        		System.out.println("Failed Transaction.");
+        		if(response.getTransactionResponse() != null && response.getTransactionResponse().getErrors() != null){
+        			System.out.println("Error Code: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode());
+        			System.out.println("Error message: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
+        		}
+        		else {
+        			System.out.println("Error Code: " + response.getMessages().getMessage().get(0).getCode());
+        			System.out.println("Error message: " + response.getMessages().getMessage().get(0).getText());
+        		}
+        	}
         }
+        else {
+        	System.out.println("Null Response.");
+        }
+        
 		return response;
     }
 }
