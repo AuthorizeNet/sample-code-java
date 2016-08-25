@@ -31,24 +31,12 @@ public class AuthorizeCreditCard {
         creditCard.setCardNumber("4242424242424242");
         creditCard.setExpirationDate("0822");
         paymentType.setCreditCard(creditCard);
-        
-
-        CustomerAddressType customerAddressType = new CustomerAddressType();
-        customerAddressType.setFirstName("John");
-        customerAddressType.setLastName("Doe");
-        customerAddressType.setAddress("123 Main St.");
-        customerAddressType.setCity("Bellevue");
-        customerAddressType.setState("WA");
-        customerAddressType.setZip("46282");
-        customerAddressType.setCountry("USA");
-        customerAddressType.setPhoneNumber("000-000-0000");
 
         // Create the payment transaction request
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.AUTH_ONLY_TRANSACTION.value());
         txnRequest.setPayment(paymentType);
         txnRequest.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
-        txnRequest.setBillTo(customerAddressType);
 
         // Make the API Request
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();
