@@ -63,6 +63,8 @@ public class CreateVisaCheckoutTransaction {
     		TransactionResponse result = response.getTransactionResponse();
     		if(result.getMessages() != null){
     			System.out.println("Successfully created transaction with Transaction ID: " + result.getTransId());
+    			System.out.println("Response Code: " + result.getResponseCode());
+    			System.out.println("Message Code: " + result.getMessages().getMessage().get(0).getCode());
     			System.out.println("Description: " + result.getMessages().getMessage().get(0).getDescription());
     			System.out.println("Auth Code: " + result.getAuthCode());
     		}
