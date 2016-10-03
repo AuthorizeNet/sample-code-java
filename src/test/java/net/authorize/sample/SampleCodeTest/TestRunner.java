@@ -83,7 +83,7 @@ public class TestRunner {
 
 	private static String getEmail()
 	{
-		return rgenerator.nextInt(10000) + "@test.com";
+		return rgenerator.nextInt(1000000) + "@test.com";
 	}
 
 	private static Double getAmount()
