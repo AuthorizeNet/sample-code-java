@@ -1,6 +1,7 @@
 package net.authorize.sample.CustomerProfiles;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import net.authorize.Environment;
 import net.authorize.api.contract.v1.*;
@@ -11,7 +12,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class GetHostedPaymentPage {
 	
-	public static ANetApiResponse run(String apiLoginId, String transactionKey) {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, Double amount) {
 
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
@@ -19,6 +20,18 @@ public class GetHostedPaymentPage {
         merchantAuthenticationType.setName(apiLoginId);
         merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
+        
+        PaymentType paymentType = new PaymentType();
+        CreditCardType creditCard = new CreditCardType();
+        creditCard.setCardNumber("4242424242424242");
+        creditCard.setExpirationDate("0822");
+        paymentType.setCreditCard(creditCard);
+
+        // Create the payment transaction request
+        TransactionRequestType txnRequest = new TransactionRequestType();
+        txnRequest.setTransactionType(TransactionTypeEnum.AUTH_CAPTURE_TRANSACTION.value());
+        txnRequest.setPayment(paymentType);
+        txnRequest.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
 
         SettingType setting = new SettingType();
         setting.setSettingName("hostedPaymentReturnOptions");
@@ -26,13 +39,9 @@ public class GetHostedPaymentPage {
 
         ArrayOfSetting alist = new ArrayOfSetting();
         alist.getSetting().add(setting);
-        
-        TransactionRequestType reqType = new TransactionRequestType();
-        reqType.setAmount(new BigDecimal("12.42"));
-        reqType.setTransactionType(TransactionTypeEnum.AUTH_ONLY_TRANSACTION.value());
 
         GetHostedPaymentPageRequest apiRequest = new GetHostedPaymentPageRequest();
-        apiRequest.setTransactionRequest(reqType);
+        apiRequest.setTransactionRequest(txnRequest);
         apiRequest.setHostedPaymentSettings(alist);
 
         GetHostedPaymentPageController controller = new GetHostedPaymentPageController(apiRequest);

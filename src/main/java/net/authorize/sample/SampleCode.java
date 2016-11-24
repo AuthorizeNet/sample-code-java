@@ -317,7 +317,7 @@ public class SampleCode {
             	UpdateHeldTransaction.run(apiLoginId, transactionKey, transactionId);
                 break;
             case "GetHostedPaymentPage":
-            	GetHostedPaymentPage.run(apiLoginId, transactionKey);
+            	GetHostedPaymentPage.run(apiLoginId, transactionKey, amount);
                 break;
             default:
                 ShowUsage();
