@@ -125,6 +125,9 @@ public class SampleCode {
         System.out.println("    PayPalAuthorizeOnlyContinue");
         System.out.println("    PayPalCredit");
         System.out.println("    UpdateSplitTenderGroup");
+        System.out.println("    GetMerchantDetails");
+        System.out.println("    UpdateHeldTransaction");
+        System.out.println("    GetHostedPaymentPage");
     }
 
     private static void RunMethod(String methodName)
@@ -306,6 +309,15 @@ public class SampleCode {
                 break;
             case "UpdateSplitTenderGroup":
                 UpdateSplitTenderGroup.run(apiLoginId, transactionKey);
+                break;
+            case "GetMerchantDetails":
+            	GetMerchantDetails.run(apiLoginId, transactionKey);
+                break;
+            case "UpdateHeldTransaction":
+            	UpdateHeldTransaction.run(apiLoginId, transactionKey, transactionId);
+                break;
+            case "GetHostedPaymentPage":
+            	GetHostedPaymentPage.run(apiLoginId, transactionKey);
                 break;
             default:
                 ShowUsage();
