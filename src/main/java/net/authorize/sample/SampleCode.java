@@ -197,6 +197,9 @@ public class SampleCode {
             case "ChargeCustomerProfile":
                 ChargeCustomerProfile.run(apiLoginId, transactionKey, customerProfileId, customerPaymentProfileId, amount);
                 break;
+            case "ChargeCustomerProfilesMT":
+                ChargeCustomerProfilesMT.run();
+                break;
             case "CreateSubscription":
                 CreateSubscription.run(apiLoginId, transactionKey, (short)12, amount);
                 break;
