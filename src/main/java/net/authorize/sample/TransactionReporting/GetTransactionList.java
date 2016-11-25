@@ -21,6 +21,18 @@ public class GetTransactionList{
 			GetTransactionListRequest getRequest = new GetTransactionListRequest();
 			getRequest.setMerchantAuthentication(merchantAuthenticationType);
 			getRequest.setBatchId(batchId);
+			
+	        Paging paging = new Paging();
+	        paging.setLimit(100);
+	        paging.setOffset(1);
+	        
+			getRequest.setPaging(paging);
+			
+			TransactionListSorting sorting = new TransactionListSorting();
+			sorting.setOrderBy(TransactionListOrderFieldEnum.ID);
+			sorting.setOrderDescending(true);
+			
+			getRequest.setSorting(sorting);
 
 			GetTransactionListController controller = new GetTransactionListController(getRequest);
             controller.execute();
