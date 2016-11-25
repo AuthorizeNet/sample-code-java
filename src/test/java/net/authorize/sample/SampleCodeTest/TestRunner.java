@@ -71,6 +71,7 @@ import net.authorize.sample.RecurringBilling.GetSubscription;
 import net.authorize.sample.RecurringBilling.GetSubscriptionStatus;
 import net.authorize.sample.RecurringBilling.UpdateSubscription;
 import net.authorize.sample.TransactionReporting.GetTransactionDetails;
+import net.authorize.sample.PaymentTransactions.GetHostedPaymentPage;
 
 public class TestRunner {
 
@@ -441,7 +442,8 @@ public class TestRunner {
 	public ANetApiResponse TestPayPalGetDetails()
 	{
 		CreateTransactionResponse response = (CreateTransactionResponse)AuthorizationAndCapture.run(apiLoginId, transactionKey, getAmount());
-		return GetDetails.run(apiLoginId, transactionKey, response.getTransactionResponse().getTransId());
+		return GetDetails.run(apiLoginId, transactionKey, response.getTransactionResponse()
+				.getTransId());
 	}
 
 	public ANetApiResponse TestPayPalPriorAuthorizationCapture()
@@ -531,5 +533,10 @@ public class TestRunner {
 	{
 		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
 		return CreateCustomerPaymentProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
+	}
+	
+	public ANetApiResponse TestGetHostedPaymentPage()
+	{
+		return GetHostedPaymentPage.run(apiLoginId, transactionKey, getAmount());
 	}
 }

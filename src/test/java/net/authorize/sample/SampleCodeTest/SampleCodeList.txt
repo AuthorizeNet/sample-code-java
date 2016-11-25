@@ -14,7 +14,6 @@ CustomerProfiles.GetCustomerShippingAddress	1	1
 CustomerProfiles.GetCustomerProfileIds	0	1
 CustomerProfiles.GetCustomerProfile	1	1
 CustomerProfiles.GetHostedProfilePage	1	1
-CustomerProfiles.GetHostedPaymentPage	0	0
 CustomerProfiles.GetCustomerPaymentProfile	1	1
 CustomerProfiles.DeleteCustomerShippingAddress	1	1
 CustomerProfiles.DeleteCustomerProfile	1	1
@@ -44,12 +43,13 @@ PaymentTransactions.DebitBankAccount	1	1
 PaymentTransactions.ChargeTokenizedCreditCard	1	1
 PaymentTransactions.UpdateSplitTenderGroup	0	1
 PaymentTransactions.UpdateHeldTransation	0	0
+PaymentTransactions.GetHostedPaymentPage	1	1
 TransactionReporting.GetTransactionList	0	1
 TransactionReporting.GetUnsettledTransactionList	0	1
 TransactionReporting.GetBatchStatistics	0	1
 TransactionReporting.GetSettledBatchList	0	1
 TransactionReporting.GetTransactionDetails	1	1
-TransactionReporting.GetMerchantDetails	1	1
+TransactionReporting.GetMerchantDetails	0	1
 MobileInappTransactions.CreateAnApplePayTransaction	0	0
 MobileInappTransactions.CreateAnAndroidPayTransaction	0	0
 MobileInappTransactions.CreateAnAcceptTransaction	0	0
