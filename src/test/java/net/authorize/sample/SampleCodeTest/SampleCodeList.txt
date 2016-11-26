@@ -13,7 +13,7 @@ CustomerProfiles.UpdateCustomerPaymentProfile	1	1
 CustomerProfiles.GetCustomerShippingAddress	1	1
 CustomerProfiles.GetCustomerProfileIds	0	1
 CustomerProfiles.GetCustomerProfile	1	1
-CustomerProfiles.GetHostedProfilePage	1	1
+CustomerProfiles.GetAcceptCustomerProfilePage	1	1
 CustomerProfiles.GetCustomerPaymentProfile	1	1
 CustomerProfiles.DeleteCustomerShippingAddress	1	1
 CustomerProfiles.DeleteCustomerProfile	1	1
