@@ -42,7 +42,7 @@ import net.authorize.sample.CustomerProfiles.DeleteCustomerShippingAddress;
 import net.authorize.sample.CustomerProfiles.GetCustomerPaymentProfile;
 import net.authorize.sample.CustomerProfiles.GetCustomerProfile;
 import net.authorize.sample.CustomerProfiles.GetCustomerShippingAddress;
-import net.authorize.sample.CustomerProfiles.GetHostedProfilePage;
+import net.authorize.sample.CustomerProfiles.GetAcceptCustomerProfilePage;
 import net.authorize.sample.CustomerProfiles.UpdateCustomerPaymentProfile;
 import net.authorize.sample.CustomerProfiles.UpdateCustomerProfile;
 import net.authorize.sample.CustomerProfiles.UpdateCustomerShippingAddress;
