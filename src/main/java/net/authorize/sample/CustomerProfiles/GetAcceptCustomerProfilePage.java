@@ -8,7 +8,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.api.controller.GetHostedProfilePageController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
-public class GetHostedProfilePage {
+public class GetAcceptCustomerProfilePage {
 	
 	public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileId) {
 
