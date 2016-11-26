@@ -280,10 +280,10 @@ public class TestRunner {
 		return profileResponse;
 	}
 
-	public ANetApiResponse TestGetHostedProfilePage()
+	public ANetApiResponse TestGetAcceptCustomerProfilePage()
 	{
 		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
-		GetHostedProfilePageResponse profileResponse = (GetHostedProfilePageResponse) GetHostedProfilePage.run(apiLoginId, transactionKey, response.getCustomerProfileId());
+		GetHostedProfilePageResponse profileResponse = (GetHostedProfilePageResponse) GetAcceptCustomerProfilePage.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 		DeleteCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 
 		return profileResponse;
