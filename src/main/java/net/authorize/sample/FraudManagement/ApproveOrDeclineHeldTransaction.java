@@ -22,7 +22,7 @@ import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.api.controller.UpdateHeldTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
-public class UpdateHeldTransaction {
+public class ApproveOrDeclineHeldTransaction {
 
     public static ANetApiResponse run(String apiLoginId, String transactionKey, String transactionId) {
 
@@ -34,17 +34,11 @@ public class UpdateHeldTransaction {
         merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
-        // Populate the payment data
-        PaymentType paymentType = new PaymentType();
-        CreditCardType creditCard = new CreditCardType();
-        creditCard.setCardNumber("4242424242424242");
-        creditCard.setExpirationDate("0822");
-        paymentType.setCreditCard(creditCard);
 
         // Create the payment transaction request
         HeldTransactionRequestType txnRequest = new HeldTransactionRequestType();
         txnRequest.setAction(AfdsTransactionEnum.APPROVE);
-        txnRequest.setRefTransId(transactionId);
+        txnRequest.setRefTransId("60012148613");
 
         // Make the API Request
         UpdateHeldTransactionRequest apiRequest = new UpdateHeldTransactionRequest();

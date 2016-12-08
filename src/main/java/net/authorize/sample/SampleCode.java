@@ -126,7 +126,8 @@ public class SampleCode {
         System.out.println("    PayPalCredit");
         System.out.println("    UpdateSplitTenderGroup");
         System.out.println("    GetMerchantDetails");
-        System.out.println("    UpdateHeldTransaction");
+        System.out.println("    GetHeldTransactionList");
+        System.out.println("    ApproveOrDeclineHeldTransaction");
         System.out.println("    GetHostedPaymentPage");
     }
 
@@ -313,8 +314,11 @@ public class SampleCode {
             case "GetMerchantDetails":
             	GetMerchantDetails.run(apiLoginId, transactionKey);
                 break;
-            case "UpdateHeldTransaction":
-            	UpdateHeldTransaction.run(apiLoginId, transactionKey, transactionId);
+            case "GetHeldTransactionList":
+                GetHeldTransactionList.run(apiLoginId, transactionKey);
+                break;
+            case "ApproveOrDeclineHeldTransaction":
+            	ApproveOrDeclineHeldTransaction.run(apiLoginId, transactionKey, transactionId);
                 break;
             case "GetHostedPaymentPage":
             	GetHostedPaymentPage.run(apiLoginId, transactionKey, amount);
