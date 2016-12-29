@@ -1,4 +1,4 @@
-package net.authorize.sample.TransactionReporting;
+package net.authorize.sample.FraudManagement;
 
 
 import net.authorize.Environment;
