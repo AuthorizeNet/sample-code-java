@@ -535,8 +535,8 @@ public class TestRunner {
 		return CreateCustomerPaymentProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 	}
 	
-	public ANetApiResponse TestGetHostedPaymentPage()
+	public ANetApiResponse TestGetAnAcceptPaymentPage()
 	{
-		return GetHostedPaymentPage.run(apiLoginId, transactionKey, getAmount());
+		return GetAnAcceptPaymentPage.run(apiLoginId, transactionKey, getAmount());
 	}
 }
