@@ -129,7 +129,7 @@ public class SampleCode {
         System.out.println("    GetMerchantDetails");
         System.out.println("    GetHeldTransactionList");
         System.out.println("    ApproveOrDeclineHeldTransaction");
-        System.out.println("    GetHostedPaymentPage");
+        System.out.println("    GetAnAcceptPaymentPage");
     }
 
     private static void RunMethod(String methodName)
@@ -321,8 +321,8 @@ public class SampleCode {
             case "ApproveOrDeclineHeldTransaction":
             	ApproveOrDeclineHeldTransaction.run(apiLoginId, transactionKey, transactionId);
                 break;
-            case "GetHostedPaymentPage":
-            	GetHostedPaymentPage.run(apiLoginId, transactionKey, amount);
+            case "GetAnAcceptPaymentPage":
+            	GetAnAcceptPaymentPage.run(apiLoginId, transactionKey, amount);
                 break;
             default:
                 ShowUsage();
