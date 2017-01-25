@@ -9,7 +9,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.api.controller.GetHostedPaymentPageController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
-public class GetHostedPaymentPage {
+public class GetAnAcceptPaymentPage {
 	
 	public static ANetApiResponse run(String apiLoginId, String transactionKey, Double amount) {
 
