@@ -43,7 +43,7 @@ PaymentTransactions.DebitBankAccount	1	1
 PaymentTransactions.ChargeTokenizedCreditCard	1	1
 PaymentTransactions.UpdateSplitTenderGroup	0	1
 PaymentTransactions.UpdateHeldTransation	0	0
-PaymentTransactions.GetHostedPaymentPage	1	1
+PaymentTransactions.GetAnAcceptPaymentPage	1	1
 TransactionReporting.GetTransactionList	0	1
 TransactionReporting.GetUnsettledTransactionList	0	1
 TransactionReporting.GetBatchStatistics	0	1
