@@ -23,7 +23,6 @@ public class AuthorizeCreditCard {
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
         merchantAuthenticationType.setName(apiLoginId);
         merchantAuthenticationType.setTransactionKey(transactionKey);
-        ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
         // Populate the payment data
         PaymentType paymentType = new PaymentType();
@@ -38,8 +37,10 @@ public class AuthorizeCreditCard {
         txnRequest.setPayment(paymentType);
         txnRequest.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
 
-        // Make the API Request
+        // Make the API Request & set the merchant details for this specific request
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();
+	apiRequest.setMerchantAuthentication(merchantAuthenticationType);
+
         apiRequest.setTransactionRequest(txnRequest);
         CreateTransactionController controller = new CreateTransactionController(apiRequest);
         controller.execute();
