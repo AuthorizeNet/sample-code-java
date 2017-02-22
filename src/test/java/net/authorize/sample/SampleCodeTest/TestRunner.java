@@ -71,7 +71,7 @@ import net.authorize.sample.RecurringBilling.GetSubscription;
 import net.authorize.sample.RecurringBilling.GetSubscriptionStatus;
 import net.authorize.sample.RecurringBilling.UpdateSubscription;
 import net.authorize.sample.TransactionReporting.GetTransactionDetails;
-import net.authorize.sample.PaymentTransactions.GetHostedPaymentPage;
+import net.authorize.sample.PaymentTransactions.GetAnAcceptPaymentPage;
 
 public class TestRunner {
 
