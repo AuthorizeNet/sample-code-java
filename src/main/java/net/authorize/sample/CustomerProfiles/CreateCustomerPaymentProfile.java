@@ -14,20 +14,24 @@ import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.cim.Result;
 import net.authorize.cim.TransactionType;
 import net.authorize.cim.ValidationModeType;
+import net.authorize.sample.SampleCodeTest.*;
 
 //author @krgupta
 public class CreateCustomerPaymentProfile {
 	
 	public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileId) {
-
-        ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		
+		if ( null == ApiOperationBase.getEnvironment() ) 
+		{
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		}
 
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
         merchantAuthenticationType.setName(apiLoginId);
         merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 		
-	//private String getPaymentDetails(MerchantAuthenticationType merchantAuthentication, String customerprofileId, ValidationModeEnum validationMode) {
+        //private String getPaymentDetails(MerchantAuthenticationType merchantAuthentication, String customerprofileId, ValidationModeEnum validationMode) {
 		CreateCustomerPaymentProfileRequest apiRequest = new CreateCustomerPaymentProfileRequest();
 		apiRequest.setMerchantAuthentication(merchantAuthenticationType);
 		apiRequest.setCustomerProfileId(customerProfileId);	

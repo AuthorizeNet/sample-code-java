@@ -4,12 +4,16 @@ import net.authorize.Environment;
 import net.authorize.api.contract.v1.*;
 import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.api.controller.UpdateCustomerPaymentProfileController;
+import net.authorize.sample.SampleCodeTest.*;
 
 public class UpdateCustomerPaymentProfile {
 	
 	public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileId, String customerPaymentProfileId) {
 
-        ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		if ( null == ApiOperationBase.getEnvironment() ) 
+		{
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		}
 
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
         merchantAuthenticationType.setName(apiLoginId);

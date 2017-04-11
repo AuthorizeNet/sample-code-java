@@ -14,6 +14,7 @@ import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.sample.CustomerProfiles.CreateCustomerPaymentProfile;
 import net.authorize.sample.CustomerProfiles.CreateCustomerProfile;
+import net.authorize.sample.SampleCodeTest.*;
 
 public class ChargeCustomerProfilesMT {
 

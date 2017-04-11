@@ -16,6 +16,7 @@ import net.authorize.api.contract.v1.TransactionResponse;
 import net.authorize.api.contract.v1.TransactionTypeEnum;
 import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;
+import net.authorize.sample.SampleCodeTest.*;
 
 public class AuthorizationOnlyContinued {
 
@@ -24,7 +25,11 @@ public class AuthorizationOnlyContinued {
 
     	System.out.println("PayPal Authorize Only-Continue Transaction");
         //Common code to set for all requests
-        ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		if ( null == ApiOperationBase.getEnvironment() ) 
+		{
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		}
+		
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
         merchantAuthenticationType.setName(apiLoginId);
         merchantAuthenticationType.setTransactionKey(transactionKey);

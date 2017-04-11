@@ -6,12 +6,16 @@ import net.authorize.Environment;
 import net.authorize.api.contract.v1.*;
 import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.api.controller.*;
+import net.authorize.sample.SampleCodeTest.*;
 
 public class GetCustomerPaymentProfileList 
 {
     public static ANetApiResponse run(String apiLoginId,String transactionKey)
     {
-        ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		if ( null == ApiOperationBase.getEnvironment() ) 
+		{
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		}
         
         // Giving the merchant authentication information
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;

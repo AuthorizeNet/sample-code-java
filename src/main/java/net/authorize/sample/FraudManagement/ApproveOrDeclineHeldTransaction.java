@@ -21,13 +21,17 @@ import net.authorize.api.contract.v1.UpdateHeldTransactionResponse;
 import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.api.controller.UpdateHeldTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;
+import net.authorize.sample.SampleCodeTest.*;
 
 public class ApproveOrDeclineHeldTransaction {
 
     public static ANetApiResponse run(String apiLoginId, String transactionKey, String transactionId) {
 
         //Common code to set for all requests
-        ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		if ( null == ApiOperationBase.getEnvironment() ) 
+		{
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		}
 
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
         merchantAuthenticationType.setName(apiLoginId);

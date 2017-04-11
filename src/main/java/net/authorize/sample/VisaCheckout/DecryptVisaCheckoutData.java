@@ -9,13 +9,17 @@ import net.authorize.api.contract.v1.MerchantAuthenticationType;
 import net.authorize.api.contract.v1.OpaqueDataType;
 import net.authorize.api.contract.v1.MessageTypeEnum;
 import net.authorize.api.controller.DecryptPaymentDataController;
+import net.authorize.sample.SampleCodeTest.*;
 
 public class DecryptVisaCheckoutData {
 
 	public static ANetApiResponse run(String apiLoginId, String transactionKey) {
 
     //Common code to set for all requests
- 		ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		if ( null == ApiOperationBase.getEnvironment() ) 
+		{
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		}
 
  		MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
 		merchantAuthenticationType.setName(apiLoginId);

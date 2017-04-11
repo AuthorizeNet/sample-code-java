@@ -20,12 +20,17 @@ import net.authorize.api.contract.v1.PaymentScheduleType;
 import net.authorize.api.contract.v1.PaymentType;
 import net.authorize.api.controller.ARBCreateSubscriptionController;
 import net.authorize.api.controller.base.ApiOperationBase;
+import net.authorize.sample.SampleCodeTest.*;
 
 public class CreateSubscription {
 
     public static ANetApiResponse run(String apiLoginId, String transactionKey, short intervalLength, Double amount) {
         //Common code to set for all requests
-        ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		if ( null == ApiOperationBase.getEnvironment() ) 
+		{
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		}
+		
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
         merchantAuthenticationType.setName(apiLoginId);
         merchantAuthenticationType.setTransactionKey(transactionKey);

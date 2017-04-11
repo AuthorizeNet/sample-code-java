@@ -1,7 +1,6 @@
 SampleCode	IsDependent	RunApi
 RecurringBilling.CreateSubscription	1	1
 RecurringBilling.CreateSubscriptionFromCustomerProfile	1	1
-RecurringBilling.GetListOfSubscriptions	0	1
 RecurringBilling.CancelSubscription	1	1
 RecurringBilling.GetSubscriptionStatus	1	1
 RecurringBilling.GetSubscription	1	1
@@ -11,7 +10,6 @@ CustomerProfiles.UpdateCustomerShippingAddress	1	1
 CustomerProfiles.UpdateCustomerProfile	1	1
 CustomerProfiles.UpdateCustomerPaymentProfile	1	1
 CustomerProfiles.GetCustomerShippingAddress	1	1
-CustomerProfiles.GetCustomerProfileIds	0	1
 CustomerProfiles.GetCustomerProfile	1	1
 CustomerProfiles.GetAcceptCustomerProfilePage	1	1
 CustomerProfiles.GetCustomerPaymentProfile	1	1
@@ -20,17 +18,8 @@ CustomerProfiles.DeleteCustomerProfile	1	1
 CustomerProfiles.DeleteCustomerPaymentProfile	1	1
 CustomerProfiles.CreateCustomerShippingAddress	1	1
 CustomerProfiles.CreateCustomerProfileFromTransaction	1	1
-CustomerProfiles.GetCustomerPaymentProfileList	0	1
 CustomerProfiles.CreateCustomerProfile	1	1
 CustomerProfiles.CreateCustomerPaymentProfile	1	1
-PaypalExpressCheckout.PayPalAuthorizationOnly	1	1
-PaypalExpressCheckout.PayPalVoid	1	0
-PaypalExpressCheckout.PayPalAuthorizationAndCapture	1	1
-PaypalExpressCheckout.PayPalAuthorizationAndCaptureContinue	1	1
-PaypalExpressCheckout.PayPalAuthorizationOnlyContinued	1	0
-PaypalExpressCheckout.PayPalCredit	1	0
-PaypalExpressCheckout.PayPalGetDetails	1	1
-PaypalExpressCheckout.PayPalPriorAuthorizationCapture	1	0
 PaymentTransactions.ChargeCreditCard	1	1
 PaymentTransactions.CapturePreviouslyAuthorizedAmount	1	1
 PaymentTransactions.RefundTransaction	1	0
@@ -41,8 +30,6 @@ PaymentTransactions.CaptureFundsAuthorizedThroughAnotherChannel	1	1
 PaymentTransactions.AuthorizeCreditCard	1	1
 PaymentTransactions.DebitBankAccount	1	1
 PaymentTransactions.ChargeTokenizedCreditCard	1	1
-PaymentTransactions.UpdateSplitTenderGroup	0	1
-PaymentTransactions.UpdateHeldTransation	0	0
 PaymentTransactions.GetHostedPaymentPage	1	1
 TransactionReporting.GetTransactionList	0	1
 TransactionReporting.GetUnsettledTransactionList	0	1
@@ -50,8 +37,3 @@ TransactionReporting.GetBatchStatistics	0	1
 TransactionReporting.GetSettledBatchList	0	1
 TransactionReporting.GetTransactionDetails	1	1
 TransactionReporting.GetMerchantDetails	0	1
-MobileInappTransactions.CreateAnApplePayTransaction	0	0
-MobileInappTransactions.CreateAnAndroidPayTransaction	0	0
-MobileInappTransactions.CreateAnAcceptTransaction	0	0
-VisaCheckout.DecryptVisaCheckoutData	0	1
-VisaCheckout.CreateVisaCheckoutTransaction	0	0

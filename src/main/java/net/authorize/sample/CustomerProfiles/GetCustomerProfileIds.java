@@ -7,12 +7,16 @@ import net.authorize.api.contract.v1.MerchantAuthenticationType;
 import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.api.controller.GetCustomerProfileIdsController;
 import net.authorize.api.controller.base.ApiOperationBase;
+import net.authorize.sample.SampleCodeTest.*;
 
 public class GetCustomerProfileIds {
 	
 	public static ANetApiResponse run(String apiLoginId, String transactionKey) {
 
-        ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		if ( null == ApiOperationBase.getEnvironment() ) 
+		{
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		}
 
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
         merchantAuthenticationType.setName(apiLoginId);

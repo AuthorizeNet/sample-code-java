@@ -9,12 +9,18 @@ import net.authorize.api.contract.v1.MerchantAuthenticationType;
 import net.authorize.api.contract.v1.MessageTypeEnum;
 import net.authorize.api.controller.ARBGetSubscriptionController;
 import net.authorize.api.controller.base.ApiOperationBase;
+import net.authorize.sample.SampleCodeTest.*;
 
 public class GetSubscription 
 {
         public static ANetApiResponse run(String apiLoginId,String transactionKey, String subscriptionId)
     {
-        ApiOperationBase.setEnvironment(Environment.SANDBOX);
+
+        if ( null == ApiOperationBase.getEnvironment() ) 
+        {
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		}
+    		
         // Giving the merchant authentication information
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
         merchantAuthenticationType.setName(apiLoginId);

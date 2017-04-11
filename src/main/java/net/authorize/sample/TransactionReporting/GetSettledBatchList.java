@@ -7,13 +7,17 @@ import net.authorize.api.contract.v1.*;
 import net.authorize.api.controller.GetSettledBatchListController;
 import net.authorize.api.controller.base.ApiOperationBase;
 import javax.xml.datatype.DatatypeFactory;
+import net.authorize.sample.SampleCodeTest.*;
 
 //author @krgupta modified @kikmak42
 public class GetSettledBatchList {
 
     public static ANetApiResponse run(String apiLoginId, String transactionKey) {
 
-        ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		if ( null == ApiOperationBase.getEnvironment() ) 
+		{
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		}
 
         MerchantAuthenticationType merchantAuthenticationType = new MerchantAuthenticationType();
         merchantAuthenticationType.setName(apiLoginId);

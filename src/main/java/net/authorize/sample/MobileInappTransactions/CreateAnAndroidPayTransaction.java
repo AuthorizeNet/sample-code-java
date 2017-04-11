@@ -6,10 +6,15 @@ import net.authorize.TransactionType;
 import net.authorize.api.contract.v1.*;
 import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;
+import net.authorize.sample.SampleCodeTest.*;
 
 public class CreateAnAndroidPayTransaction {
 	public static ANetApiResponse run(String apiLoginId, String transactionKey) {
-		ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		
+		if ( null == ApiOperationBase.getEnvironment() ) 
+		{
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		}
 
 		// Giving the merchant authentication information
 		MerchantAuthenticationType merchantAuthenticationType = new MerchantAuthenticationType();

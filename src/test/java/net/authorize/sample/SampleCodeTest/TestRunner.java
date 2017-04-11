@@ -1,16 +1,21 @@
 package net.authorize.sample.SampleCodeTest;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.security.SecureRandom;
 import java.text.DecimalFormat;
+import java.util.Enumeration;
+import java.util.Properties;
 
 import org.junit.Test;
-
+import net.authorize.*;
 import junit.framework.Assert;
 import net.authorize.api.contract.v1.ANetApiResponse;
 import net.authorize.api.contract.v1.ARBCreateSubscriptionResponse;
@@ -27,6 +32,7 @@ import net.authorize.api.contract.v1.GetCustomerPaymentProfileResponse;
 import net.authorize.api.contract.v1.GetCustomerProfileResponse;
 import net.authorize.api.contract.v1.GetCustomerShippingAddressResponse;
 import net.authorize.api.contract.v1.GetHostedProfilePageResponse;
+import net.authorize.api.contract.v1.MerchantAuthenticationType;
 import net.authorize.api.contract.v1.MessageTypeEnum;
 import net.authorize.api.contract.v1.UpdateCustomerPaymentProfileResponse;
 import net.authorize.api.contract.v1.UpdateCustomerProfileResponse;
@@ -79,6 +85,7 @@ public class TestRunner {
 	String transactionKey = Constants.TRANSACTION_KEY;
 	String TransactionID = Constants.TRANSACTION_ID;
 	String payerID = Constants.PAYER_ID;
+	
 
 	static SecureRandom rgenerator = new SecureRandom();
 
@@ -103,21 +110,54 @@ public class TestRunner {
 	@Test
 	public void TestAllSampleCodes()
 	{
-		String fileName = Constants.CONFIG_FILE;
-		int numRetries = 3;
-
-		BufferedReader reader = null;
-
-		try {
-			reader = new BufferedReader(new FileReader(fileName));
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
+		
 		TestRunner tr = new TestRunner();
 		int cnt = 0;
 		String line;
+		int numRetries = 3;
+		BufferedReader reader = null;
+
+		String apiCustomEndpoint = Environment.getProperty("CustomEnv");
+		String apiCustomLoginID = Environment.getProperty("api.login.id");
+		String apiCustomTransKey = Environment.getProperty("transaction.key");
+		String fileName = Constants.CONFIG_FILE;
+		
+		URL url = getClass().getResource("SampleCodeList.txt");
+		fileName = url.getPath();
+
+
+		
+		//check for the EnvName
+		if(null != apiCustomEndpoint && !apiCustomEndpoint.isEmpty())
+		{
+			Constants.Custom_APIEndPoint = Environment.createEnvironment(apiCustomEndpoint, apiCustomEndpoint, apiCustomEndpoint);
+		}
+		else
+		{
+			Constants.Custom_APIEndPoint = Environment.createEnvironment(Environment.SANDBOX.getBaseUrl(), Environment.SANDBOX.getXmlBaseUrl(), Environment.SANDBOX.getCardPresentUrl());
+		}
+		
+		net.authorize.api.controller.base.ApiOperationBase.setEnvironment(Constants.Custom_APIEndPoint);
+		
+		//check for userName
+		if(null != apiCustomLoginID &&!(apiCustomLoginID.isEmpty()))
+		{
+			tr.apiLoginId = apiCustomLoginID;
+		}			
+		
+		if(null != apiCustomTransKey && !(apiCustomTransKey.isEmpty()))
+		{
+			tr.transactionKey = apiCustomTransKey;
+		}
+		
+		try {
+			reader = new BufferedReader(new FileReader(fileName));
+		} catch (FileNotFoundException e1) {
+			System.err.println("File not found " + fileName);
+			e1.printStackTrace();
+			System.exit(1);
+		}
+
 		try {
 
 			while ((line = reader.readLine()) != null)
@@ -192,7 +232,7 @@ public class TestRunner {
 
 		Method runMethod = null;
 		try {
-			runMethod = classType.getMethod("run",String.class, String.class);
+			runMethod = classType.getMethod("run", String.class, String.class);
 		} catch (NoSuchMethodException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -202,7 +242,7 @@ public class TestRunner {
 		}
 
 		try {
-			return (ANetApiResponse)runMethod.invoke(null, Constants.API_LOGIN_ID, Constants.TRANSACTION_KEY);
+			return (ANetApiResponse)runMethod.invoke(null, apiLoginId, transactionKey);
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

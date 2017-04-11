@@ -18,13 +18,18 @@ import net.authorize.api.contract.v1.MessageTypeEnum;
 import net.authorize.api.contract.v1.PaymentScheduleType;
 import net.authorize.api.controller.ARBCreateSubscriptionController;
 import net.authorize.api.controller.base.ApiOperationBase;
+import net.authorize.sample.SampleCodeTest.*;
 
 public class CreateSubscriptionFromCustomerProfile {
 
     public static ANetApiResponse run(String apiLoginId, String transactionKey, short intervalLength, Double amount,
     		String profileId, String paymentProfileId, String customerAddressId) {
         //Common code to set for all requests
-        ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		if ( null == ApiOperationBase.getEnvironment() ) 
+		{
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		}
+		
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
         merchantAuthenticationType.setName(apiLoginId);
         merchantAuthenticationType.setTransactionKey(transactionKey);

@@ -11,6 +11,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.api.contract.v1.*;
 import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.Environment;
+import net.authorize.sample.SampleCodeTest.*;
 
 /**
  *
@@ -21,7 +22,10 @@ public class PriorAuthorizationCapture {
         System.out.println("Paypal Prior Authorization Transaction");
         
         //Common code to set for all requests
-        ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		if ( null == ApiOperationBase.getEnvironment() ) 
+		{
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		}
         
         // Define the merchant information (Authentication / Transaction ID)
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;

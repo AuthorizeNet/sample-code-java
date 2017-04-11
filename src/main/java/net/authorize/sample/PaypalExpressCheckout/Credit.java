@@ -6,6 +6,7 @@ import net.authorize.Environment;
 import net.authorize.api.contract.v1.*;
 import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.api.controller.CreateTransactionController;
+import net.authorize.sample.SampleCodeTest.*;
 
 public class Credit {
 
@@ -13,7 +14,11 @@ public class Credit {
 
 		System.out.println("PayPal Credit Transaction");
 		//Common code to set for all requests
-		ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		if ( null == ApiOperationBase.getEnvironment() ) 
+		{
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		}
+		
 		MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
 		merchantAuthenticationType.setName(apiLoginId);
 		merchantAuthenticationType.setTransactionKey(transactionKey);

@@ -6,12 +6,17 @@ import net.authorize.api.contract.v1.*;
 import net.authorize.api.controller.GetSettledBatchListController;
 import net.authorize.api.controller.GetUnsettledTransactionListController;
 import net.authorize.api.controller.base.ApiOperationBase;
+import net.authorize.sample.SampleCodeTest.*;
 
 //author @krgupta
 public class GetUnsettledTransactionList{
 	
 		public static ANetApiResponse run(String apiLoginId, String transactionKey) {
-			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+			
+			if ( null == ApiOperationBase.getEnvironment() ) 
+			{
+				ApiOperationBase.setEnvironment(Environment.SANDBOX);
+			}
 
 	        MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
 	        merchantAuthenticationType.setName(apiLoginId);

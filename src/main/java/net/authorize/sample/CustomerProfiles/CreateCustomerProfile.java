@@ -1,6 +1,7 @@
 package net.authorize.sample.CustomerProfiles;
 
 import net.authorize.Environment;
+import net.authorize.sample.SampleCodeTest.*;
 import net.authorize.api.contract.v1.*;
 import java.math.BigDecimal;
 import net.authorize.api.controller.CreateCustomerProfileController;
@@ -10,7 +11,10 @@ public class CreateCustomerProfile {
 
 	public static ANetApiResponse run(String apiLoginId, String transactionKey, String eMail) {
 
-		ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		if ( null == ApiOperationBase.getEnvironment() ) 
+		{
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		}
 
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
         merchantAuthenticationType.setName(apiLoginId);

@@ -8,12 +8,17 @@ import net.authorize.api.contract.v1.*;
 import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.api.controller.ARBCancelSubscriptionController;
 import javax.xml.datatype.XMLGregorianCalendar;
+import net.authorize.sample.SampleCodeTest.*;
 
 public class CancelSubscription {
 
     public static ANetApiResponse run(String apiLoginId, String transactionKey, String subscriptionId) {
         //Common code to set for all requests
-        ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		if ( null == ApiOperationBase.getEnvironment() ) 
+		{
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		}
+		
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
         merchantAuthenticationType.setName(apiLoginId);
         merchantAuthenticationType.setTransactionKey(transactionKey);

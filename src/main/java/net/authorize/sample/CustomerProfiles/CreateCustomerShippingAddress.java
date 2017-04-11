@@ -5,12 +5,16 @@ import net.authorize.api.contract.v1.*;
 import java.math.BigDecimal;
 import net.authorize.api.controller.CreateCustomerShippingAddressController;
 import net.authorize.api.controller.base.ApiOperationBase;
+import net.authorize.sample.SampleCodeTest.*;
 
 public class CreateCustomerShippingAddress {
 
 	public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileId) {
 
-		ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		if ( null == ApiOperationBase.getEnvironment() ) 
+		{
+			ApiOperationBase.setEnvironment(Environment.SANDBOX);
+		}
 
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
         merchantAuthenticationType.setName(apiLoginId);
