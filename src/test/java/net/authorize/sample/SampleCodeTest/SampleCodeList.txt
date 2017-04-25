@@ -45,7 +45,7 @@ PaymentTransactions.UpdateSplitTenderGroup	0	1
 PaymentTransactions.UpdateHeldTransation	0	0
 PaymentTransactions.GetAnAcceptPaymentPage	1	1
 TransactionReporting.GetTransactionList	0	1
-TransactionReporting.GetTransactionListForCustomer	1	1
+TransactionReporting.GetTransactionListForCustomer	0	0
 TransactionReporting.GetUnsettledTransactionList	0	1
 TransactionReporting.GetBatchStatistics	0	1
 TransactionReporting.GetSettledBatchList	0	1
