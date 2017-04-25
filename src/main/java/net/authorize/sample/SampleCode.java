@@ -112,6 +112,7 @@ public class SampleCode {
         System.out.println("    GetCustomerPaymentProfileList");
         System.out.println("    GetCustomerProfile");
         System.out.println("    GetCustomerProfileIds");
+        System.out.println("    GetCustomerProfileTransactionList");
         System.out.println("    GetCustomerShippingAddress");
         System.out.println("    GetAcceptCustomerProfilePage");
         System.out.println("    UpdateCustomerPaymentProfile");
@@ -271,6 +272,10 @@ public class SampleCode {
             case "GetCustomerProfileIds":
                 GetCustomerProfileIds.run(apiLoginId, transactionKey);
                 break;
+            case "GetCustomerProfileTransactionList":
+            	customerProfileId = "1811474252";
+            	GetCustomerProfileTransactionList.run(apiLoginId, transactionKey, customerProfileId);
+            	break;
             case "GetCustomerShippingAddress":
                 GetCustomerShippingAddress.run(apiLoginId, transactionKey, customerProfileId, customerAddressId);
                 break;
