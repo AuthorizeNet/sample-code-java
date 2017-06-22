@@ -1,11 +1,13 @@
 package net.authorize.sample.SampleCodeTest;
 
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -85,32 +87,27 @@ public class TestRunner {
 	String transactionKey = Constants.TRANSACTION_KEY;
 	String TransactionID = Constants.TRANSACTION_ID;
 	String payerID = Constants.PAYER_ID;
-	
 
 	static SecureRandom rgenerator = new SecureRandom();
 
-	private static String getEmail()
-	{
+	private static String getEmail() {
 		return rgenerator.nextInt(1000000) + "@test.com";
 	}
 
-	private static Double getAmount()
-	{
-		double d = (double)(1.05 + (450.0 * rgenerator.nextDouble()));
-		DecimalFormat df = new DecimalFormat("#.##");      
+	private static Double getAmount() {
+		double d = (double) (1.05 + (450.0 * rgenerator.nextDouble()));
+		DecimalFormat df = new DecimalFormat("#.##");
 		d = Double.valueOf(df.format(d));
 		return d;
 	}
 
-	private static short getDays()
-	{
+	private static short getDays() {
 		return (short) (rgenerator.nextInt(358) + 7);
 	}
 
 	@Test
-	public void TestAllSampleCodes()
-	{
-		
+	public void TestAllSampleCodes() {
+
 		TestRunner tr = new TestRunner();
 		int cnt = 0;
 		String line;
@@ -120,39 +117,37 @@ public class TestRunner {
 		String apiCustomEndpoint = Environment.getProperty("CustomEnv");
 		String apiCustomLoginID = Environment.getProperty("api.login.id");
 		String apiCustomTransKey = Environment.getProperty("transaction.key");
+		boolean acceptCertificates = Environment.getBooleanProperty("acceptCertificates");
 		String fileName = Constants.CONFIG_FILE;
-		
-		URL url = getClass().getResource("SampleCodeList.txt");
-		fileName = url.getPath();
 
+		// check for the EnvName
+		if (null != apiCustomEndpoint && !apiCustomEndpoint.isEmpty()) {
+			Constants.Custom_APIEndPoint = Environment.createEnvironment(apiCustomEndpoint, apiCustomEndpoint,
+					apiCustomEndpoint);
+		} else {
+			Constants.Custom_APIEndPoint = Environment.createEnvironment(Environment.SANDBOX.getBaseUrl(),
+					Environment.SANDBOX.getXmlBaseUrl(), Environment.SANDBOX.getCardPresentUrl());
+		}
 
-		
-		//check for the EnvName
-		if(null != apiCustomEndpoint && !apiCustomEndpoint.isEmpty())
-		{
-			Constants.Custom_APIEndPoint = Environment.createEnvironment(apiCustomEndpoint, apiCustomEndpoint, apiCustomEndpoint);
-		}
-		else
-		{
-			Constants.Custom_APIEndPoint = Environment.createEnvironment(Environment.SANDBOX.getBaseUrl(), Environment.SANDBOX.getXmlBaseUrl(), Environment.SANDBOX.getCardPresentUrl());
-		}
-		
 		net.authorize.api.controller.base.ApiOperationBase.setEnvironment(Constants.Custom_APIEndPoint);
-		
-		//check for userName
-		if(null != apiCustomLoginID &&!(apiCustomLoginID.isEmpty()))
-		{
+
+		// check for userName
+		if (null != apiCustomLoginID && !(apiCustomLoginID.isEmpty())) {
 			tr.apiLoginId = apiCustomLoginID;
-		}			
-		
-		if(null != apiCustomTransKey && !(apiCustomTransKey.isEmpty()))
-		{
+		}
+
+		if (null != apiCustomTransKey && !(apiCustomTransKey.isEmpty())) {
 			tr.transactionKey = apiCustomTransKey;
 		}
-		
+
 		try {
-			reader = new BufferedReader(new FileReader(fileName));
-		} catch (FileNotFoundException e1) {
+
+			InputStream stream = null;
+			stream = TestRunner.class.getClassLoader()
+					.getResourceAsStream("net/authorize/sample/SampleCodeTest/SampleCodeList.txt");
+			reader = new BufferedReader(new InputStreamReader(stream));
+
+		} catch (IllegalArgumentException e1) {
 			System.err.println("File not found " + fileName);
 			e1.printStackTrace();
 			System.exit(1);
@@ -160,8 +155,7 @@ public class TestRunner {
 
 		try {
 
-			while ((line = reader.readLine()) != null)
-			{
+			while ((line = reader.readLine()) != null) {
 				String[] items = line.split("\t");
 
 				String apiName = items[0];
@@ -172,38 +166,30 @@ public class TestRunner {
 
 				if (!shouldApiRun.equals("1"))
 					continue;
-				
-				
+
 				System.out.println("-------------------");
 				System.out.println("Running test case for :: " + apiName);
 				System.out.println("-------------------");
-				 
+
 				ANetApiResponse response = null;
 
 				cnt++;
-				
-				for(int i = 0;i<numRetries;++i)
-				{
-					try
-					{
-						if (isDependent.equals("0"))
-						{
-							response = InvokeRunMethod(apiName); 
-						}
-						else
-						{
+
+				for (int i = 0; i < numRetries; ++i) {
+					try {
+						if (isDependent.equals("0")) {
+							response = InvokeRunMethod(apiName);
+						} else {
 							String[] namespace = apiName.split("\\.");
-							
+
 							String className = namespace[1];
 							Class classType = this.getClass();
-							response = (ANetApiResponse)classType.getMethod("Test" + className).invoke(tr);
+							response = (ANetApiResponse) classType.getMethod("Test" + className).invoke(tr);
 						}
 
-						if((response != null) && (response.getMessages().getResultCode() == MessageTypeEnum.OK))
+						if ((response != null) && (response.getMessages().getResultCode() == MessageTypeEnum.OK))
 							break;
-					}
-					catch (Exception e)
-					{
+					} catch (Exception e) {
 						System.out.println("Exception in " + apiName + " " + e.toString());
 						System.out.println(e.getMessage());
 					}
@@ -218,8 +204,7 @@ public class TestRunner {
 		System.out.println("Total Sample Runs: " + cnt);
 	}
 
-	public ANetApiResponse InvokeRunMethod(String className)
-	{
+	public ANetApiResponse InvokeRunMethod(String className) {
 		String fqClassName = "net.authorize.sample." + className;
 
 		Class classType = null;
@@ -242,7 +227,7 @@ public class TestRunner {
 		}
 
 		try {
-			return (ANetApiResponse)runMethod.invoke(null, apiLoginId, transactionKey);
+			return (ANetApiResponse) runMethod.invoke(null, apiLoginId, transactionKey);
 		} catch (IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -256,327 +241,345 @@ public class TestRunner {
 		return null;
 	}
 
-	public ANetApiResponse TestValidateCustomerPaymentProfile()
-	{
-		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse) CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
-		CreateCustomerPaymentProfileResponse customerPaymentProfile = (CreateCustomerPaymentProfileResponse)CreateCustomerPaymentProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
+	public ANetApiResponse TestValidateCustomerPaymentProfile() {
+		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse) CreateCustomerProfile.run(apiLoginId,
+				transactionKey, getEmail());
+		CreateCustomerPaymentProfileResponse customerPaymentProfile = (CreateCustomerPaymentProfileResponse) CreateCustomerPaymentProfile
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 		System.out.println(response.getCustomerProfileId());
 		System.out.println(customerPaymentProfile.getCustomerPaymentProfileId());
-		ValidateCustomerPaymentProfileResponse validateResponse = (ValidateCustomerPaymentProfileResponse) ValidateCustomerPaymentProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId(), customerPaymentProfile.getCustomerPaymentProfileId());
+		ValidateCustomerPaymentProfileResponse validateResponse = (ValidateCustomerPaymentProfileResponse) ValidateCustomerPaymentProfile
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId(),
+						customerPaymentProfile.getCustomerPaymentProfileId());
 		DeleteCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 
 		return validateResponse;
 	}
 
-
-	public ANetApiResponse TestUpdateCustomerShippingAddress()
-	{
-		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
-		CreateCustomerShippingAddressResponse shippingResponse = (CreateCustomerShippingAddressResponse)CreateCustomerShippingAddress.run(apiLoginId, transactionKey, response.getCustomerProfileId());
-		UpdateCustomerShippingAddressResponse updateResponse = (UpdateCustomerShippingAddressResponse) UpdateCustomerShippingAddress.run(apiLoginId, transactionKey, response.getCustomerProfileId(), shippingResponse.getCustomerAddressId());
+	public ANetApiResponse TestUpdateCustomerShippingAddress() {
+		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse) CreateCustomerProfile.run(apiLoginId,
+				transactionKey, getEmail());
+		CreateCustomerShippingAddressResponse shippingResponse = (CreateCustomerShippingAddressResponse) CreateCustomerShippingAddress
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId());
+		UpdateCustomerShippingAddressResponse updateResponse = (UpdateCustomerShippingAddressResponse) UpdateCustomerShippingAddress
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId(),
+						shippingResponse.getCustomerAddressId());
 		DeleteCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 
 		return updateResponse;
 	}
 
-	public ANetApiResponse TestUpdateCustomerProfile()
-	{
-		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
-		UpdateCustomerProfileResponse updateResponse = (UpdateCustomerProfileResponse) UpdateCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
+	public ANetApiResponse TestUpdateCustomerProfile() {
+		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse) CreateCustomerProfile.run(apiLoginId,
+				transactionKey, getEmail());
+		UpdateCustomerProfileResponse updateResponse = (UpdateCustomerProfileResponse) UpdateCustomerProfile
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 		DeleteCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 
 		return updateResponse;
 	}
 
-	public ANetApiResponse TestUpdateCustomerPaymentProfile()
-	{
-		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
-		CreateCustomerPaymentProfileResponse paymentProfileResponse = (CreateCustomerPaymentProfileResponse)CreateCustomerPaymentProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
-		UpdateCustomerPaymentProfileResponse updateResponse = (UpdateCustomerPaymentProfileResponse) UpdateCustomerPaymentProfile.run(apiLoginId, transactionKey,
-				response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId());
+	public ANetApiResponse TestUpdateCustomerPaymentProfile() {
+		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse) CreateCustomerProfile.run(apiLoginId,
+				transactionKey, getEmail());
+		CreateCustomerPaymentProfileResponse paymentProfileResponse = (CreateCustomerPaymentProfileResponse) CreateCustomerPaymentProfile
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId());
+		UpdateCustomerPaymentProfileResponse updateResponse = (UpdateCustomerPaymentProfileResponse) UpdateCustomerPaymentProfile
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId(),
+						paymentProfileResponse.getCustomerPaymentProfileId());
 		DeleteCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 
 		return updateResponse;
 	}
 
-	public ANetApiResponse TestGetCustomerShippingAddress()
-	{
-		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
-		CreateCustomerShippingAddressResponse shippingResponse = (CreateCustomerShippingAddressResponse)CreateCustomerShippingAddress.run(apiLoginId, transactionKey, response.getCustomerProfileId());
+	public ANetApiResponse TestGetCustomerShippingAddress() {
+		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse) CreateCustomerProfile.run(apiLoginId,
+				transactionKey, getEmail());
+		CreateCustomerShippingAddressResponse shippingResponse = (CreateCustomerShippingAddressResponse) CreateCustomerShippingAddress
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 
-		GetCustomerShippingAddressResponse getResponse = (GetCustomerShippingAddressResponse) GetCustomerShippingAddress.run(apiLoginId, transactionKey, 
-				response.getCustomerProfileId(), shippingResponse.getCustomerAddressId());
+		GetCustomerShippingAddressResponse getResponse = (GetCustomerShippingAddressResponse) GetCustomerShippingAddress
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId(),
+						shippingResponse.getCustomerAddressId());
 
 		DeleteCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 		return getResponse;
 	}
 
-	public ANetApiResponse TestGetCustomerProfile()
-	{
-		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
-		GetCustomerProfileResponse profileResponse = (GetCustomerProfileResponse) GetCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
+	public ANetApiResponse TestGetCustomerProfile() {
+		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse) CreateCustomerProfile.run(apiLoginId,
+				transactionKey, getEmail());
+		GetCustomerProfileResponse profileResponse = (GetCustomerProfileResponse) GetCustomerProfile.run(apiLoginId,
+				transactionKey, response.getCustomerProfileId());
 		DeleteCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 
 		return profileResponse;
 	}
 
-	public ANetApiResponse TestGetAcceptCustomerProfilePage()
-	{
-		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
-		GetHostedProfilePageResponse profileResponse = (GetHostedProfilePageResponse) GetAcceptCustomerProfilePage.run(apiLoginId, transactionKey, response.getCustomerProfileId());
+	public ANetApiResponse TestGetAcceptCustomerProfilePage() {
+		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse) CreateCustomerProfile.run(apiLoginId,
+				transactionKey, getEmail());
+		GetHostedProfilePageResponse profileResponse = (GetHostedProfilePageResponse) GetAcceptCustomerProfilePage
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 		DeleteCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 
 		return profileResponse;
 	}
 
-	public ANetApiResponse TestGetCustomerPaymentProfile()
-	{
-		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
-		CreateCustomerPaymentProfileResponse paymentProfileResponse = (CreateCustomerPaymentProfileResponse)CreateCustomerPaymentProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
-		GetCustomerPaymentProfileResponse getResponse = (GetCustomerPaymentProfileResponse) GetCustomerPaymentProfile.run(apiLoginId, transactionKey,
-				response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId());
+	public ANetApiResponse TestGetCustomerPaymentProfile() {
+		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse) CreateCustomerProfile.run(apiLoginId,
+				transactionKey, getEmail());
+		CreateCustomerPaymentProfileResponse paymentProfileResponse = (CreateCustomerPaymentProfileResponse) CreateCustomerPaymentProfile
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId());
+		GetCustomerPaymentProfileResponse getResponse = (GetCustomerPaymentProfileResponse) GetCustomerPaymentProfile
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId(),
+						paymentProfileResponse.getCustomerPaymentProfileId());
 
 		DeleteCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 		return getResponse;
 	}
 
-	public ANetApiResponse TestDeleteCustomerShippingAddress()
-	{
-		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
-		CreateCustomerShippingAddressResponse shippingResponse = (CreateCustomerShippingAddressResponse)CreateCustomerShippingAddress.run(apiLoginId, transactionKey, response.getCustomerProfileId());
-		DeleteCustomerShippingAddressResponse deleteResponse = (DeleteCustomerShippingAddressResponse) DeleteCustomerShippingAddress.run(apiLoginId, transactionKey,
-				response.getCustomerProfileId(), shippingResponse.getCustomerAddressId());
+	public ANetApiResponse TestDeleteCustomerShippingAddress() {
+		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse) CreateCustomerProfile.run(apiLoginId,
+				transactionKey, getEmail());
+		CreateCustomerShippingAddressResponse shippingResponse = (CreateCustomerShippingAddressResponse) CreateCustomerShippingAddress
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId());
+		DeleteCustomerShippingAddressResponse deleteResponse = (DeleteCustomerShippingAddressResponse) DeleteCustomerShippingAddress
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId(),
+						shippingResponse.getCustomerAddressId());
 		DeleteCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 
 		return deleteResponse;
 	}
 
-	public ANetApiResponse TestDeleteCustomerProfile()
-	{
-		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
+	public ANetApiResponse TestDeleteCustomerProfile() {
+		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse) CreateCustomerProfile.run(apiLoginId,
+				transactionKey, getEmail());
 		return DeleteCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 	}
 
-	public ANetApiResponse TestDeleteCustomerPaymentProfile()
-	{
-		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
-		CreateCustomerPaymentProfileResponse paymentProfileResponse = (CreateCustomerPaymentProfileResponse)CreateCustomerPaymentProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
-		DeleteCustomerPaymentProfileResponse deleteResponse = (DeleteCustomerPaymentProfileResponse) DeleteCustomerPaymentProfile.run(apiLoginId, transactionKey,
-				response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId());
+	public ANetApiResponse TestDeleteCustomerPaymentProfile() {
+		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse) CreateCustomerProfile.run(apiLoginId,
+				transactionKey, getEmail());
+		CreateCustomerPaymentProfileResponse paymentProfileResponse = (CreateCustomerPaymentProfileResponse) CreateCustomerPaymentProfile
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId());
+		DeleteCustomerPaymentProfileResponse deleteResponse = (DeleteCustomerPaymentProfileResponse) DeleteCustomerPaymentProfile
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId(),
+						paymentProfileResponse.getCustomerPaymentProfileId());
 		DeleteCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 
 		return deleteResponse;
 	}
 
-	public ANetApiResponse TestCreateCustomerShippingAddress()
-	{
-		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
-		CreateCustomerShippingAddressResponse shippingResponse = (CreateCustomerShippingAddressResponse)CreateCustomerShippingAddress.run(apiLoginId, transactionKey, response.getCustomerProfileId());
+	public ANetApiResponse TestCreateCustomerShippingAddress() {
+		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse) CreateCustomerProfile.run(apiLoginId,
+				transactionKey, getEmail());
+		CreateCustomerShippingAddressResponse shippingResponse = (CreateCustomerShippingAddressResponse) CreateCustomerShippingAddress
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 		DeleteCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 
 		return shippingResponse;
 	}
 
-	public ANetApiResponse TestAuthorizeCreditCard()
-	{
-		CreateTransactionResponse response = (CreateTransactionResponse)AuthorizeCreditCard.run(apiLoginId, transactionKey, getAmount());
-		return response;
-	}
-	
-	public ANetApiResponse TestDebitBankAccount()
-	{
-		CreateTransactionResponse response = (CreateTransactionResponse)DebitBankAccount.run(apiLoginId, transactionKey, getAmount());
-		return response;
-	}
-	
-	public ANetApiResponse TestChargeTokenizedCreditCard()
-	{
-		CreateTransactionResponse response = (CreateTransactionResponse)ChargeTokenizedCreditCard.run(apiLoginId, transactionKey, getAmount());
+	public ANetApiResponse TestAuthorizeCreditCard() {
+		CreateTransactionResponse response = (CreateTransactionResponse) AuthorizeCreditCard.run(apiLoginId,
+				transactionKey, getAmount());
 		return response;
 	}
 
-	public ANetApiResponse TestGetTransactionDetails()
-	{
-		CreateTransactionResponse response = (CreateTransactionResponse)AuthorizeCreditCard.run(apiLoginId, transactionKey, getAmount());
+	public ANetApiResponse TestDebitBankAccount() {
+		CreateTransactionResponse response = (CreateTransactionResponse) DebitBankAccount.run(apiLoginId,
+				transactionKey, getAmount());
+		return response;
+	}
+
+	public ANetApiResponse TestChargeTokenizedCreditCard() {
+		CreateTransactionResponse response = (CreateTransactionResponse) ChargeTokenizedCreditCard.run(apiLoginId,
+				transactionKey, getAmount());
+		return response;
+	}
+
+	public ANetApiResponse TestGetTransactionDetails() {
+		CreateTransactionResponse response = (CreateTransactionResponse) AuthorizeCreditCard.run(apiLoginId,
+				transactionKey, getAmount());
 		return GetTransactionDetails.run(apiLoginId, transactionKey, response.getTransactionResponse().getTransId());
 	}
 
-	public ANetApiResponse TestChargeCreditCard()
-	{
+	public ANetApiResponse TestChargeCreditCard() {
 		return ChargeCreditCard.run(apiLoginId, transactionKey, getAmount());
 	}
-	
-	public ANetApiResponse TestCreateCustomerProfileFromTransaction()
-	{
+
+	public ANetApiResponse TestCreateCustomerProfileFromTransaction() {
 		return CreateCustomerProfileFromTransaction.run(apiLoginId, transactionKey, getAmount(), getEmail());
 	}
 
-	public ANetApiResponse TestCapturePreviouslyAuthorizedAmount()
-	{
-		CreateTransactionResponse response = (CreateTransactionResponse)AuthorizeCreditCard.run(apiLoginId, transactionKey, getAmount());
-		return CapturePreviouslyAuthorizedAmount.run(apiLoginId, transactionKey, response.getTransactionResponse().getTransId());
+	public ANetApiResponse TestCapturePreviouslyAuthorizedAmount() {
+		CreateTransactionResponse response = (CreateTransactionResponse) AuthorizeCreditCard.run(apiLoginId,
+				transactionKey, getAmount());
+		return CapturePreviouslyAuthorizedAmount.run(apiLoginId, transactionKey,
+				response.getTransactionResponse().getTransId());
 	}
 
-	public ANetApiResponse TestRefundTransaction()
-	{
-		CreateTransactionResponse response = (CreateTransactionResponse)AuthorizeCreditCard.run(apiLoginId, transactionKey, getAmount());
-		response = (CreateTransactionResponse)CapturePreviouslyAuthorizedAmount.run(apiLoginId, transactionKey, response.getTransactionResponse().getTransId());
-		return RefundTransaction.run(apiLoginId, transactionKey, getAmount(), response.getTransactionResponse().getTransId());
+	public ANetApiResponse TestRefundTransaction() {
+		CreateTransactionResponse response = (CreateTransactionResponse) AuthorizeCreditCard.run(apiLoginId,
+				transactionKey, getAmount());
+		response = (CreateTransactionResponse) CapturePreviouslyAuthorizedAmount.run(apiLoginId, transactionKey,
+				response.getTransactionResponse().getTransId());
+		return RefundTransaction.run(apiLoginId, transactionKey, getAmount(),
+				response.getTransactionResponse().getTransId());
 	}
 
-	public ANetApiResponse TestVoidTransaction()
-	{
-		CreateTransactionResponse response = (CreateTransactionResponse)AuthorizeCreditCard.run(apiLoginId, transactionKey, getAmount());
+	public ANetApiResponse TestVoidTransaction() {
+		CreateTransactionResponse response = (CreateTransactionResponse) AuthorizeCreditCard.run(apiLoginId,
+				transactionKey, getAmount());
 		return VoidTransaction.run(apiLoginId, transactionKey, response.getTransactionResponse().getTransId());
 	}
 
-	public ANetApiResponse TestCreditBankAccount()
-	{
+	public ANetApiResponse TestCreditBankAccount() {
 		return CreditBankAccount.run(apiLoginId, transactionKey, TransactionID, getAmount());
 	}
 
-	public ANetApiResponse TestChargeCustomerProfile()
-	{
-		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
-		CreateCustomerPaymentProfileResponse paymentProfileResponse = (CreateCustomerPaymentProfileResponse)CreateCustomerPaymentProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
-		CreateTransactionResponse chargeResponse = (CreateTransactionResponse) ChargeCustomerProfile.run(apiLoginId, transactionKey,
-				response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), getAmount());
+	public ANetApiResponse TestChargeCustomerProfile() {
+		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse) CreateCustomerProfile.run(apiLoginId,
+				transactionKey, getEmail());
+		CreateCustomerPaymentProfileResponse paymentProfileResponse = (CreateCustomerPaymentProfileResponse) CreateCustomerPaymentProfile
+				.run(apiLoginId, transactionKey, response.getCustomerProfileId());
+		CreateTransactionResponse chargeResponse = (CreateTransactionResponse) ChargeCustomerProfile.run(apiLoginId,
+				transactionKey, response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(),
+				getAmount());
 		DeleteCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 
 		return chargeResponse;
 	}
 
-	public ANetApiResponse TestPayPalVoid()
-	{
-		CreateTransactionResponse response = (CreateTransactionResponse)AuthorizationAndCapture.run(apiLoginId, transactionKey, getAmount());
-		return net.authorize.sample.PaypalExpressCheckout.Void.run(apiLoginId, transactionKey, response.getTransactionResponse().getTransId());
-	}  
+	public ANetApiResponse TestPayPalVoid() {
+		CreateTransactionResponse response = (CreateTransactionResponse) AuthorizationAndCapture.run(apiLoginId,
+				transactionKey, getAmount());
+		return net.authorize.sample.PaypalExpressCheckout.Void.run(apiLoginId, transactionKey,
+				response.getTransactionResponse().getTransId());
+	}
 
-	public ANetApiResponse TestPayPalAuthorizationAndCapture()
-	{
+	public ANetApiResponse TestPayPalAuthorizationAndCapture() {
 		return AuthorizationAndCapture.run(apiLoginId, transactionKey, getAmount());
 	}
 
-	public ANetApiResponse TestPayPalAuthorizationAndCaptureContinue()
-	{
-		CreateTransactionResponse response = (CreateTransactionResponse)AuthorizationAndCapture.run(apiLoginId, transactionKey, getAmount());
-		return AuthorizationAndCaptureContinue.run(apiLoginId, transactionKey, response.getTransactionResponse().getTransId(), payerID, getAmount());
+	public ANetApiResponse TestPayPalAuthorizationAndCaptureContinue() {
+		CreateTransactionResponse response = (CreateTransactionResponse) AuthorizationAndCapture.run(apiLoginId,
+				transactionKey, getAmount());
+		return AuthorizationAndCaptureContinue.run(apiLoginId, transactionKey,
+				response.getTransactionResponse().getTransId(), payerID, getAmount());
 	}
-	
-	public ANetApiResponse TestPayPalAuthorizationOnly()
-	{
+
+	public ANetApiResponse TestPayPalAuthorizationOnly() {
 		return AuthorizationOnly.run(apiLoginId, transactionKey, getAmount());
 	}
 
-	public ANetApiResponse TestPayPalAuthorizationOnlyContinued()
-	{
-		CreateTransactionResponse response = (CreateTransactionResponse)AuthorizationAndCapture.run(apiLoginId, transactionKey, getAmount());
-		return AuthorizationOnlyContinued.run(apiLoginId, transactionKey, response.getTransactionResponse().getTransId(), payerID, getAmount());
+	public ANetApiResponse TestPayPalAuthorizationOnlyContinued() {
+		CreateTransactionResponse response = (CreateTransactionResponse) AuthorizationAndCapture.run(apiLoginId,
+				transactionKey, getAmount());
+		return AuthorizationOnlyContinued.run(apiLoginId, transactionKey,
+				response.getTransactionResponse().getTransId(), payerID, getAmount());
 	}
 
-	public ANetApiResponse TestPayPalCredit()
-	{
+	public ANetApiResponse TestPayPalCredit() {
 		return Credit.run(apiLoginId, transactionKey, TransactionID);
 	}
 
-	public ANetApiResponse TestPayPalGetDetails()
-	{
-		CreateTransactionResponse response = (CreateTransactionResponse)AuthorizationAndCapture.run(apiLoginId, transactionKey, getAmount());
-		return GetDetails.run(apiLoginId, transactionKey, response.getTransactionResponse()
-				.getTransId());
+	public ANetApiResponse TestPayPalGetDetails() {
+		CreateTransactionResponse response = (CreateTransactionResponse) AuthorizationAndCapture.run(apiLoginId,
+				transactionKey, getAmount());
+		return GetDetails.run(apiLoginId, transactionKey, response.getTransactionResponse().getTransId());
 	}
 
-	public ANetApiResponse TestPayPalPriorAuthorizationCapture()
-	{
-		CreateTransactionResponse response = (CreateTransactionResponse)AuthorizationAndCapture.run(apiLoginId, transactionKey, getAmount());
-		return PriorAuthorizationCapture.run(apiLoginId, transactionKey, response.getTransactionResponse().getTransId());
+	public ANetApiResponse TestPayPalPriorAuthorizationCapture() {
+		CreateTransactionResponse response = (CreateTransactionResponse) AuthorizationAndCapture.run(apiLoginId,
+				transactionKey, getAmount());
+		return PriorAuthorizationCapture.run(apiLoginId, transactionKey,
+				response.getTransactionResponse().getTransId());
 	}
 
-	public ANetApiResponse TestCancelSubscription()
-	{
-		ARBCreateSubscriptionResponse response = (ARBCreateSubscriptionResponse)CreateSubscription.run(apiLoginId, transactionKey, getDays(), getAmount());
+	public ANetApiResponse TestCancelSubscription() {
+		ARBCreateSubscriptionResponse response = (ARBCreateSubscriptionResponse) CreateSubscription.run(apiLoginId,
+				transactionKey, getDays(), getAmount());
 		return CancelSubscription.run(apiLoginId, transactionKey, response.getSubscriptionId());
 	}
 
-	public ANetApiResponse TestCreateSubscription()
-	{
-		ARBCreateSubscriptionResponse response = (ARBCreateSubscriptionResponse)CreateSubscription.run(apiLoginId, transactionKey,  getDays(), getAmount());
+	public ANetApiResponse TestCreateSubscription() {
+		ARBCreateSubscriptionResponse response = (ARBCreateSubscriptionResponse) CreateSubscription.run(apiLoginId,
+				transactionKey, getDays(), getAmount());
 		CancelSubscription.run(apiLoginId, transactionKey, response.getSubscriptionId());
 
 		return response;
 	}
-	
-	public ANetApiResponse TestCreateSubscriptionFromCustomerProfile()
-	{
-		CreateCustomerProfileResponse profileResponse = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
-		CreateCustomerPaymentProfileResponse paymentResponse = (CreateCustomerPaymentProfileResponse) CreateCustomerPaymentProfile.
-				run(apiLoginId, transactionKey, profileResponse.getCustomerProfileId());
 
-		CreateCustomerShippingAddressResponse shippingResponse = (CreateCustomerShippingAddressResponse)CreateCustomerShippingAddress.
-				run(apiLoginId, transactionKey, profileResponse.getCustomerProfileId());
-		
-		try
-		{
+	public ANetApiResponse TestCreateSubscriptionFromCustomerProfile() {
+		CreateCustomerProfileResponse profileResponse = (CreateCustomerProfileResponse) CreateCustomerProfile
+				.run(apiLoginId, transactionKey, getEmail());
+		CreateCustomerPaymentProfileResponse paymentResponse = (CreateCustomerPaymentProfileResponse) CreateCustomerPaymentProfile
+				.run(apiLoginId, transactionKey, profileResponse.getCustomerProfileId());
+
+		CreateCustomerShippingAddressResponse shippingResponse = (CreateCustomerShippingAddressResponse) CreateCustomerShippingAddress
+				.run(apiLoginId, transactionKey, profileResponse.getCustomerProfileId());
+
+		try {
 			Thread.sleep(10000);
-		} 
-		catch (InterruptedException e)
-		{
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-		ARBCreateSubscriptionResponse response = (ARBCreateSubscriptionResponse) CreateSubscriptionFromCustomerProfile.run(apiLoginId, transactionKey, getDays(), getAmount(), profileResponse.getCustomerProfileId(), 
-				paymentResponse.getCustomerPaymentProfileId(), shippingResponse.getCustomerAddressId());
+
+		ARBCreateSubscriptionResponse response = (ARBCreateSubscriptionResponse) CreateSubscriptionFromCustomerProfile
+				.run(apiLoginId, transactionKey, getDays(), getAmount(), profileResponse.getCustomerProfileId(),
+						paymentResponse.getCustomerPaymentProfileId(), shippingResponse.getCustomerAddressId());
 
 		CancelSubscription.run(apiLoginId, transactionKey, response.getSubscriptionId());
 		DeleteCustomerProfile.run(apiLoginId, transactionKey, profileResponse.getCustomerProfileId());
-		
+
 		return response;
 	}
 
-	public ANetApiResponse TestGetSubscriptionStatus()
-	{
-		ARBCreateSubscriptionResponse response = (ARBCreateSubscriptionResponse)CreateSubscription.run(apiLoginId, transactionKey, getDays(), getAmount());
-		ARBGetSubscriptionStatusResponse subscriptionResponse = (ARBGetSubscriptionStatusResponse) GetSubscriptionStatus.run(apiLoginId, transactionKey, response.getSubscriptionId());
-
+	public ANetApiResponse TestGetSubscriptionStatus() {
+		ARBCreateSubscriptionResponse response = (ARBCreateSubscriptionResponse) CreateSubscription.run(apiLoginId,
+				transactionKey, getDays(), getAmount());
+		ARBGetSubscriptionStatusResponse subscriptionResponse = (ARBGetSubscriptionStatusResponse) GetSubscriptionStatus
+				.run(apiLoginId, transactionKey, response.getSubscriptionId());
 
 		return subscriptionResponse;
 	}
 
-	public ANetApiResponse TestGetSubscription()
-	{
-		ARBCreateSubscriptionResponse response = (ARBCreateSubscriptionResponse)CreateSubscription.run(apiLoginId, transactionKey, getDays(), getAmount());
-		ARBGetSubscriptionResponse getResponse = (ARBGetSubscriptionResponse) GetSubscription.run(apiLoginId, transactionKey, response.getSubscriptionId());
+	public ANetApiResponse TestGetSubscription() {
+		ARBCreateSubscriptionResponse response = (ARBCreateSubscriptionResponse) CreateSubscription.run(apiLoginId,
+				transactionKey, getDays(), getAmount());
+		ARBGetSubscriptionResponse getResponse = (ARBGetSubscriptionResponse) GetSubscription.run(apiLoginId,
+				transactionKey, response.getSubscriptionId());
 		CancelSubscription.run(apiLoginId, transactionKey, response.getSubscriptionId());
 		return getResponse;
 	}
 
-	public ANetApiResponse TestUpdateSubscription()
-	{
-		ARBCreateSubscriptionResponse response = (ARBCreateSubscriptionResponse)CreateSubscription.run(apiLoginId, transactionKey, getDays(), getAmount());
-		ARBUpdateSubscriptionResponse updateResponse = (ARBUpdateSubscriptionResponse) UpdateSubscription.run(apiLoginId, transactionKey, response.getSubscriptionId());
+	public ANetApiResponse TestUpdateSubscription() {
+		ARBCreateSubscriptionResponse response = (ARBCreateSubscriptionResponse) CreateSubscription.run(apiLoginId,
+				transactionKey, getDays(), getAmount());
+		ARBUpdateSubscriptionResponse updateResponse = (ARBUpdateSubscriptionResponse) UpdateSubscription
+				.run(apiLoginId, transactionKey, response.getSubscriptionId());
 		CancelSubscription.run(apiLoginId, transactionKey, response.getSubscriptionId());
 
 		return updateResponse;
 	}
 
-	public ANetApiResponse TestCreateCustomerProfile()
-	{
+	public ANetApiResponse TestCreateCustomerProfile() {
 		return CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
 	}
-	
-	public ANetApiResponse TestCaptureFundsAuthorizedThroughAnotherChannel()
-	{
+
+	public ANetApiResponse TestCaptureFundsAuthorizedThroughAnotherChannel() {
 		return CaptureFundsAuthorizedThroughAnotherChannel.run(apiLoginId, transactionKey, getAmount());
 	}
 
-	public ANetApiResponse TestCreateCustomerPaymentProfile()
-	{
-		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
+	public ANetApiResponse TestCreateCustomerPaymentProfile() {
+		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse) CreateCustomerProfile.run(apiLoginId,
+				transactionKey, getEmail());
 		return CreateCustomerPaymentProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 	}
-	
-	public ANetApiResponse TestGetHostedPaymentPage()
-	{
+
+	public ANetApiResponse TestGetHostedPaymentPage() {
 		return GetHostedPaymentPage.run(apiLoginId, transactionKey, getAmount());
 	}
 }
