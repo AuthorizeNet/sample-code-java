@@ -1,4 +1,4 @@
-package net.authorize.sample.TransactionReporting;
+package net.authorize.sample.FraudManagement;
 
 
 import net.authorize.Environment;
@@ -8,7 +8,7 @@ import net.authorize.api.controller.GetUnsettledTransactionListController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
 //author @krgupta
-public class GetUnsettledTransactionList{
+public class GetHeldTransactionList{
 	
 		public static ANetApiResponse run(String apiLoginId, String transactionKey) {
 			ApiOperationBase.setEnvironment(Environment.SANDBOX);
@@ -20,7 +20,7 @@ public class GetUnsettledTransactionList{
 	
 			GetUnsettledTransactionListRequest getRequest = new GetUnsettledTransactionListRequest();
 			getRequest.setMerchantAuthentication(merchantAuthenticationType);
-			getRequest.setStatus(TransactionGroupStatusEnum.ANY);
+			getRequest.setStatus(TransactionGroupStatusEnum.PENDING_APPROVAL);
 			
 	        Paging paging = new Paging();
 	        paging.setLimit(100);
@@ -44,6 +44,15 @@ public class GetUnsettledTransactionList{
 
                 	System.out.println(getResponse.getMessages().getMessage().get(0).getCode());
                 	System.out.println(getResponse.getMessages().getMessage().get(0).getText());
+                	getResponse.getTransactions();
+                	
+                	ArrayOfTransactionSummaryType txnList = getResponse.getTransactions();
+	                if (txnList != null) {
+	                    System.out.println("List of Suspicious Transactions :");
+	                    for (TransactionSummaryType txn : txnList.getTransaction()) {
+	                        System.out.println(txn.getTransId());
+	                    }
+	                }
             	}
             	else
             	{

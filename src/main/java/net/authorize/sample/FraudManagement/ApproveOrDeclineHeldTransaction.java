@@ -1,73 +1,67 @@
-package net.authorize.sample.PaypalExpressCheckout;
+package net.authorize.sample.FraudManagement;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import net.authorize.Environment;
 import net.authorize.api.contract.v1.ANetApiResponse;
+import net.authorize.api.contract.v1.AfdsTransactionEnum;
 import net.authorize.api.contract.v1.CreateTransactionRequest;
 import net.authorize.api.contract.v1.CreateTransactionResponse;
+import net.authorize.api.contract.v1.CreditCardType;
+import net.authorize.api.contract.v1.HeldTransactionRequestType;
 import net.authorize.api.contract.v1.MerchantAuthenticationType;
 import net.authorize.api.contract.v1.MessageTypeEnum;
-import net.authorize.api.contract.v1.PayPalType;
 import net.authorize.api.contract.v1.PaymentType;
 import net.authorize.api.contract.v1.TransactionRequestType;
 import net.authorize.api.contract.v1.TransactionResponse;
 import net.authorize.api.contract.v1.TransactionTypeEnum;
+import net.authorize.api.contract.v1.UpdateHeldTransactionRequest;
+import net.authorize.api.contract.v1.UpdateHeldTransactionResponse;
 import net.authorize.api.controller.CreateTransactionController;
+import net.authorize.api.controller.UpdateHeldTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
-public class AuthorizationOnlyContinued {
+public class ApproveOrDeclineHeldTransaction {
 
-   
-    public static ANetApiResponse run(String apiLoginId, String transactionKey, String transactionId, String payerId, Double amount) {
+    public static ANetApiResponse run(String apiLoginId, String transactionKey, String transactionId) {
 
-    	System.out.println("PayPal Authorize Only-Continue Transaction");
         //Common code to set for all requests
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
+
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
         merchantAuthenticationType.setName(apiLoginId);
         merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
-        // Populate PayPal Transaction Data
-        PayPalType payPalType = new PayPalType();
-        payPalType.setCancelUrl("http://www.merchanteCommerceSite.com/Success/TC25262");
-        payPalType.setSuccessUrl("http://www.merchanteCommerceSite.com/Success/TC25262");
-        payPalType.setPayerID(payerId);
-                
-        // Populate the payment data
-        PaymentType paymentType = new PaymentType();
-        paymentType.setPayPal(payPalType);
 
         // Create the payment transaction request
-        TransactionRequestType txnRequest = new TransactionRequestType();
-        txnRequest.setTransactionType(TransactionTypeEnum.AUTH_ONLY_CONTINUE_TRANSACTION.value());
-        txnRequest.setPayment(paymentType);
-        txnRequest.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
-        txnRequest.setRefTransId(transactionId);
+        HeldTransactionRequestType txnRequest = new HeldTransactionRequestType();
+        txnRequest.setAction(AfdsTransactionEnum.APPROVE);
+        txnRequest.setRefTransId("60012148613");
 
         // Make the API Request
-        CreateTransactionRequest apiRequest = new CreateTransactionRequest();
-        apiRequest.setTransactionRequest(txnRequest);
-        CreateTransactionController controller = new CreateTransactionController(apiRequest);
+        UpdateHeldTransactionRequest apiRequest = new UpdateHeldTransactionRequest();
+        apiRequest.setHeldTransactionRequest(txnRequest);
+        UpdateHeldTransactionController controller = new UpdateHeldTransactionController(apiRequest);
         controller.execute();
 
 
-        CreateTransactionResponse response = controller.getApiResponse();
+        UpdateHeldTransactionResponse response = controller.getApiResponse();
 
         if (response!=null) {
         	// If API Response is ok, go ahead and check the transaction response
         	if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
         		TransactionResponse result = response.getTransactionResponse();
         		if(result.getMessages() != null){
-        			System.out.println("Successfully created transaction with Transaction ID: " + result.getTransId());
+        			System.out.println("Successfully updated transaction with Transaction ID: " + result.getTransId());
         			System.out.println("Response Code: " + result.getResponseCode());
         			System.out.println("Message Code: " + result.getMessages().getMessage().get(0).getCode());
         			System.out.println("Description: " + result.getMessages().getMessage().get(0).getDescription());
+        			System.out.println("Auth Code: " + result.getAuthCode());
         		}
         		else {
-        			System.out.println("Failed Transaction.");
+        			System.out.println("Failed while updating transaction.");
         			if(response.getTransactionResponse().getErrors() != null){
         				System.out.println("Error Code: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode());
         				System.out.println("Error message: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
@@ -75,7 +69,7 @@ public class AuthorizationOnlyContinued {
         		}
         	}
         	else {
-        		System.out.println("Failed Transaction.");
+        		System.out.println("Failed while updating transaction.");
         		if(response.getTransactionResponse() != null && response.getTransactionResponse().getErrors() != null){
         			System.out.println("Error Code: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode());
         			System.out.println("Error message: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
@@ -91,7 +85,6 @@ public class AuthorizationOnlyContinued {
         }
         
 		return response;
-
     }
 
 

@@ -1,14 +1,16 @@
 package net.authorize.sample.TransactionReporting;
 
+import java.util.List;
+
 import net.authorize.Environment;
 import net.authorize.api.contract.v1.*;
-import net.authorize.api.controller.GetTransactionListController;
+import net.authorize.api.controller.GetTransactionListForCustomerController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
-//author @krgupta
-public class GetTransactionList{
+//author @akashah
+public class GetCustomerProfileTransactionList{
 	
-		public static ANetApiResponse run(String apiLoginId, String transactionKey) {
+		public static ANetApiResponse run(String apiLoginId, String transactionKey, String customerProfileId) {
 			ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
 	        MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
@@ -16,11 +18,10 @@ public class GetTransactionList{
 	        merchantAuthenticationType.setTransactionKey(transactionKey);
 	        ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
-			String batchId = "4594221";
 	
-			GetTransactionListRequest getRequest = new GetTransactionListRequest();
+			GetTransactionListForCustomerRequest getRequest = new GetTransactionListForCustomerRequest();
 			getRequest.setMerchantAuthentication(merchantAuthenticationType);
-			getRequest.setBatchId(batchId);
+			getRequest.setCustomerProfileId(customerProfileId);
 			
 	        Paging paging = new Paging();
 	        paging.setLimit(100);
@@ -34,12 +35,22 @@ public class GetTransactionList{
 			
 			getRequest.setSorting(sorting);
 
-			GetTransactionListController controller = new GetTransactionListController(getRequest);
+			GetTransactionListForCustomerController controller = new GetTransactionListForCustomerController(getRequest);
             controller.execute();
 
 			GetTransactionListResponse getResponse = controller.getApiResponse();
 			if (getResponse!=null) {
-
+				ArrayOfTransactionSummaryType transactions = getResponse.getTransactions();
+				List<TransactionSummaryType> list = transactions.getTransaction();
+				
+				for(TransactionSummaryType summary : list)
+				{
+					System.out.println(summary.getFirstName());
+					System.out.println(summary.getTransId());
+					System.out.println(summary.getSettleAmount());
+					System.out.println(summary.getSubmitTimeLocal());
+				}
+				
 			     if (getResponse.getMessages().getResultCode() == MessageTypeEnum.OK) {
 			        System.out.println(getResponse.getMessages().getMessage().get(0).getCode());
 			        System.out.println(getResponse.getMessages().getMessage().get(0).getText());

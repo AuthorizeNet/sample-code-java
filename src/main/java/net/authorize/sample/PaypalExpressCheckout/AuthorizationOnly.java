@@ -13,6 +13,7 @@ import net.authorize.api.contract.v1.MessagesType;
 import net.authorize.api.contract.v1.PayPalType;
 import net.authorize.api.contract.v1.PaymentType;
 import net.authorize.api.contract.v1.TransactionRequestType;
+import net.authorize.api.contract.v1.TransactionResponse;
 import net.authorize.api.contract.v1.TransactionTypeEnum;
 import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;
@@ -57,17 +58,41 @@ public class AuthorizationOnly {
         MessagesType responseMessage = response.getMessages();
         
         //validate 
-        if (responseMessage.getResultCode().equals(MessageTypeEnum.OK)) {
-            System.out.println("Message Code : " + responseMessage.getMessage().get(0).getCode() + " | Message Text : " + responseMessage.getMessage().get(0).getText());
-            if (response.getTransactionResponse() != null) {
-                System.out.println("Success, Response Code : " + response.getTransactionResponse().getResponseCode() + " | Transaction ID : " + response.getTransactionResponse().getTransId());
-            }
-        } else {
-            System.out.println("Error: " + response.getMessages().getMessage().get(0).getCode() + "  " + response.getMessages().getMessage().get(0).getText());
-            if (response.getTransactionResponse() != null) {
-                System.out.println("Transaction Error : " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode() + " : " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
-            }
+        if (response!=null) {
+        	// If API Response is ok, go ahead and check the transaction response
+        	if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
+        		TransactionResponse result = response.getTransactionResponse();
+        		if(result.getMessages() != null){
+        			System.out.println("Successfully created transaction with Transaction ID: " + result.getTransId());
+        			System.out.println("Response Code: " + result.getResponseCode());
+        			System.out.println("Message Code: " + result.getMessages().getMessage().get(0).getCode());
+        			System.out.println("Description: " + result.getMessages().getMessage().get(0).getDescription());
+        			System.out.println("Secure Acceptance URL : " + result.getSecureAcceptance().getSecureAcceptanceUrl());
+        		}
+        		else {
+        			System.out.println("Failed Transaction.");
+        			if(response.getTransactionResponse().getErrors() != null){
+        				System.out.println("Error Code: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode());
+        				System.out.println("Error message: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
+        			}
+        		}
+        	}
+        	else {
+        		System.out.println("Failed Transaction.");
+        		if(response.getTransactionResponse() != null && response.getTransactionResponse().getErrors() != null){
+        			System.out.println("Error Code: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode());
+        			System.out.println("Error message: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
+        		}
+        		else {
+        			System.out.println("Error Code: " + response.getMessages().getMessage().get(0).getCode());
+        			System.out.println("Error message: " + response.getMessages().getMessage().get(0).getText());
+        		}
+        	}
         }
+        else {
+        	System.out.println("Null Response.");
+        }
+        
 		return response;
     }
 }

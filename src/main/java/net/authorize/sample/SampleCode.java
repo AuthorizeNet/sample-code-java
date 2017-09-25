@@ -3,7 +3,6 @@ package net.authorize.sample;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import net.authorize.sample.ApplePayTransactions.CreateAnApplePayTransaction;
 
 import net.authorize.sample.VisaCheckout.*;
 import net.authorize.sample.PaymentTransactions.*;
@@ -12,7 +11,8 @@ import net.authorize.sample.PaypalExpressCheckout.Void;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
-import net.authorize.sample.ApplePayTransactions.*;
+import net.authorize.sample.MobileInappTransactions.*;
+import net.authorize.sample.FraudManagement.*;
 /**
  * Created by anetdeveloper on 8/5/15.
  */
@@ -87,6 +87,8 @@ public class SampleCode {
         System.out.println("    CreditBankAccount");
         System.out.println("    ChargeTokenizedCreditCard");
         System.out.println("    CreateAnApplePayTransaction");
+        System.out.println("    CreateAnAndroidPayTransaction");
+        System.out.println("    CreateAnAcceptTransaction");
         System.out.println("    ChargeCustomerProfile");
         System.out.println("    CreateSubscription");
         System.out.println("    CreateSubscriptionFromCustomerProfile");
@@ -110,8 +112,9 @@ public class SampleCode {
         System.out.println("    GetCustomerPaymentProfileList");
         System.out.println("    GetCustomerProfile");
         System.out.println("    GetCustomerProfileIds");
+        System.out.println("    GetCustomerProfileTransactionList");
         System.out.println("    GetCustomerShippingAddress");
-        System.out.println("    GetHostedProfilePage");
+        System.out.println("    GetAcceptCustomerProfilePage");
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
         System.out.println("    ValidateCustomerPaymentProfile");
@@ -124,6 +127,10 @@ public class SampleCode {
         System.out.println("    PayPalAuthorizeOnlyContinue");
         System.out.println("    PayPalCredit");
         System.out.println("    UpdateSplitTenderGroup");
+        System.out.println("    GetMerchantDetails");
+        System.out.println("    GetHeldTransactionList");
+        System.out.println("    ApproveOrDeclineHeldTransaction");
+        System.out.println("    GetAnAcceptPaymentPage");
     }
 
     private static void RunMethod(String methodName)
@@ -187,8 +194,17 @@ public class SampleCode {
             case "CreateAnApplePayTransaction":
                 CreateAnApplePayTransaction.run(apiLoginId, transactionKey);
                 break;
+            case "CreateAnAndroidPayTransaction":
+                CreateAnAndroidPayTransaction.run(apiLoginId, transactionKey);
+                break;
+            case "CreateAnAcceptTransaction":
+                CreateAnAcceptTransaction.run(apiLoginId, transactionKey);
+                break;
             case "ChargeCustomerProfile":
                 ChargeCustomerProfile.run(apiLoginId, transactionKey, customerProfileId, customerPaymentProfileId, amount);
+                break;
+            case "ChargeCustomerProfilesMT":
+                ChargeCustomerProfilesMT.run();
                 break;
             case "CreateSubscription":
                 CreateSubscription.run(apiLoginId, transactionKey, (short)12, amount);
@@ -256,11 +272,15 @@ public class SampleCode {
             case "GetCustomerProfileIds":
                 GetCustomerProfileIds.run(apiLoginId, transactionKey);
                 break;
+            case "GetCustomerProfileTransactionList":
+            	customerProfileId = "1811474252";
+            	GetCustomerProfileTransactionList.run(apiLoginId, transactionKey, customerProfileId);
+            	break;
             case "GetCustomerShippingAddress":
                 GetCustomerShippingAddress.run(apiLoginId, transactionKey, customerProfileId, customerAddressId);
                 break;
-            case "GetHostedProfilePage":
-                GetHostedProfilePage.run(apiLoginId, transactionKey, customerProfileId);
+            case "GetAcceptCustomerProfilePage":
+                GetAcceptCustomerProfilePage.run(apiLoginId, transactionKey, customerProfileId);
                 break;
             case "UpdateCustomerPaymentProfile":
                 UpdateCustomerPaymentProfile.run(apiLoginId, transactionKey, customerProfileId, customerPaymentProfileId);
@@ -296,6 +316,18 @@ public class SampleCode {
                 break;
             case "UpdateSplitTenderGroup":
                 UpdateSplitTenderGroup.run(apiLoginId, transactionKey);
+                break;
+            case "GetMerchantDetails":
+            	GetMerchantDetails.run(apiLoginId, transactionKey);
+                break;
+            case "GetHeldTransactionList":
+                GetHeldTransactionList.run(apiLoginId, transactionKey);
+                break;
+            case "ApproveOrDeclineHeldTransaction":
+            	ApproveOrDeclineHeldTransaction.run(apiLoginId, transactionKey, transactionId);
+                break;
+            case "GetAnAcceptPaymentPage":
+            	GetAnAcceptPaymentPage.run(apiLoginId, transactionKey, amount);
                 break;
             default:
                 ShowUsage();

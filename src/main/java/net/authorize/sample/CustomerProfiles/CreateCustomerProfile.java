@@ -30,7 +30,7 @@ public class CreateCustomerProfile {
 
         CustomerProfileType customerProfileType = new CustomerProfileType();
         customerProfileType.setMerchantCustomerId("M_" + eMail);
-        customerProfileType.setDescription("Profile description here");
+        customerProfileType.setDescription("Profile description for " + eMail);
         customerProfileType.setEmail(eMail);
         customerProfileType.getPaymentProfiles().add(customerPaymentProfileType);
 

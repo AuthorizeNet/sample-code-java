@@ -13,7 +13,7 @@ CustomerProfiles.UpdateCustomerPaymentProfile	1	1
 CustomerProfiles.GetCustomerShippingAddress	1	1
 CustomerProfiles.GetCustomerProfileIds	0	1
 CustomerProfiles.GetCustomerProfile	1	1
-CustomerProfiles.GetHostedProfilePage	1	1
+CustomerProfiles.GetAcceptCustomerProfilePage	1	1
 CustomerProfiles.GetCustomerPaymentProfile	1	1
 CustomerProfiles.DeleteCustomerShippingAddress	1	1
 CustomerProfiles.DeleteCustomerProfile	1	1
@@ -42,11 +42,17 @@ PaymentTransactions.AuthorizeCreditCard	1	1
 PaymentTransactions.DebitBankAccount	1	1
 PaymentTransactions.ChargeTokenizedCreditCard	1	1
 PaymentTransactions.UpdateSplitTenderGroup	0	1
+PaymentTransactions.UpdateHeldTransation	0	0
+PaymentTransactions.GetAnAcceptPaymentPage	1	1
 TransactionReporting.GetTransactionList	0	1
+TransactionReporting.GetTransactionListForCustomer	0	0
 TransactionReporting.GetUnsettledTransactionList	0	1
 TransactionReporting.GetBatchStatistics	0	1
 TransactionReporting.GetSettledBatchList	0	1
 TransactionReporting.GetTransactionDetails	1	1
-ApplePayTransactions.CreateAnApplePayTransaction	0	0
+TransactionReporting.GetMerchantDetails	0	1
+MobileInAppTransactions.CreateAnApplePayTransaction	0	0
+MobileInAppTransactions.CreateAnAndroidPayTransaction	0	0
+MobileInAppTransactions.CreateAnAcceptTransaction	0	0
 VisaCheckout.DecryptVisaCheckoutData	0	1
 VisaCheckout.CreateVisaCheckoutTransaction	0	0

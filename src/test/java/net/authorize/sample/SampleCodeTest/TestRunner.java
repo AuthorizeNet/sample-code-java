@@ -42,7 +42,7 @@ import net.authorize.sample.CustomerProfiles.DeleteCustomerShippingAddress;
 import net.authorize.sample.CustomerProfiles.GetCustomerPaymentProfile;
 import net.authorize.sample.CustomerProfiles.GetCustomerProfile;
 import net.authorize.sample.CustomerProfiles.GetCustomerShippingAddress;
-import net.authorize.sample.CustomerProfiles.GetHostedProfilePage;
+import net.authorize.sample.CustomerProfiles.GetAcceptCustomerProfilePage;
 import net.authorize.sample.CustomerProfiles.UpdateCustomerPaymentProfile;
 import net.authorize.sample.CustomerProfiles.UpdateCustomerProfile;
 import net.authorize.sample.CustomerProfiles.UpdateCustomerShippingAddress;
@@ -71,6 +71,7 @@ import net.authorize.sample.RecurringBilling.GetSubscription;
 import net.authorize.sample.RecurringBilling.GetSubscriptionStatus;
 import net.authorize.sample.RecurringBilling.UpdateSubscription;
 import net.authorize.sample.TransactionReporting.GetTransactionDetails;
+import net.authorize.sample.PaymentTransactions.GetAnAcceptPaymentPage;
 
 public class TestRunner {
 
@@ -83,7 +84,7 @@ public class TestRunner {
 
 	private static String getEmail()
 	{
-		return rgenerator.nextInt(10000) + "@test.com";
+		return rgenerator.nextInt(1000000) + "@test.com";
 	}
 
 	private static Double getAmount()
@@ -279,10 +280,10 @@ public class TestRunner {
 		return profileResponse;
 	}
 
-	public ANetApiResponse TestGetHostedProfilePage()
+	public ANetApiResponse TestGetAcceptCustomerProfilePage()
 	{
 		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
-		GetHostedProfilePageResponse profileResponse = (GetHostedProfilePageResponse) GetHostedProfilePage.run(apiLoginId, transactionKey, response.getCustomerProfileId());
+		GetHostedProfilePageResponse profileResponse = (GetHostedProfilePageResponse) GetAcceptCustomerProfilePage.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 		DeleteCustomerProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
 
 		return profileResponse;
@@ -441,7 +442,8 @@ public class TestRunner {
 	public ANetApiResponse TestPayPalGetDetails()
 	{
 		CreateTransactionResponse response = (CreateTransactionResponse)AuthorizationAndCapture.run(apiLoginId, transactionKey, getAmount());
-		return GetDetails.run(apiLoginId, transactionKey, response.getTransactionResponse().getTransId());
+		return GetDetails.run(apiLoginId, transactionKey, response.getTransactionResponse()
+				.getTransId());
 	}
 
 	public ANetApiResponse TestPayPalPriorAuthorizationCapture()
@@ -531,5 +533,10 @@ public class TestRunner {
 	{
 		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse)CreateCustomerProfile.run(apiLoginId, transactionKey, getEmail());
 		return CreateCustomerPaymentProfile.run(apiLoginId, transactionKey, response.getCustomerProfileId());
+	}
+	
+	public ANetApiResponse TestGetAnAcceptPaymentPage()
+	{
+		return GetAnAcceptPaymentPage.run(apiLoginId, transactionKey, getAmount());
 	}
 }

@@ -1,4 +1,4 @@
-package net.authorize.sample.PaypalExpressCheckout;
+package net.authorize.sample.PaymentTransactions;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -7,9 +7,9 @@ import net.authorize.Environment;
 import net.authorize.api.contract.v1.ANetApiResponse;
 import net.authorize.api.contract.v1.CreateTransactionRequest;
 import net.authorize.api.contract.v1.CreateTransactionResponse;
+import net.authorize.api.contract.v1.OpaqueDataType;
 import net.authorize.api.contract.v1.MerchantAuthenticationType;
 import net.authorize.api.contract.v1.MessageTypeEnum;
-import net.authorize.api.contract.v1.PayPalType;
 import net.authorize.api.contract.v1.PaymentType;
 import net.authorize.api.contract.v1.TransactionRequestType;
 import net.authorize.api.contract.v1.TransactionResponse;
@@ -17,35 +17,35 @@ import net.authorize.api.contract.v1.TransactionTypeEnum;
 import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
-public class AuthorizationOnlyContinued {
+public class CreateAnAcceptPaymentTransaction {
 
-   
-    public static ANetApiResponse run(String apiLoginId, String transactionKey, String transactionId, String payerId, Double amount) {
+    //
+    // Run this sample from command line with:
+    //                 java -jar target/CreateAnAcceptPaymentTransaction-jar-with-dependencies.jar
+    //
+    public static ANetApiResponse run(String apiLoginId, String transactionKey, Double amount) {
 
-    	System.out.println("PayPal Authorize Only-Continue Transaction");
+
         //Common code to set for all requests
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
+
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
         merchantAuthenticationType.setName(apiLoginId);
         merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
-        // Populate PayPal Transaction Data
-        PayPalType payPalType = new PayPalType();
-        payPalType.setCancelUrl("http://www.merchanteCommerceSite.com/Success/TC25262");
-        payPalType.setSuccessUrl("http://www.merchanteCommerceSite.com/Success/TC25262");
-        payPalType.setPayerID(payerId);
-                
         // Populate the payment data
         PaymentType paymentType = new PaymentType();
-        paymentType.setPayPal(payPalType);
+        OpaqueDataType OpaqueData = new OpaqueDataType();
+        OpaqueData.setDataDescriptor("COMMON.ACCEPT.INAPP.PAYMENT");
+        OpaqueData.setDataValue("119eyJjb2RlIjoiNTBfMl8wNjAwMDUyN0JEODE4RjQxOUEyRjhGQkIxMkY0MzdGQjAxQUIwRTY2NjhFNEFCN0VENzE4NTUwMjlGRUU0M0JFMENERUIwQzM2M0ExOUEwMDAzNzlGRDNFMjBCODJEMDFCQjkyNEJDIiwidG9rZW4iOiI5NDkwMjMyMTAyOTQwOTk5NDA0NjAzIiwidiI6IjEuMSJ9");
+        paymentType.setOpaqueData(OpaqueData);
 
         // Create the payment transaction request
         TransactionRequestType txnRequest = new TransactionRequestType();
-        txnRequest.setTransactionType(TransactionTypeEnum.AUTH_ONLY_CONTINUE_TRANSACTION.value());
+        txnRequest.setTransactionType(TransactionTypeEnum.AUTH_CAPTURE_TRANSACTION.value());
         txnRequest.setPayment(paymentType);
         txnRequest.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
-        txnRequest.setRefTransId(transactionId);
 
         // Make the API Request
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();
@@ -65,6 +65,7 @@ public class AuthorizationOnlyContinued {
         			System.out.println("Response Code: " + result.getResponseCode());
         			System.out.println("Message Code: " + result.getMessages().getMessage().get(0).getCode());
         			System.out.println("Description: " + result.getMessages().getMessage().get(0).getDescription());
+        			System.out.println("Auth Code: " + result.getAuthCode());
         		}
         		else {
         			System.out.println("Failed Transaction.");

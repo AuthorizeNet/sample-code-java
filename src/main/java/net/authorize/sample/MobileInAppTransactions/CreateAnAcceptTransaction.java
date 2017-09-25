@@ -1,61 +1,43 @@
-package net.authorize.sample.PaypalExpressCheckout;
+package net.authorize.sample.MobileInappTransactions;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 import net.authorize.Environment;
-import net.authorize.api.contract.v1.ANetApiResponse;
-import net.authorize.api.contract.v1.CreateTransactionRequest;
-import net.authorize.api.contract.v1.CreateTransactionResponse;
-import net.authorize.api.contract.v1.MerchantAuthenticationType;
-import net.authorize.api.contract.v1.MessageTypeEnum;
-import net.authorize.api.contract.v1.PayPalType;
-import net.authorize.api.contract.v1.PaymentType;
-import net.authorize.api.contract.v1.TransactionRequestType;
-import net.authorize.api.contract.v1.TransactionResponse;
-import net.authorize.api.contract.v1.TransactionTypeEnum;
+import net.authorize.TransactionType;
+import net.authorize.api.contract.v1.*;
 import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
-public class AuthorizationOnlyContinued {
-
-   
-    public static ANetApiResponse run(String apiLoginId, String transactionKey, String transactionId, String payerId, Double amount) {
-
-    	System.out.println("PayPal Authorize Only-Continue Transaction");
-        //Common code to set for all requests
+public class CreateAnAcceptTransaction
+{
+    public static ANetApiResponse run(String apiLoginId, String transactionKey)
+    {
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
+        
+        // Giving the merchant authentication information
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
         merchantAuthenticationType.setName(apiLoginId);
         merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
-
-        // Populate PayPal Transaction Data
-        PayPalType payPalType = new PayPalType();
-        payPalType.setCancelUrl("http://www.merchanteCommerceSite.com/Success/TC25262");
-        payPalType.setSuccessUrl("http://www.merchanteCommerceSite.com/Success/TC25262");
-        payPalType.setPayerID(payerId);
-                
-        // Populate the payment data
-        PaymentType paymentType = new PaymentType();
-        paymentType.setPayPal(payPalType);
-
-        // Create the payment transaction request
-        TransactionRequestType txnRequest = new TransactionRequestType();
-        txnRequest.setTransactionType(TransactionTypeEnum.AUTH_ONLY_CONTINUE_TRANSACTION.value());
-        txnRequest.setPayment(paymentType);
-        txnRequest.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
-        txnRequest.setRefTransId(transactionId);
-
-        // Make the API Request
+        // Setting the payment
+        OpaqueDataType op = new OpaqueDataType();
+        op.setDataDescriptor("COMMON.ACCEPT.INAPP.PAYMENT");
+        op.setDataValue("9471471570959063005001");
+        PaymentType paymentOne = new PaymentType();
+        paymentOne.setOpaqueData(op);
+        // Setting the transaction
+        TransactionRequestType transactionRequest = new TransactionRequestType();
+        transactionRequest.setAmount(new BigDecimal("131"));
+        transactionRequest.setTransactionType(TransactionTypeEnum.AUTH_CAPTURE_TRANSACTION.value());
+        transactionRequest.setPayment(paymentOne);
+        // Making the api request
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();
-        apiRequest.setTransactionRequest(txnRequest);
+        apiRequest.setTransactionRequest(transactionRequest);
+        // Creating the controller
         CreateTransactionController controller = new CreateTransactionController(apiRequest);
         controller.execute();
-
-
+        // Getting the response
         CreateTransactionResponse response = controller.getApiResponse();
-
+        
         if (response!=null) {
         	// If API Response is ok, go ahead and check the transaction response
         	if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
@@ -65,6 +47,7 @@ public class AuthorizationOnlyContinued {
         			System.out.println("Response Code: " + result.getResponseCode());
         			System.out.println("Message Code: " + result.getMessages().getMessage().get(0).getCode());
         			System.out.println("Description: " + result.getMessages().getMessage().get(0).getDescription());
+        			System.out.println("Auth code : " + result.getAuthCode());
         		}
         		else {
         			System.out.println("Failed Transaction.");
@@ -91,9 +74,5 @@ public class AuthorizationOnlyContinued {
         }
         
 		return response;
-
     }
-
-
-
 }
