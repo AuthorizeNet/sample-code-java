@@ -1,4 +1,4 @@
-package net.authorize.sample.PaypalExpressCheckout;
+package net.authorize.sample.PayPalExpressCheckout;
 
 import java.math.BigDecimal;
 

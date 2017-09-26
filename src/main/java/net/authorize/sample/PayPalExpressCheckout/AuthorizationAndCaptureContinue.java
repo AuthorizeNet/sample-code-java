@@ -1,4 +1,7 @@
-package net.authorize.sample.PaypalExpressCheckout;
+package net.authorize.sample.PayPalExpressCheckout;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import net.authorize.Environment;
 import net.authorize.api.contract.v1.ANetApiResponse;
@@ -14,42 +17,52 @@ import net.authorize.api.contract.v1.TransactionTypeEnum;
 import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
-public class Void {
-	public static ANetApiResponse run(String apiLoginId, String transactionKey, String transactionID) {
 
-		System.out.println("PayPal Void Transaction");
-
+public class AuthorizationAndCaptureContinue
+{
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String TransactionID, String payerID , Double amount){
+		
+		System.out.println("PayPal Authorize Capture-Continue Transaction");
+		
 		//Common code to set for all requests
 		ApiOperationBase.setEnvironment(Environment.SANDBOX);
-
-		MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType();
-		merchantAuthenticationType.setName(apiLoginId);
-		merchantAuthenticationType.setTransactionKey(transactionKey);
-		ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
-
-		PayPalType payPalType = new PayPalType();
-		payPalType.setSuccessUrl("");
-		payPalType.setCancelUrl("");
-
-		//standard api call to retrieve response
-		PaymentType paymentType = new PaymentType();
-		paymentType.setPayPal(payPalType);
-
-		// Create the payment transaction request
-		TransactionRequestType transactionRequest = new TransactionRequestType();
-
-		transactionRequest.setTransactionType(TransactionTypeEnum.VOID_TRANSACTION.value());
-		transactionRequest.setPayment(paymentType);
-		transactionRequest.setRefTransId(transactionID);
-
-		// Make the API Request
-		CreateTransactionRequest apiRequest = new CreateTransactionRequest();
-		apiRequest.setTransactionRequest(transactionRequest);
-		CreateTransactionController controller = new CreateTransactionController(apiRequest);
-		controller.execute();
-
-		CreateTransactionResponse response = controller.getApiResponse();
-
+		
+		// define the merchant information (authentication / transaction id)
+		MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
+        merchantAuthenticationType.setName(apiLoginId);
+        merchantAuthenticationType.setTransactionKey(transactionKey);
+        ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
+        
+        // Get Transaction Code and Payer ID from the User
+        
+        
+        // Set PayPal type and attributes
+        PayPalType payPalType = new PayPalType();
+        payPalType.setCancelUrl("http://www.merchanteCommerceSite.com/Success/TC25262");
+        payPalType.setSuccessUrl("http://www.merchanteCommerceSite.com/Success/TC25262");
+        payPalType.setPayerID(payerID);
+        
+        //standard api call to retrieve response
+        PaymentType paymentType = new PaymentType();
+        paymentType.setPayPal(payPalType);
+        
+        TransactionRequestType transactionRequest = new TransactionRequestType();
+        transactionRequest.setTransactionType(TransactionTypeEnum.AUTH_CAPTURE_CONTINUE_TRANSACTION.value().toString());
+        transactionRequest.setPayment(paymentType);
+        transactionRequest.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
+        transactionRequest.setRefTransId(TransactionID);
+        
+        CreateTransactionRequest request = new CreateTransactionRequest();
+        request.setTransactionRequest(transactionRequest);
+        
+        // instantiate the controller that will call the service
+        CreateTransactionController controller = new CreateTransactionController(request);        
+        controller.execute();
+        
+        // get the response from the service (errors contained if any)
+        CreateTransactionResponse response = controller.getApiResponse();
+        
+        //validate
         if (response!=null) {
         	// If API Response is ok, go ahead and check the transaction response
         	if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
@@ -83,8 +96,7 @@ public class Void {
         else {
         	System.out.println("Null Response.");
         }
-        
-		return response;
-	}
 
+		return response; 
+	}
 }

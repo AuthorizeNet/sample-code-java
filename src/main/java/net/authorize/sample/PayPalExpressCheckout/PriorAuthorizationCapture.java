@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package net.authorize.sample.PaypalExpressCheckout;
+package net.authorize.sample.PayPalExpressCheckout;
 
 import java.math.BigDecimal;
 import net.authorize.api.controller.base.ApiOperationBase;
@@ -18,7 +18,7 @@ import net.authorize.Environment;
  */
 public class PriorAuthorizationCapture {
     public static ANetApiResponse run(String apiLoginId, String apiTransactionKey, String transactionId){
-        System.out.println("Paypal Prior Authorization Transaction");
+        System.out.println("PayPal Prior Authorization Transaction");
         
         //Common code to set for all requests
         ApiOperationBase.setEnvironment(Environment.SANDBOX);

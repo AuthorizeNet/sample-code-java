@@ -1,61 +1,41 @@
-package net.authorize.sample.PaypalExpressCheckout;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+package net.authorize.sample.PayPalExpressCheckout;
 
 import net.authorize.Environment;
-import net.authorize.api.contract.v1.ANetApiResponse;
-import net.authorize.api.contract.v1.CreateTransactionRequest;
-import net.authorize.api.contract.v1.CreateTransactionResponse;
-import net.authorize.api.contract.v1.MerchantAuthenticationType;
-import net.authorize.api.contract.v1.MessageTypeEnum;
-import net.authorize.api.contract.v1.PayPalType;
-import net.authorize.api.contract.v1.PaymentType;
-import net.authorize.api.contract.v1.TransactionRequestType;
-import net.authorize.api.contract.v1.TransactionResponse;
-import net.authorize.api.contract.v1.TransactionTypeEnum;
+import net.authorize.api.contract.v1.*;
 import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
-public class AuthorizationOnlyContinued {
-
-   
-    public static ANetApiResponse run(String apiLoginId, String transactionKey, String transactionId, String payerId, Double amount) {
-
-    	System.out.println("PayPal Authorize Only-Continue Transaction");
+public class GetDetails {
+	
+	public static ANetApiResponse run(String apiLoginId, String transactionKey, String transactionID) {
         //Common code to set for all requests
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
         merchantAuthenticationType.setName(apiLoginId);
         merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
-
-        // Populate PayPal Transaction Data
+                
         PayPalType payPalType = new PayPalType();
         payPalType.setCancelUrl("http://www.merchanteCommerceSite.com/Success/TC25262");
         payPalType.setSuccessUrl("http://www.merchanteCommerceSite.com/Success/TC25262");
-        payPalType.setPayerID(payerId);
-                
-        // Populate the payment data
+        // set payment type as PayPal
         PaymentType paymentType = new PaymentType();
         paymentType.setPayPal(payPalType);
-
-        // Create the payment transaction request
-        TransactionRequestType txnRequest = new TransactionRequestType();
-        txnRequest.setTransactionType(TransactionTypeEnum.AUTH_ONLY_CONTINUE_TRANSACTION.value());
-        txnRequest.setPayment(paymentType);
-        txnRequest.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
-        txnRequest.setRefTransId(transactionId);
-
-        // Make the API Request
+        
+        //create GetDetailsTransaction for any valid PayPal transaction Id for the Merchant
+        TransactionRequestType transactionRequestType = new TransactionRequestType();
+        transactionRequestType.setTransactionType(TransactionTypeEnum.GET_DETAILS_TRANSACTION.value());
+        transactionRequestType.setPayment(paymentType);
+        transactionRequestType.setRefTransId(transactionID);
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();
-        apiRequest.setTransactionRequest(txnRequest);
+        apiRequest.setTransactionRequest(transactionRequestType);
+        
         CreateTransactionController controller = new CreateTransactionController(apiRequest);
         controller.execute();
-
-
+        
+        
         CreateTransactionResponse response = controller.getApiResponse();
-
+        
         if (response!=null) {
         	// If API Response is ok, go ahead and check the transaction response
         	if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
@@ -65,6 +45,16 @@ public class AuthorizationOnlyContinued {
         			System.out.println("Response Code: " + result.getResponseCode());
         			System.out.println("Message Code: " + result.getMessages().getMessage().get(0).getCode());
         			System.out.println("Description: " + result.getMessages().getMessage().get(0).getDescription());
+        			
+        			if(result.getSecureAcceptance() != null)
+                    	System.out.println("PayPal PayerID : "+ result.getSecureAcceptance().getPayerID());
+                    
+                    if(result.getShipTo() != null) {
+                    	System.out.println("Shipping Address : "+ result.getShipTo().getFirstName());
+    	                System.out.println(result.getShipTo().getAddress() +" " + result.getShipTo().getCity());
+    	                System.out.println(result.getShipTo().getState() +" "+ result.getShipTo().getZip());
+    	                System.out.println(result.getShipTo().getCountry());
+                    }
         		}
         		else {
         			System.out.println("Failed Transaction.");
@@ -89,11 +79,9 @@ public class AuthorizationOnlyContinued {
         else {
         	System.out.println("Null Response.");
         }
-        
+
 		return response;
 
-    }
-
-
+	}
 
 }

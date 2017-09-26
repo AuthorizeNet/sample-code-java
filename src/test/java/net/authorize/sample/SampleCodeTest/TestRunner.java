@@ -57,13 +57,13 @@ import net.authorize.sample.PaymentTransactions.CreditBankAccount;
 import net.authorize.sample.PaymentTransactions.DebitBankAccount;
 import net.authorize.sample.PaymentTransactions.RefundTransaction;
 import net.authorize.sample.PaymentTransactions.VoidTransaction;
-import net.authorize.sample.PaypalExpressCheckout.AuthorizationAndCapture;
-import net.authorize.sample.PaypalExpressCheckout.AuthorizationAndCaptureContinue;
-import net.authorize.sample.PaypalExpressCheckout.AuthorizationOnly;
-import net.authorize.sample.PaypalExpressCheckout.AuthorizationOnlyContinued;
-import net.authorize.sample.PaypalExpressCheckout.Credit;
-import net.authorize.sample.PaypalExpressCheckout.GetDetails;
-import net.authorize.sample.PaypalExpressCheckout.PriorAuthorizationCapture;
+import net.authorize.sample.PayPalExpressCheckout.AuthorizationAndCapture;
+import net.authorize.sample.PayPalExpressCheckout.AuthorizationAndCaptureContinue;
+import net.authorize.sample.PayPalExpressCheckout.AuthorizationOnly;
+import net.authorize.sample.PayPalExpressCheckout.AuthorizationOnlyContinued;
+import net.authorize.sample.PayPalExpressCheckout.Credit;
+import net.authorize.sample.PayPalExpressCheckout.GetDetails;
+import net.authorize.sample.PayPalExpressCheckout.PriorAuthorizationCapture;
 import net.authorize.sample.RecurringBilling.CancelSubscription;
 import net.authorize.sample.RecurringBilling.CreateSubscription;
 import net.authorize.sample.RecurringBilling.CreateSubscriptionFromCustomerProfile;
@@ -409,7 +409,7 @@ public class TestRunner {
 	public ANetApiResponse TestPayPalVoid()
 	{
 		CreateTransactionResponse response = (CreateTransactionResponse)AuthorizationAndCapture.run(apiLoginId, transactionKey, getAmount());
-		return net.authorize.sample.PaypalExpressCheckout.Void.run(apiLoginId, transactionKey, response.getTransactionResponse().getTransId());
+		return net.authorize.sample.PayPalExpressCheckout.Void.run(apiLoginId, transactionKey, response.getTransactionResponse().getTransId());
 	}  
 
 	public ANetApiResponse TestPayPalAuthorizationAndCapture()

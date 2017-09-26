@@ -6,8 +6,8 @@ import java.io.InputStreamReader;
 
 import net.authorize.sample.VisaCheckout.*;
 import net.authorize.sample.PaymentTransactions.*;
-import net.authorize.sample.PaypalExpressCheckout.*;
-import net.authorize.sample.PaypalExpressCheckout.Void;
+import net.authorize.sample.PayPalExpressCheckout.*;
+import net.authorize.sample.PayPalExpressCheckout.Void;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
@@ -311,7 +311,7 @@ public class SampleCode {
                 break;
             case "PayPalGetDetails":
             	GetDetails.run(apiLoginId, transactionKey, transactionId);
-            case "PaypalPriorAuthorizationCapture":
+            case "PayPalPriorAuthorizationCapture":
                 PriorAuthorizationCapture.run(apiLoginId, transactionKey, transactionId);
                 break;
             case "UpdateSplitTenderGroup":
