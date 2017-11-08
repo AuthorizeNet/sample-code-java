@@ -26,7 +26,7 @@ CustomerProfiles.CreateCustomerPaymentProfile	1	1
 PayPalExpressCheckout.PayPalAuthorizationOnly	1	1
 PayPalExpressCheckout.PayPalVoid	1	0
 PayPalExpressCheckout.PayPalAuthorizationAndCapture	1	1
-PayPalExpressCheckout.PayPalAuthorizationAndCaptureContinue	1	1
+PayPalExpressCheckout.PayPalAuthorizationAndCaptureContinued	1	1
 PayPalExpressCheckout.PayPalAuthorizationOnlyContinued	1	0
 PayPalExpressCheckout.PayPalCredit	1	0
 PayPalExpressCheckout.PayPalGetDetails	1	1

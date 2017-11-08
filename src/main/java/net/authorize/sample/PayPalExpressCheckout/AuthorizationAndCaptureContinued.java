@@ -18,7 +18,7 @@ import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
 
-public class AuthorizationAndCaptureContinue
+public class AuthorizationAndCaptureContinued
 {
 	public static ANetApiResponse run(String apiLoginId, String transactionKey, String TransactionID, String payerID , Double amount){
 		

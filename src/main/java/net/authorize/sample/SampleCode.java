@@ -301,7 +301,7 @@ public class SampleCode {
                 AuthorizationOnly.run(apiLoginId, transactionKey, amount);
                 break;
             case "PayPalAuthorizeCaptureContinue":
-            	AuthorizationAndCaptureContinue.run(apiLoginId, transactionKey, transactionId, payerId, amount);
+            	AuthorizationAndCaptureContinued.run(apiLoginId, transactionKey, transactionId, payerId, amount);
             	break;
             case "PayPalAuthorizeOnlyContinue":
             	AuthorizationOnlyContinued.run(apiLoginId, transactionKey, transactionId, payerId, amount);

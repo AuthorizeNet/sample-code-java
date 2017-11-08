@@ -58,7 +58,7 @@ import net.authorize.sample.PaymentTransactions.DebitBankAccount;
 import net.authorize.sample.PaymentTransactions.RefundTransaction;
 import net.authorize.sample.PaymentTransactions.VoidTransaction;
 import net.authorize.sample.PayPalExpressCheckout.AuthorizationAndCapture;
-import net.authorize.sample.PayPalExpressCheckout.AuthorizationAndCaptureContinue;
+import net.authorize.sample.PayPalExpressCheckout.AuthorizationAndCaptureContinued;
 import net.authorize.sample.PayPalExpressCheckout.AuthorizationOnly;
 import net.authorize.sample.PayPalExpressCheckout.AuthorizationOnlyContinued;
 import net.authorize.sample.PayPalExpressCheckout.Credit;
@@ -420,7 +420,7 @@ public class TestRunner {
 	public ANetApiResponse TestPayPalAuthorizationAndCaptureContinue()
 	{
 		CreateTransactionResponse response = (CreateTransactionResponse)AuthorizationAndCapture.run(apiLoginId, transactionKey, getAmount());
-		return AuthorizationAndCaptureContinue.run(apiLoginId, transactionKey, response.getTransactionResponse().getTransId(), payerID, getAmount());
+		return AuthorizationAndCaptureContinued.run(apiLoginId, transactionKey, response.getTransactionResponse().getTransId(), payerID, getAmount());
 	}
 	
 	public ANetApiResponse TestPayPalAuthorizationOnly()
