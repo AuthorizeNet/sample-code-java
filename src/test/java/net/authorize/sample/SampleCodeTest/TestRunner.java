@@ -417,7 +417,7 @@ public class TestRunner {
 		return AuthorizationAndCapture.run(apiLoginId, transactionKey, getAmount());
 	}
 
-	public ANetApiResponse TestPayPalAuthorizationAndCaptureContinue()
+	public ANetApiResponse TestPayPalAuthorizationAndCaptureContinued()
 	{
 		CreateTransactionResponse response = (CreateTransactionResponse)AuthorizationAndCapture.run(apiLoginId, transactionKey, getAmount());
 		return AuthorizationAndCaptureContinued.run(apiLoginId, transactionKey, response.getTransactionResponse().getTransId(), payerID, getAmount());

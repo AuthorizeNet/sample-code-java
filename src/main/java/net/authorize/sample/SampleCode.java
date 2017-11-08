@@ -121,10 +121,10 @@ public class SampleCode {
         System.out.println("    PayPalAuthorizeCapture");
         System.out.println("    PayPalVoid");
         System.out.println("    PayPalAuthorizationOnly");
-        System.out.println("    PayPalAuthorizeCaptureContinue");
+        System.out.println("    PayPalAuthorizeCaptureContinued");
         System.out.println("    PayPalGetDetails");
         System.out.println("    PayPalPriorAuthorizationCapture");	
-        System.out.println("    PayPalAuthorizeOnlyContinue");
+        System.out.println("    PayPalAuthorizeOnlyContinued");
         System.out.println("    PayPalCredit");
         System.out.println("    UpdateSplitTenderGroup");
         System.out.println("    GetMerchantDetails");
@@ -300,10 +300,10 @@ public class SampleCode {
             case "PayPalAuthorizationOnly":
                 AuthorizationOnly.run(apiLoginId, transactionKey, amount);
                 break;
-            case "PayPalAuthorizeCaptureContinue":
+            case "PayPalAuthorizeCaptureContinued":
             	AuthorizationAndCaptureContinued.run(apiLoginId, transactionKey, transactionId, payerId, amount);
             	break;
-            case "PayPalAuthorizeOnlyContinue":
+            case "PayPalAuthorizeOnlyContinued":
             	AuthorizationOnlyContinued.run(apiLoginId, transactionKey, transactionId, payerId, amount);
             	break;	
             case "PayPalCredit":

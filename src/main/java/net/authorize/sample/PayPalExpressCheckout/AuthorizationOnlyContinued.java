@@ -22,7 +22,7 @@ public class AuthorizationOnlyContinued {
    
     public static ANetApiResponse run(String apiLoginId, String transactionKey, String transactionId, String payerId, Double amount) {
 
-    	System.out.println("PayPal Authorize Only-Continue Transaction");
+    	System.out.println("PayPal Authorization Only, Continued Transaction");
         //Common code to set for all requests
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;

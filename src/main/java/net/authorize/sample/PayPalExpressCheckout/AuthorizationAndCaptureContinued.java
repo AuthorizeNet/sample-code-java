@@ -22,7 +22,7 @@ public class AuthorizationAndCaptureContinued
 {
 	public static ANetApiResponse run(String apiLoginId, String transactionKey, String TransactionID, String payerID , Double amount){
 		
-		System.out.println("PayPal Authorize Capture-Continue Transaction");
+		System.out.println("PayPal Authorization and Capture, Continued Transaction");
 		
 		//Common code to set for all requests
 		ApiOperationBase.setEnvironment(Environment.SANDBOX);
