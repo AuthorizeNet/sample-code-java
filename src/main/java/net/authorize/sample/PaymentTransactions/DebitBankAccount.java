@@ -40,7 +40,7 @@ public class DebitBankAccount {
         BankAccountType bankAccountType = new BankAccountType();
         bankAccountType.setAccountType(BankAccountTypeEnum.CHECKING);
         bankAccountType.setRoutingNumber("121042882");
-        bankAccountType.setAccountNumber("123456789");
+        bankAccountType.setAccountNumber("1234567890");
         bankAccountType.setNameOnAccount("John Doe");
         paymentType.setBankAccount(bankAccountType);
 
