@@ -40,7 +40,7 @@ public class SampleCode {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try{
             int i = Integer.parseInt(br.readLine());
-        }catch(Exception ex){
+        }catch(Exception ex) {
         }
 
     }
@@ -67,7 +67,7 @@ public class SampleCode {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try{
             RunMethod(br.readLine());
-        }catch(Exception ex){
+        }catch(Exception ex) {
             System.out.println(ex.toString());
         }
     }

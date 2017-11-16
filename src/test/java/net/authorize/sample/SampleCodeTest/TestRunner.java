@@ -142,7 +142,7 @@ public class TestRunner {
 
 				cnt++;
 				
-				for(int i = 0;i<numRetries;++i)
+				for (int i = 0;i<numRetries;++i)
 				{
 					try
 					{
@@ -159,7 +159,7 @@ public class TestRunner {
 							response = (ANetApiResponse)classType.getMethod("Test" + className).invoke(tr);
 						}
 
-						if((response != null) && (response.getMessages().getResultCode() == MessageTypeEnum.OK))
+						if ((response != null) && (response.getMessages().getResultCode() == MessageTypeEnum.OK))
 							break;
 					}
 					catch (Exception e)

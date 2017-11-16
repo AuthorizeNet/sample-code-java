@@ -43,22 +43,19 @@ public class GetCustomerProfileTransactionList{
 				ArrayOfTransactionSummaryType transactions = getResponse.getTransactions();
 				List<TransactionSummaryType> list = transactions.getTransaction();
 				
-				for(TransactionSummaryType summary : list)
-				{
+				for (TransactionSummaryType summary : list) {
 					System.out.println(summary.getFirstName());
 					System.out.println(summary.getTransId());
 					System.out.println(summary.getSettleAmount());
 					System.out.println(summary.getSubmitTimeLocal());
 				}
 				
-			     if (getResponse.getMessages().getResultCode() == MessageTypeEnum.OK) {
+			    if (getResponse.getMessages().getResultCode() == MessageTypeEnum.OK) {
 			        System.out.println(getResponse.getMessages().getMessage().get(0).getCode());
-			        System.out.println(getResponse.getMessages().getMessage().get(0).getText());
-			        }
-			        else
-			        {
-			            System.out.println("Failed to get transaction list:  " + getResponse.getMessages().getResultCode());
-			        }
+					System.out.println(getResponse.getMessages().getMessage().get(0).getText());
+				} else {
+					System.out.println("Failed to get transaction list:  " + getResponse.getMessages().getResultCode());
+				}
 			}
 			return getResponse;
 		

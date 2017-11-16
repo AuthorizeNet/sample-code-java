@@ -25,14 +25,13 @@ public class ChargeCreditCard {
     //
     public static ANetApiResponse run(String apiLoginId, String transactionKey, Double amount) {
 
-
-        //Common code to set for all requests
+        // Set the request to operate in either the sandbox or production environment
         ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
+        // Create object with merchant authentication details
         MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
         merchantAuthenticationType.setName(apiLoginId);
         merchantAuthenticationType.setTransactionKey(transactionKey);
-        ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
         // Populate the payment data
         PaymentType paymentType = new PaymentType();
@@ -41,60 +40,62 @@ public class ChargeCreditCard {
         creditCard.setExpirationDate("0822");
         paymentType.setCreditCard(creditCard);
 
-        // Create the payment transaction request
+        // Create the payment transaction object
         TransactionRequestType txnRequest = new TransactionRequestType();
         txnRequest.setTransactionType(TransactionTypeEnum.AUTH_CAPTURE_TRANSACTION.value());
         txnRequest.setPayment(paymentType);
         txnRequest.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
 
-        // Make the API Request
+        // Create the API request and set the parameters for this specific request
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();
+        apiRequest.setMerchantAuthentication(merchantAuthenticationType);
         apiRequest.setTransactionRequest(txnRequest);
+
+        // Call the controller
         CreateTransactionController controller = new CreateTransactionController(apiRequest);
         controller.execute();
 
-
-        CreateTransactionResponse response = controller.getApiResponse();
-
+        // Get the response
+        CreateTransactionResponse response = new CreateTransactionResponse();
+        response = controller.getApiResponse();
+        
+        // Parse the response to determine results
         if (response!=null) {
-        	// If API Response is ok, go ahead and check the transaction response
-        	if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
-        		TransactionResponse result = response.getTransactionResponse();
-        		if(result.getMessages() != null){
-        			System.out.println("Successfully created transaction with Transaction ID: " + result.getTransId());
-        			System.out.println("Response Code: " + result.getResponseCode());
-        			System.out.println("Message Code: " + result.getMessages().getMessage().get(0).getCode());
-        			System.out.println("Description: " + result.getMessages().getMessage().get(0).getDescription());
-        			System.out.println("Auth Code: " + result.getAuthCode());
-        		}
-        		else {
-        			System.out.println("Failed Transaction.");
-        			if(response.getTransactionResponse().getErrors() != null){
-        				System.out.println("Error Code: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode());
-        				System.out.println("Error message: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
-        			}
-        		}
-        	}
-        	else {
-        		System.out.println("Failed Transaction.");
-        		if(response.getTransactionResponse() != null && response.getTransactionResponse().getErrors() != null){
-        			System.out.println("Error Code: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode());
-        			System.out.println("Error message: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
-        		}
-        		else {
-        			System.out.println("Error Code: " + response.getMessages().getMessage().get(0).getCode());
-        			System.out.println("Error message: " + response.getMessages().getMessage().get(0).getText());
-        		}
-        	}
-        }
-        else {
-        	System.out.println("Null Response.");
+            // If API Response is OK, go ahead and check the transaction response
+            if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
+                TransactionResponse result = response.getTransactionResponse();
+                if (result.getMessages() != null) {
+                    System.out.println("Successfully created transaction with Transaction ID: " + result.getTransId());
+                    System.out.println("Response Code: " + result.getResponseCode());
+                    System.out.println("Message Code: " + result.getMessages().getMessage().get(0).getCode());
+                    System.out.println("Description: " + result.getMessages().getMessage().get(0).getDescription());
+                    System.out.println("Auth Code: " + result.getAuthCode());
+                } else {
+                    System.out.println("Failed Transaction.");
+                    if (response.getTransactionResponse().getErrors() != null) {
+                        System.out.println("Error Code: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode());
+                        System.out.println("Error message: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
+                    }
+                }
+            } else {
+                System.out.println("Failed Transaction.");
+                if (response.getTransactionResponse() != null && response.getTransactionResponse().getErrors() != null) {
+                    System.out.println("Error Code: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode());
+                    System.out.println("Error message: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
+                } else {
+                    System.out.println("Error Code: " + response.getMessages().getMessage().get(0).getCode());
+                    System.out.println("Error message: " + response.getMessages().getMessage().get(0).getText());
+                }
+            }
+        } else {
+            // Display the error code and message when response is null 
+            ANetApiResponse errorResponse = controller.getErrorResponse();
+            System.out.println("Failed to get response");
+            if (!errorResponse.getMessages().getMessage().isEmpty()) {
+                System.out.println("Error: "+errorResponse.getMessages().getMessage().get(0).getCode()+" \n"+ errorResponse.getMessages().getMessage().get(0).getText());
+            }
         }
         
-		return response;
-
+        return response;
     }
-
-
-
 }

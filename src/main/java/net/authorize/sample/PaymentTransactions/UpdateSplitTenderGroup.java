@@ -39,7 +39,7 @@ public class UpdateSplitTenderGroup {
         
         UpdateSplitTenderGroupResponse response = controller.getApiResponse();
         
-        if (response.getMessages().getResultCode() == MessageTypeEnum.OK){
+        if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
                 System.out.println(response.getMessages().getMessage().get(0).getCode());
                 System.out.println(response.getMessages().getMessage().get(0).getText());
         }

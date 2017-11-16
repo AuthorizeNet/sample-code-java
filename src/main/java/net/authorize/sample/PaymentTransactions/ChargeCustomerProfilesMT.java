@@ -86,7 +86,7 @@ public class ChargeCustomerProfilesMT {
                 System.out.println("============================================================================");
                 System.out.println("chargeResponse Dt1: + " + dt1.toString());
 
-                if((response.getCustomerProfileId() != null) && (paymentProfileResponse.getCustomerPaymentProfileId() != null))
+                if ((response.getCustomerProfileId() != null) && (paymentProfileResponse.getCustomerPaymentProfileId() != null))
                 {
                     CreateTransactionResponse chargeResponse = (CreateTransactionResponse) ChargeCustomerProfile.run(apiLoginId, transactionKey,
                             response.getCustomerProfileId(), paymentProfileResponse.getCustomerPaymentProfileId(), getAmount());

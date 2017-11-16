@@ -30,7 +30,7 @@ public class GetCustomerProfile {
 
 		if (response!=null) {
 
-             if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
+            if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
 
  				System.out.println(response.getMessages().getMessage().get(0).getCode());
                 System.out.println(response.getMessages().getMessage().get(0).getText());
@@ -40,8 +40,8 @@ public class GetCustomerProfile {
                 System.out.println(response.getProfile().getEmail());
                 System.out.println(response.getProfile().getCustomerProfileId());
 
-                if((!response.getProfile().getPaymentProfiles().isEmpty()) &&
-                		(response.getProfile().getPaymentProfiles().get(0).getBillTo() != null)){
+                if ((!response.getProfile().getPaymentProfiles().isEmpty()) &&
+                		(response.getProfile().getPaymentProfiles().get(0).getBillTo() != null)) {
                     System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getFirstName());
                     System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getLastName());
                     System.out.println(response.getProfile().getPaymentProfiles().get(0).getBillTo().getCompany());
@@ -59,7 +59,7 @@ public class GetCustomerProfile {
                     System.out.println(response.getProfile().getPaymentProfiles().get(0).getPayment().getCreditCard().getExpirationDate());
                 }
 
-                if(!response.getProfile().getShipToList().isEmpty()){
+                if (!response.getProfile().getShipToList().isEmpty()) {
                     System.out.println(response.getProfile().getShipToList().get(0).getFirstName());
                     System.out.println(response.getProfile().getShipToList().get(0).getLastName());
                     System.out.println(response.getProfile().getShipToList().get(0).getCompany());
@@ -72,16 +72,14 @@ public class GetCustomerProfile {
                     System.out.println(response.getProfile().getShipToList().get(0).getFaxNumber());
                 }
                 
-                if((response.getSubscriptionIds() != null) && (response.getSubscriptionIds().getSubscriptionId() != null) && 
-                		(!response.getSubscriptionIds().getSubscriptionId().isEmpty())){
+                if ((response.getSubscriptionIds() != null) && (response.getSubscriptionIds().getSubscriptionId() != null) && 
+                		(!response.getSubscriptionIds().getSubscriptionId().isEmpty())) {
                 	System.out.println("List of subscriptions:");
-                	for(String subscriptionid : response.getSubscriptionIds().getSubscriptionId())
+                	for (String subscriptionid : response.getSubscriptionIds().getSubscriptionId())
                 		System.out.println(subscriptionid);
                 }
 
-            }
-            else
-            {
+            } else {
                 System.out.println("Failed to get customer profile:  " + response.getMessages().getResultCode());
             }
         }

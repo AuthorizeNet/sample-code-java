@@ -71,7 +71,7 @@ public class CreateCustomerProfileFromTransaction {
 		createProfileController.execute();
 		CreateCustomerProfileResponse customer_response = createProfileController.getApiResponse();
 
-		if(customer_response != null) {
+		if (customer_response != null) {
 			System.out.println(transaction_request.getTransId());
 		}
 		return customer_response;

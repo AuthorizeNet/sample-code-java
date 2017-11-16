@@ -50,15 +50,13 @@ public class GetCustomerShippingAddress {
 
                 System.out.println(response.getAddress().getCustomerAddressId());
                 
-                if((response.getSubscriptionIds() != null) && (response.getSubscriptionIds().getSubscriptionId() != null) && 
-                		(!response.getSubscriptionIds().getSubscriptionId().isEmpty())){
+                if ((response.getSubscriptionIds() != null) && (response.getSubscriptionIds().getSubscriptionId() != null) && 
+                		(!response.getSubscriptionIds().getSubscriptionId().isEmpty())) {
                 	System.out.println("List of subscriptions:");
-                	for(String subscriptionid : response.getSubscriptionIds().getSubscriptionId())
+                	for (String subscriptionid : response.getSubscriptionIds().getSubscriptionId())
                 		System.out.println(subscriptionid);
                 }
-            }
-            else
-            {
+            } else {
                 System.out.println("Failed to get customer shipping address:  " + response.getMessages().getResultCode());
             }
         }

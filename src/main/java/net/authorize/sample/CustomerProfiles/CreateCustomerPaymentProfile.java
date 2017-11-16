@@ -69,7 +69,7 @@ public class CreateCustomerPaymentProfile {
                 System.out.println(response.getCustomerPaymentProfileId());
  				System.out.println(response.getMessages().getMessage().get(0).getCode());
                 System.out.println(response.getMessages().getMessage().get(0).getText());
-                if(response.getValidationDirectResponse() != null)
+                if (response.getValidationDirectResponse() != null)
                 	System.out.println(response.getValidationDirectResponse());
             }
             else

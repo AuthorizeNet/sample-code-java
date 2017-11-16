@@ -34,7 +34,7 @@ public class GetCustomerProfileIds {
  				System.out.println(response.getMessages().getMessage().get(0).getCode());
                 System.out.println(response.getMessages().getMessage().get(0).getText());
 
-                for(int i =0; i < response.getIds().getNumericString().size(); i++) {
+                for (int i =0; i < response.getIds().getNumericString().size(); i++) {
 
                 	System.out.println(response.getIds().getNumericString().get(i));
                 }

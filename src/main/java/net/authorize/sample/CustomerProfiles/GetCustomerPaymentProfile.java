@@ -53,15 +53,13 @@ public class GetCustomerPaymentProfile {
                 System.out.println(response.getPaymentProfile().getPayment().getCreditCard().getCardNumber());
                 System.out.println(response.getPaymentProfile().getPayment().getCreditCard().getExpirationDate());
                 
-                if((response.getPaymentProfile().getSubscriptionIds() != null) && (response.getPaymentProfile().getSubscriptionIds().getSubscriptionId() != null) && 
-                		(!response.getPaymentProfile().getSubscriptionIds().getSubscriptionId().isEmpty())){
+                if ((response.getPaymentProfile().getSubscriptionIds() != null) && (response.getPaymentProfile().getSubscriptionIds().getSubscriptionId() != null) && 
+                		(!response.getPaymentProfile().getSubscriptionIds().getSubscriptionId().isEmpty())) {
                 	System.out.println("List of subscriptions:");
-                	for(String subscriptionid : response.getPaymentProfile().getSubscriptionIds().getSubscriptionId())
+                	for (String subscriptionid : response.getPaymentProfile().getSubscriptionIds().getSubscriptionId())
                 		System.out.println(subscriptionid);
                 }
-            }
-            else
-            {
+            } else {
                 System.out.println("Failed to get customer payment profile:  " + response.getMessages().getResultCode());
             }
         }

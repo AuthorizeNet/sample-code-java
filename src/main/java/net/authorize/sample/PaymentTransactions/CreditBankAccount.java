@@ -64,7 +64,7 @@ public class CreditBankAccount {
         	// If API Response is ok, go ahead and check the transaction response
         	if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
         		TransactionResponse result = response.getTransactionResponse();
-        		if(result.getMessages() != null){
+        		if (result.getMessages() != null) {
         			System.out.println("Successfully created transaction with Transaction ID: " + result.getTransId());
         			System.out.println("Response Code: " + result.getResponseCode());
         			System.out.println("Message Code: " + result.getMessages().getMessage().get(0).getCode());
@@ -73,7 +73,7 @@ public class CreditBankAccount {
         		}
         		else {
         			System.out.println("Failed Transaction.");
-        			if(response.getTransactionResponse().getErrors() != null){
+        			if (response.getTransactionResponse().getErrors() != null) {
         				System.out.println("Error Code: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode());
         				System.out.println("Error message: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
         			}
@@ -81,7 +81,7 @@ public class CreditBankAccount {
         	}
         	else {
         		System.out.println("Failed Transaction.");
-        		if(response.getTransactionResponse() != null && response.getTransactionResponse().getErrors() != null){
+        		if (response.getTransactionResponse() != null && response.getTransactionResponse().getErrors() != null) {
         			System.out.println("Error Code: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorCode());
         			System.out.println("Error message: " + response.getTransactionResponse().getErrors().getError().get(0).getErrorText());
         		}

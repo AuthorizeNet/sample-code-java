@@ -39,7 +39,7 @@ public class DecryptVisaCheckoutData {
  		
  		DecryptPaymentDataResponse response = controller.getApiResponse();
 
- 		if (response != null){
+ 		if (response != null) {
 
  		   System.out.println("Response Code : "+ response.getMessages().getResultCode());
        if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
