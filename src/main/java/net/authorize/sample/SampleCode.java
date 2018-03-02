@@ -11,7 +11,7 @@ import net.authorize.sample.PayPalExpressCheckout.Void;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
-import net.authorize.sample.MobileInappTransactions.*;
+import net.authorize.sample.MobileInAppTransactions.*;
 import net.authorize.sample.FraudManagement.*;
 /**
  * Created by anetdeveloper on 8/5/15.
@@ -153,6 +153,15 @@ public class SampleCode {
         String subscriptionId = "2930242";
         
         Double amount = 123.45;
+        
+//      Proxy server settings.
+//      Enable these lines for using Sample Codes behind a proxy server
+      
+//      System.setProperty("https.proxyUse", "true");
+//      System.setProperty("https.proxyHost", "example.proxy.server");
+//      System.setProperty("https.proxyPort", "portNumber");
+//      System.setProperty("https.proxyUser", "exampleUsername");
+//      System.setProperty("https.proxyPassword", "examplePassword");
 
         switch (methodName) {
             case "DecryptVisaCheckoutData":
