@@ -160,7 +160,7 @@ public class SampleCode {
 //      System.setProperty("https.proxyUse", "true");
 //      System.setProperty("https.proxyHost", "example.proxy.server");
 //      System.setProperty("https.proxyPort", "portNumber");
-//      System.setProperty("https.proxyUser", "exampleUsername");
+//      System.setProperty("https.proxyUserName", "exampleUsername");
 //      System.setProperty("https.proxyPassword", "examplePassword");
 
         switch (methodName) {
