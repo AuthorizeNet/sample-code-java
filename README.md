@@ -38,3 +38,10 @@ Please set the JAVA environment proxy using a similar code :
     System.setProperty("https.proxyHost", "127.0.0.1");
     System.setProperty("https.proxyPort", "3128");
 ```
+**For using proxy authentication**
+
+Please set the JAVA environment proxy credentials using a similar code :
+```
+    System.setProperty("https.proxyUserName", "exampleUsername");
+    System.setProperty("https.proxyPassword", "examplePassword");
+```
