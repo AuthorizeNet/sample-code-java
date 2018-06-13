@@ -16,11 +16,12 @@ public class UpdateCustomerProfile {
         merchantAuthenticationType.setTransactionKey(transactionKey);
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
-		CustomerProfileExType customer =  new CustomerProfileExType();
+		CustomerProfileInfoExType customer =  new CustomerProfileInfoExType();
 		customer.setMerchantCustomerId("custId123");
 		customer.setDescription("some description");
 		customer.setEmail("newaddress@example.com");
 		customer.setCustomerProfileId(customerProfileId);
+		customer.setProfileType(CustomerProfileTypeEnum.REGULAR);
 
 		UpdateCustomerProfileRequest apiRequest = new UpdateCustomerProfileRequest();
 		apiRequest.setProfile(customer);
