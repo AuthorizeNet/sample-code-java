@@ -115,6 +115,7 @@ public class SampleCode {
         System.out.println("    GetCustomerProfileTransactionList");
         System.out.println("    GetCustomerShippingAddress");
         System.out.println("    GetAcceptCustomerProfilePage");
+        System.out.println("    UpdateCustomerProfile");
         System.out.println("    UpdateCustomerPaymentProfile");
         System.out.println("    UpdateCustomerShippingAddress");
         System.out.println("    ValidateCustomerPaymentProfile");
@@ -291,6 +292,9 @@ public class SampleCode {
             case "GetAcceptCustomerProfilePage":
                 GetAcceptCustomerProfilePage.run(apiLoginId, transactionKey, customerProfileId);
                 break;
+            case "UpdateCustomerProfile":
+            	UpdateCustomerProfile.run(apiLoginId, transactionKey, customerProfileId);
+            	break;
             case "UpdateCustomerPaymentProfile":
                 UpdateCustomerPaymentProfile.run(apiLoginId, transactionKey, customerProfileId, customerPaymentProfileId);
                 break;
