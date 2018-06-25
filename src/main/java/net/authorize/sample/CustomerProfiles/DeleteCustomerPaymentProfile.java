@@ -2,11 +2,8 @@ package net.authorize.sample.CustomerProfiles;
 
 import net.authorize.Environment;
 import net.authorize.api.contract.v1.*;
-
-import net.authorize.api.contract.v1.MerchantAuthenticationType;
 import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.api.controller.DeleteCustomerPaymentProfileController;
-import net.authorize.api.controller.base.ApiOperationBase;
 
 public class DeleteCustomerPaymentProfile {
 	
@@ -27,21 +24,27 @@ public class DeleteCustomerPaymentProfile {
         DeleteCustomerPaymentProfileController controller = new DeleteCustomerPaymentProfileController(apiRequest);
         controller.execute();
        
-		DeleteCustomerPaymentProfileResponse response = new DeleteCustomerPaymentProfileResponse();
-		response = controller.getApiResponse();
+		ANetApiResponse apiResponse = controller.getApiResponse();
 
-		if (response!=null) {
+		if (apiResponse != null) {
+			if (apiResponse instanceof DeleteCustomerPaymentProfileResponse) {
+				DeleteCustomerPaymentProfileResponse response = (DeleteCustomerPaymentProfileResponse) apiResponse;
 
-             if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
-
- 				System.out.println(response.getMessages().getMessage().get(0).getCode());
-                System.out.println(response.getMessages().getMessage().get(0).getText());
-            }
-            else
-            {
-                System.out.println("Failed to delete customer payment profile:  " + response.getMessages().getResultCode());
+				if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
+					System.out.println(response.getMessages().getMessage().get(0).getCode());
+					System.out.println(response.getMessages().getMessage().get(0).getText());
+				}
+				else if (response.getMessages().getResultCode() == MessageTypeEnum.ERROR) {
+	            	 System.out.println(response.getMessages().getMessage().get(0).getCode());
+	                 System.out.println(response.getMessages().getMessage().get(0).getText());
+	             }
+			}
+            else if (apiResponse instanceof ErrorResponse) {
+		 		System.out.println(apiResponse.getMessages().getMessage().get(0).getCode());
+                System.out.println(apiResponse.getMessages().getMessage().get(0).getText());
+                System.out.println("Failed to delete customer payment profile:  " + apiResponse.getMessages().getResultCode());
             }
         }
-		return response;
+		return apiResponse;
     }
 }
