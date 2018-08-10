@@ -1,4 +1,4 @@
-package net.authorize.sample.AcceptSuite;
+package net.authorize.sample.PaymentTransactions;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

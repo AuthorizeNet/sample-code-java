@@ -1,4 +1,4 @@
-package net.authorize.sample.AcceptSuite;
+package net.authorize.sample.CustomerProfiles;
 
 import net.authorize.Environment;
 import net.authorize.api.contract.v1.*;

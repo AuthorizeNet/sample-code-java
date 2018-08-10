@@ -1,4 +1,4 @@
-package net.authorize.sample.AcceptSuite;
+package net.authorize.sample.MobileInAppTransactions;
 
 import java.math.BigDecimal;
 import net.authorize.Environment;
