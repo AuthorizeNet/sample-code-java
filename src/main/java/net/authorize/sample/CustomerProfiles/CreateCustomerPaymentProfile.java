@@ -6,14 +6,7 @@ import net.authorize.api.contract.v1.*;
 import net.authorize.api.contract.v1.MerchantAuthenticationType;
 import net.authorize.api.controller.base.ApiOperationBase;
 
-import net.authorize.Transaction;
-import net.authorize.api.controller.CreateCustomerProfileController;
-import net.authorize.api.controller.CreateCustomerProfileFromTransactionController;
 import net.authorize.api.controller.CreateCustomerPaymentProfileController;
-import net.authorize.api.controller.base.ApiOperationBase;
-import net.authorize.cim.Result;
-import net.authorize.cim.TransactionType;
-import net.authorize.cim.ValidationModeType;
 
 //author @krgupta
 public class CreateCustomerPaymentProfile {
@@ -61,23 +54,30 @@ public class CreateCustomerPaymentProfile {
 		CreateCustomerPaymentProfileController controller = new CreateCustomerPaymentProfileController(apiRequest);
 		controller.execute();
        
-		CreateCustomerPaymentProfileResponse response = new CreateCustomerPaymentProfileResponse();
-		response = controller.getApiResponse();
-		if (response!=null) {
-             if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
-            	
-                System.out.println(response.getCustomerPaymentProfileId());
- 				System.out.println(response.getMessages().getMessage().get(0).getCode());
-                System.out.println(response.getMessages().getMessage().get(0).getText());
-                if (response.getValidationDirectResponse() != null)
-                	System.out.println(response.getValidationDirectResponse());
+		ANetApiResponse apiResponse = controller.getApiResponse();
+		if (apiResponse != null) {
+			 if (apiResponse instanceof CreateCustomerPaymentProfileResponse) {
+				 CreateCustomerPaymentProfileResponse response = (CreateCustomerPaymentProfileResponse) apiResponse;
+			
+	             if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {	            	
+	                System.out.println(response.getCustomerPaymentProfileId());
+	 				System.out.println(response.getMessages().getMessage().get(0).getCode());
+	                System.out.println(response.getMessages().getMessage().get(0).getText());
+	                if (response.getValidationDirectResponse() != null)
+	                	System.out.println(response.getValidationDirectResponse());
+	             } 
+	             else if (response.getMessages().getResultCode() == MessageTypeEnum.ERROR) {
+	            	 System.out.println(response.getMessages().getMessage().get(0).getCode());
+	                 System.out.println(response.getMessages().getMessage().get(0).getText());
+	             }	
             }
-            else
-            {
-                System.out.println("Failed to create customer payment profile:  " + response.getMessages().getResultCode());
+		 	else if (apiResponse instanceof ErrorResponse) {
+		 		System.out.println(apiResponse.getMessages().getMessage().get(0).getCode());
+                System.out.println(apiResponse.getMessages().getMessage().get(0).getText());
+                System.out.println("Failed to create customer payment profile:  " + apiResponse.getMessages().getResultCode());
             }
         }
 
-		return response;
+		return apiResponse;
 	}	
 }
