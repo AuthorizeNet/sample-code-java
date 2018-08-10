@@ -32,6 +32,8 @@ import net.authorize.api.contract.v1.UpdateCustomerPaymentProfileResponse;
 import net.authorize.api.contract.v1.UpdateCustomerProfileResponse;
 import net.authorize.api.contract.v1.UpdateCustomerShippingAddressResponse;
 import net.authorize.api.contract.v1.ValidateCustomerPaymentProfileResponse;
+import net.authorize.sample.AcceptSuite.GetAcceptCustomerProfilePage;
+import net.authorize.sample.AcceptSuite.GetAnAcceptPaymentPage;
 import net.authorize.sample.CustomerProfiles.CreateCustomerPaymentProfile;
 import net.authorize.sample.CustomerProfiles.CreateCustomerProfile;
 import net.authorize.sample.CustomerProfiles.CreateCustomerProfileFromTransaction;
@@ -42,7 +44,6 @@ import net.authorize.sample.CustomerProfiles.DeleteCustomerShippingAddress;
 import net.authorize.sample.CustomerProfiles.GetCustomerPaymentProfile;
 import net.authorize.sample.CustomerProfiles.GetCustomerProfile;
 import net.authorize.sample.CustomerProfiles.GetCustomerShippingAddress;
-import net.authorize.sample.CustomerProfiles.GetAcceptCustomerProfilePage;
 import net.authorize.sample.CustomerProfiles.UpdateCustomerPaymentProfile;
 import net.authorize.sample.CustomerProfiles.UpdateCustomerProfile;
 import net.authorize.sample.CustomerProfiles.UpdateCustomerShippingAddress;
@@ -71,7 +72,6 @@ import net.authorize.sample.RecurringBilling.GetSubscription;
 import net.authorize.sample.RecurringBilling.GetSubscriptionStatus;
 import net.authorize.sample.RecurringBilling.UpdateSubscription;
 import net.authorize.sample.TransactionReporting.GetTransactionDetails;
-import net.authorize.sample.PaymentTransactions.GetAnAcceptPaymentPage;
 
 public class TestRunner {
 
