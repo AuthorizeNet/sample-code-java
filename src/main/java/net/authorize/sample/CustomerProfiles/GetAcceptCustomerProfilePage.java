@@ -2,8 +2,11 @@ package net.authorize.sample.CustomerProfiles;
 
 import net.authorize.Environment;
 import net.authorize.api.contract.v1.*;
+
+import net.authorize.api.contract.v1.MerchantAuthenticationType;
 import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.api.controller.GetHostedProfilePageController;
+import net.authorize.api.controller.base.ApiOperationBase;
 
 public class GetAcceptCustomerProfilePage {
 	
@@ -29,29 +32,24 @@ public class GetAcceptCustomerProfilePage {
 
         GetHostedProfilePageController controller = new GetHostedProfilePageController(apiRequest);
         controller.execute();
-               
-        ANetApiResponse apiResponse = controller.getApiResponse();
-		if (apiResponse != null) {
-			 if (apiResponse instanceof GetHostedProfilePageResponse) {
-				 GetHostedProfilePageResponse response = (GetHostedProfilePageResponse) apiResponse;
-			
-	             if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {	            	
-	                System.out.println(response.getToken());
-	 				System.out.println(response.getMessages().getMessage().get(0).getCode());
-	                System.out.println(response.getMessages().getMessage().get(0).getText());
-	             } 
-	             else if (response.getMessages().getResultCode() == MessageTypeEnum.ERROR) {
-	            	 System.out.println(response.getMessages().getMessage().get(0).getCode());
-	                 System.out.println(response.getMessages().getMessage().get(0).getText());
-	             }	
+       
+		GetHostedProfilePageResponse response = new GetHostedProfilePageResponse();
+		response = controller.getApiResponse();
+
+		if (response!=null) {
+
+             if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
+
+ 				System.out.println(response.getMessages().getMessage().get(0).getCode());
+                System.out.println(response.getMessages().getMessage().get(0).getText());
+
+                System.out.println(response.getToken());
             }
-		 	else if (apiResponse instanceof ErrorResponse) {
-		 		System.out.println(apiResponse.getMessages().getMessage().get(0).getCode());
-                System.out.println(apiResponse.getMessages().getMessage().get(0).getText());
-                System.out.println("Failed to get hosted profile page:  " + apiResponse.getMessages().getResultCode());
+            else
+            {
+                System.out.println("Failed to get hosted profile page:  " + response.getMessages().getResultCode());
             }
         }
-
-		return apiResponse;
+		return response;
     }
 }

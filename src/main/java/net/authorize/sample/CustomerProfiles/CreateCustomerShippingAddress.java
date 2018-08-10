@@ -2,6 +2,7 @@ package net.authorize.sample.CustomerProfiles;
 
 import net.authorize.Environment;
 import net.authorize.api.contract.v1.*;
+import java.math.BigDecimal;
 import net.authorize.api.controller.CreateCustomerShippingAddressController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
@@ -33,28 +34,21 @@ public class CreateCustomerShippingAddress {
         CreateCustomerShippingAddressController controller = new CreateCustomerShippingAddressController(apiRequest);
         controller.execute();
 
-        ANetApiResponse apiResponse = controller.getApiResponse();
-        if (apiResponse != null) {
-        	 if (apiResponse instanceof CreateCustomerShippingAddressResponse) {
-        		 CreateCustomerShippingAddressResponse response = (CreateCustomerShippingAddressResponse) apiResponse;
+        CreateCustomerShippingAddressResponse response = controller.getApiResponse();
+        if (response!=null) {
 
-	             if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {	
-	                System.out.println(response.getCustomerAddressId());
-	                System.out.println(response.getMessages().getMessage().get(0).getCode());
-	                System.out.println(response.getMessages().getMessage().get(0).getText());
-	            }
-				else if (response.getMessages().getResultCode() == MessageTypeEnum.ERROR) {
-					System.out.println(response.getMessages().getMessage().get(0).getCode());
-				    System.out.println(response.getMessages().getMessage().get(0).getText());
-				}
-        	}
-            else if (apiResponse instanceof ErrorResponse) {
-		 		System.out.println(apiResponse.getMessages().getMessage().get(0).getCode());
-                System.out.println(apiResponse.getMessages().getMessage().get(0).getText());
-                System.out.println("Failed to create customer shipping address:  " + apiResponse.getMessages().getResultCode());
+             if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
+
+                System.out.println(response.getCustomerAddressId());
+                System.out.println(response.getMessages().getMessage().get(0).getCode());
+                System.out.println(response.getMessages().getMessage().get(0).getText());
+            }
+            else
+            {
+                System.out.println("Failed to create customer shipping address:  " + response.getMessages().getResultCode());
             }
         }
-		return apiResponse;
+		return response;
  
     }
 }
