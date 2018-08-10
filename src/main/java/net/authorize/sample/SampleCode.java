@@ -10,6 +10,7 @@ import net.authorize.sample.PayPalExpressCheckout.*;
 import net.authorize.sample.PayPalExpressCheckout.Void;
 import net.authorize.sample.RecurringBilling.*;
 import net.authorize.sample.TransactionReporting.*;
+import net.authorize.sample.AcceptSuite.*;
 import net.authorize.sample.CustomerProfiles.*;
 import net.authorize.sample.MobileInAppTransactions.*;
 import net.authorize.sample.FraudManagement.*;
