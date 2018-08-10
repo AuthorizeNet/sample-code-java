@@ -2,6 +2,7 @@ package net.authorize.sample.CustomerProfiles;
 
 import net.authorize.Environment;
 import net.authorize.api.contract.v1.*;
+import java.math.BigDecimal;
 import net.authorize.api.controller.CreateCustomerProfileController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
@@ -46,37 +47,37 @@ public class CreateCustomerProfile {
         controller.execute();
 
         // Get the response
-        ANetApiResponse apiResponse = controller.getApiResponse();
+        CreateCustomerProfileResponse response = new CreateCustomerProfileResponse();
+        response = controller.getApiResponse();
         
         // Parse the response to determine results
-        if (apiResponse != null) {
-        	if (apiResponse instanceof CreateCustomerProfileResponse) {
+        if (response!=null) {
             // If API Response is OK, go ahead and check the transaction response
-        		CreateCustomerProfileResponse response = (CreateCustomerProfileResponse) apiResponse;
-	            if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
-	                System.out.println(response.getCustomerProfileId());
-	                if (!response.getCustomerPaymentProfileIdList().getNumericString().isEmpty()) {
-	                    System.out.println(response.getCustomerPaymentProfileIdList().getNumericString().get(0));
-	                }
-	                if (!response.getCustomerShippingAddressIdList().getNumericString().isEmpty()) {
-	                    System.out.println(response.getCustomerShippingAddressIdList().getNumericString().get(0));
-	                }
-	                if (!response.getValidationDirectResponseList().getString().isEmpty()) {
-	                    System.out.println(response.getValidationDirectResponseList().getString().get(0));
-	                }
-	            } 
-	            else if (response.getMessages().getResultCode() == MessageTypeEnum.ERROR) {
-	            	System.out.println(response.getMessages().getMessage().get(0).getCode());
-	                System.out.println(response.getMessages().getMessage().get(0).getText());
-	            }
-        	}
-            else if (apiResponse instanceof ErrorResponse) {
-            	System.out.println(apiResponse.getMessages().getMessage().get(0).getCode());
-                System.out.println(apiResponse.getMessages().getMessage().get(0).getText());
-                System.out.println("Failed to create customer profile:  " + apiResponse.getMessages().getResultCode());
+            if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
+                System.out.println(response.getCustomerProfileId());
+                if (!response.getCustomerPaymentProfileIdList().getNumericString().isEmpty()) {
+                    System.out.println(response.getCustomerPaymentProfileIdList().getNumericString().get(0));
+                }
+                if (!response.getCustomerShippingAddressIdList().getNumericString().isEmpty()) {
+                    System.out.println(response.getCustomerShippingAddressIdList().getNumericString().get(0));
+                }
+                if (!response.getValidationDirectResponseList().getString().isEmpty()) {
+                    System.out.println(response.getValidationDirectResponseList().getString().get(0));
+                }
             }
-        } 
-        return apiResponse;
+            else
+            {
+                System.out.println("Failed to create customer profile:  " + response.getMessages().getResultCode());
+            }
+        } else {
+            // Display the error code and message when response is null 
+            ANetApiResponse errorResponse = controller.getErrorResponse();
+            System.out.println("Failed to get response");
+            if (!errorResponse.getMessages().getMessage().isEmpty()) {
+                System.out.println("Error: "+errorResponse.getMessages().getMessage().get(0).getCode()+" \n"+ errorResponse.getMessages().getMessage().get(0).getText());
+            }
+        }
+        return response;
 
     }
 }
