@@ -40,7 +40,7 @@ public class CreditBankAccount {
         BankAccountType bankAccountType = new BankAccountType();
         bankAccountType.setAccountType(BankAccountTypeEnum.CHECKING);
         bankAccountType.setRoutingNumber("121141754");
-        bankAccountType.setAccountNumber("1234567890");
+        bankAccountType.setAccountNumber("7687245428");
         bankAccountType.setNameOnAccount("John Doe");
         paymentType.setBankAccount(bankAccountType);
 
