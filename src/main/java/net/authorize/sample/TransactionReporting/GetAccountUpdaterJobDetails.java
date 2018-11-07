@@ -63,7 +63,6 @@ public class GetAccountUpdaterJobDetails {
 			ArrayList<AuDeleteType> deleteTypeList = new ArrayList<AuDeleteType>();
 
 			for (AuDetailsType details : response.getAuDetails().getAuUpdateOrAuDelete()) {
-
 				System.out.println("---Customer profile details Start---");
 				System.out.println("customerProfileID:" + details.getCustomerProfileID());
 				System.out.println("customerPaymentProfileID:" + details.getCustomerPaymentProfileID());
@@ -74,18 +73,13 @@ public class GetAccountUpdaterJobDetails {
 				System.out.println("reasonDescription:" + details.getReasonDescription());
 
 				if (details.getClass().getTypeName().toString().contains("AuUpdateType")) {
-
 					updateTypeList.add((AuUpdateType) details);
-
 				} else if (details.getClass().getTypeName().toString().contains("AuDeleteType")) {
-
 					deleteTypeList.add((AuDeleteType) details);
-
 				}
 
 				if (!(updateTypeList.isEmpty())) {
 					for (int i = 0; i < updateTypeList.size(); i++) {
-
 						System.out.println("---AU Update Start---");
 						System.out.println("customerProfileID:" + details.getCustomerProfileID());
 						System.out.println("customerPaymentProfileID:" + details.getCustomerPaymentProfileID());
@@ -102,7 +96,6 @@ public class GetAccountUpdaterJobDetails {
 							for (String subscriptionid : updateTypeList.get(i).getSubscriptionIdList()
 									.getSubscriptionId())
 								System.out.println("SubscriptionId:" + subscriptionid);
-
 						}
 
 						if (updateTypeList.get(i).getNewCreditCard() != null) {
@@ -111,7 +104,6 @@ public class GetAccountUpdaterJobDetails {
 							System.out.println("cardNumber:" + newCreditCard.getCardNumber());
 							System.out.println("expirationDate:" + newCreditCard.getExpirationDate());
 							System.out.println("cardType:" + newCreditCard.getCardType());
-
 						}
 
 						if (updateTypeList.get(i).getOldCreditCard() != null) {
@@ -120,14 +112,12 @@ public class GetAccountUpdaterJobDetails {
 							System.out.println("cardNumber:" + oldCreditCard.getCardNumber());
 							System.out.println("expirationDate:" + oldCreditCard.getExpirationDate());
 							System.out.println("cardType:" + oldCreditCard.getCardType());
-
 						}
 					}
 				}
 				
 				if (!(deleteTypeList.isEmpty())) {
-					for (int i = 0; i < deleteTypeList.size(); i++) {
-						
+					for (int i = 0; i < deleteTypeList.size(); i++) {					
 						System.out.println("---AU Delete Start---");
 						System.out.println("customerProfileID:" + details.getCustomerProfileID());
 						System.out.println("customerPaymentProfileID:" + details.getCustomerPaymentProfileID());
@@ -136,7 +126,6 @@ public class GetAccountUpdaterJobDetails {
 						System.out.println("updateTimeUTC:" + details.getUpdateTimeUTC());
 						System.out.println("reasonCode:" + details.getAuReasonCode());
 						System.out.println("reasonDescription:" + details.getReasonDescription());
-
 						
 						if ((deleteTypeList.get(i).getSubscriptionIdList() != null)
 								&& (deleteTypeList.get(i).getSubscriptionIdList().getSubscriptionId() != null)
@@ -145,23 +134,18 @@ public class GetAccountUpdaterJobDetails {
 							for (String subscriptionid : deleteTypeList.get(i).getSubscriptionIdList()
 									.getSubscriptionId())
 								System.out.println("SubscriptionId:" + subscriptionid);
-
 						}
 
 						if (deleteTypeList.get(i).getCreditCard() != null) {
-
 							CreditCardMaskedType creditCard = deleteTypeList.get(i).getCreditCard();
 							System.out.println("cardNumber:" + creditCard.getCardNumber());
 							System.out.println("expirationDate:" + creditCard.getExpirationDate());
 							System.out.println("cardType:" + creditCard.getCardType());
 						}
-
 					}
 				}
-
 			}
 		}
-
 		else {
 			// Display the error code and message when response is null
 			ANetApiResponse errorResponse = controller.getErrorResponse();
@@ -171,7 +155,6 @@ public class GetAccountUpdaterJobDetails {
 						+ errorResponse.getMessages().getMessage().get(0).getText());
 			}
 		}
-
 		return response;
 	}
 }
