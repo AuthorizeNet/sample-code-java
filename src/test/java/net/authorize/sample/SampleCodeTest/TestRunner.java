@@ -542,7 +542,7 @@ public class TestRunner {
 		return GetAnAcceptPaymentPage.run(apiLoginId, transactionKey, getAmount());
 	}
 	/*---Added for GetAccountUpdaterJobDetails---*/
-	 public ANetApiResponse TestGetAccountUpdaterJobDetails() throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException
+	 public ANetApiResponse TestGetAccountUpdaterJobDetails()
      {
          return GetAccountUpdaterJobDetails.run(apiLoginId, transactionKey);
      }

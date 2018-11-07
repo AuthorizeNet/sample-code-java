@@ -1,4 +1,5 @@
 package net.authorize.sample;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import net.authorize.sample.VisaCheckout.*;
@@ -17,6 +18,7 @@ public class SampleCode {
 
     public static void main( String[] args ) 
     {
+
     	 if (args.length == 0)
          {
              SelectMethod();
@@ -30,6 +32,7 @@ public class SampleCode {
          {
              ShowUsage();
          }
+
          System.out.println("");
          System.out.print("Press <Return> to finish ...");
          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -37,6 +40,7 @@ public class SampleCode {
              int i = Integer.parseInt(br.readLine());
          }catch(Exception ex) {
          }
+
     }
 
     private static void ShowUsage()
@@ -131,27 +135,30 @@ public class SampleCode {
     {
         // These are default transaction keys.
         // You can create your own keys in seconds by signing up for a sandbox account here: https://developer.authorize.net/sandbox/
-		String apiLoginId           = "5KP3u95bQpv";
+    	String apiLoginId           = "5KP3u95bQpv";
         String transactionKey       = "346HZ32z3fP4hTG2";
         //Update the payedId with which you want to run the sample code
         String payerId 				= "6ZSCSYG33VP8Q";
         //Update the transactionId with which you want to run the sample code
-        String transactionId 		= "123456";       
+        String transactionId 		= "123456";
         String customerProfileId = "40204235";
         String customerPaymentProfileId = "1000041617";
-        String customerAddressId = "1871959249";       
-        String emailId = "test@test.com";        
-        String subscriptionId = "2925606";        
+        String customerAddressId = "1871959249";
+        
+        String emailId = "test@test.com";
+        
+        String subscriptionId = "2925606";
+        
         Double amount = 123.45;
         
 //      Proxy server settings.
-//      Enable these lines for using Sample Codes behind a proxy server      
+//      Enable these lines for using Sample Codes behind a proxy server 
 //      System.setProperty("https.proxyUse", "true");
 //      System.setProperty("https.proxyHost", "example.proxy.server");
 //      System.setProperty("https.proxyPort", "portNumber");
 //      System.setProperty("https.proxyUserName", "exampleUsername");
 //      System.setProperty("https.proxyPassword", "examplePassword");
-               
+         
         switch (methodName) {
             case "DecryptVisaCheckoutData":
                 DecryptVisaCheckoutData.run(apiLoginId, transactionKey);
@@ -333,10 +340,10 @@ public class SampleCode {
             case "GetAccountUpdaterJobDetails":
             	GetAccountUpdaterJobDetails.run(apiLoginId, transactionKey);
                 break;    
-                
             default:
                 ShowUsage();
                 break;
-        }       
+        }
+        
     }
 }

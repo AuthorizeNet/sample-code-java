@@ -52,10 +52,10 @@ public class GetAccountUpdaterJobDetails {
 		// If API Response is OK, go ahead and check the transaction response
 		if (response != null && response.getMessages().getResultCode() == MessageTypeEnum.OK) {
 
-			System.out.println("SUCCESS: Get Account Updater job details for Month and year : " + month);
+			System.out.println("SUCCESS: Get Account Updater job details for Month: " + month);
 
 			if (response.getAuDetails() == null) {
-				System.out.println("No GetAccountUpdaterjobdetails for this month and year.");
+				System.out.println("No GetAccountUpdaterjobdetails for Month.");
 				return response;
 			}
 
@@ -63,31 +63,37 @@ public class GetAccountUpdaterJobDetails {
 			ArrayList<AuDeleteType> deleteTypeList = new ArrayList<AuDeleteType>();
 
 			for (AuDetailsType details : response.getAuDetails().getAuUpdateOrAuDelete()) {
-				System.out.println("---Customer profile details Start---");
-				System.out.println("customerProfileID:" + details.getCustomerProfileID());
-				System.out.println("customerPaymentProfileID:" + details.getCustomerPaymentProfileID());
-				System.out.println("customerFirstname:" + details.getFirstName());
-				System.out.println("customerLastname:" + details.getLastName());
-				System.out.println("updateTimeUTC:" + details.getUpdateTimeUTC());
-				System.out.println("reasonCode:" + details.getAuReasonCode());
-				System.out.println("reasonDescription:" + details.getReasonDescription());
+
+				System.out.println("---Customer Profile Details Start---");
+				System.out.println("Profile ID:" + details.getCustomerProfileID());
+				System.out.println("Payment Profile ID:" + details.getCustomerPaymentProfileID());
+				System.out.println("First Name:" + details.getFirstName());
+				System.out.println("Last Name:" + details.getLastName());
+				System.out.println("Update Time UTC:" + details.getUpdateTimeUTC());
+				System.out.println("Reason Code:" + details.getAuReasonCode());
+				System.out.println("Reason Description:" + details.getReasonDescription());
 
 				if (details.getClass().getTypeName().toString().contains("AuUpdateType")) {
+
 					updateTypeList.add((AuUpdateType) details);
+
 				} else if (details.getClass().getTypeName().toString().contains("AuDeleteType")) {
+
 					deleteTypeList.add((AuDeleteType) details);
+
 				}
 
 				if (!(updateTypeList.isEmpty())) {
 					for (int i = 0; i < updateTypeList.size(); i++) {
+
 						System.out.println("---AU Update Start---");
-						System.out.println("customerProfileID:" + details.getCustomerProfileID());
-						System.out.println("customerPaymentProfileID:" + details.getCustomerPaymentProfileID());
-						System.out.println("customerFirstname:" + details.getFirstName());
-						System.out.println("customerLastname:" + details.getLastName());
-						System.out.println("updateTimeUTC:" + details.getUpdateTimeUTC());
-						System.out.println("reasonCode:" + details.getAuReasonCode());
-						System.out.println("reasonDescription:" + details.getReasonDescription());
+						System.out.println("Profile ID:" + details.getCustomerProfileID());
+						System.out.println("Payment Profile ID:" + details.getCustomerPaymentProfileID());
+						System.out.println("First Name:" + details.getFirstName());
+						System.out.println("Last Name:" + details.getLastName());
+						System.out.println("Update Time UTC:" + details.getUpdateTimeUTC());
+						System.out.println("Reason Code:" + details.getAuReasonCode());
+						System.out.println("Reason Description:" + details.getReasonDescription());
 
 						if ((updateTypeList.get(i).getSubscriptionIdList() != null)
 								&& (updateTypeList.get(i).getSubscriptionIdList().getSubscriptionId() != null)
@@ -101,32 +107,33 @@ public class GetAccountUpdaterJobDetails {
 						if (updateTypeList.get(i).getNewCreditCard() != null) {
 							CreditCardMaskedType newCreditCard = updateTypeList.get(i).getNewCreditCard();
 							System.out.println("---Fetching New Card Details---");
-							System.out.println("cardNumber:" + newCreditCard.getCardNumber());
-							System.out.println("expirationDate:" + newCreditCard.getExpirationDate());
-							System.out.println("cardType:" + newCreditCard.getCardType());
+							System.out.println("Card Number:" + newCreditCard.getCardNumber());
+							System.out.println("Expiration Date:" + newCreditCard.getExpirationDate());
+							System.out.println("Card Type:" + newCreditCard.getCardType());
 						}
 
 						if (updateTypeList.get(i).getOldCreditCard() != null) {
 							CreditCardMaskedType oldCreditCard = updateTypeList.get(i).getOldCreditCard();
 							System.out.println("---Fetching Old Card Details---");
-							System.out.println("cardNumber:" + oldCreditCard.getCardNumber());
-							System.out.println("expirationDate:" + oldCreditCard.getExpirationDate());
-							System.out.println("cardType:" + oldCreditCard.getCardType());
+							System.out.println("Card Number:" + oldCreditCard.getCardNumber());
+							System.out.println("Expiration Date:" + oldCreditCard.getExpirationDate());
+							System.out.println("Card Type:" + oldCreditCard.getCardType());
 						}
 					}
 				}
 				
 				if (!(deleteTypeList.isEmpty())) {
-					for (int i = 0; i < deleteTypeList.size(); i++) {					
-						System.out.println("---AU Delete Start---");
-						System.out.println("customerProfileID:" + details.getCustomerProfileID());
-						System.out.println("customerPaymentProfileID:" + details.getCustomerPaymentProfileID());
-						System.out.println("customerFirstname:" + details.getFirstName());
-						System.out.println("customerLastname:" + details.getLastName());
-						System.out.println("updateTimeUTC:" + details.getUpdateTimeUTC());
-						System.out.println("reasonCode:" + details.getAuReasonCode());
-						System.out.println("reasonDescription:" + details.getReasonDescription());
+					for (int i = 0; i < deleteTypeList.size(); i++) {
 						
+						System.out.println("---AU Delete Start---");
+						System.out.println("Profile ID:" + details.getCustomerProfileID());
+						System.out.println("Payment Profile ID:" + details.getCustomerPaymentProfileID());
+						System.out.println("First Name:" + details.getFirstName());
+						System.out.println("Last Name:" + details.getLastName());
+						System.out.println("Update Time UTC:" + details.getUpdateTimeUTC());
+						System.out.println("Reason Code:" + details.getAuReasonCode());
+						System.out.println("Reason Description:" + details.getReasonDescription());
+
 						if ((deleteTypeList.get(i).getSubscriptionIdList() != null)
 								&& (deleteTypeList.get(i).getSubscriptionIdList().getSubscriptionId() != null)
 								&& (!deleteTypeList.get(i).getSubscriptionIdList().getSubscriptionId().isEmpty())) {
@@ -137,15 +144,18 @@ public class GetAccountUpdaterJobDetails {
 						}
 
 						if (deleteTypeList.get(i).getCreditCard() != null) {
+
 							CreditCardMaskedType creditCard = deleteTypeList.get(i).getCreditCard();
-							System.out.println("cardNumber:" + creditCard.getCardNumber());
-							System.out.println("expirationDate:" + creditCard.getExpirationDate());
-							System.out.println("cardType:" + creditCard.getCardType());
+							System.out.println("Card Number:" + creditCard.getCardNumber());
+							System.out.println("Expiration Date:" + creditCard.getExpirationDate());
+							System.out.println("Card Type:" + creditCard.getCardType());
 						}
+
 					}
 				}
 			}
 		}
+
 		else {
 			// Display the error code and message when response is null
 			ANetApiResponse errorResponse = controller.getErrorResponse();
@@ -155,6 +165,7 @@ public class GetAccountUpdaterJobDetails {
 						+ errorResponse.getMessages().getMessage().get(0).getText());
 			}
 		}
+
 		return response;
 	}
 }
