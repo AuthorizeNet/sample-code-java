@@ -1,7 +1,6 @@
 package net.authorize.sample;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 import net.authorize.sample.VisaCheckout.*;
@@ -18,30 +17,30 @@ import net.authorize.sample.FraudManagement.*;
  */
 public class SampleCode {
 
-    public static void main( String[] args ) throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException
+    public static void main( String[] args ) 
     {
 
-        if (args.length == 0)
-        {
-            SelectMethod();
-        }
-        else if (args.length == 1)
-        {
-            RunMethod(args[0]);
-            return;
-        }
-        else
-        {
-            ShowUsage();
-        }
+    	 if (args.length == 0)
+         {
+             SelectMethod();
+         }
+         else if (args.length == 1)
+         {
+             RunMethod(args[0]);
+             return;
+         }
+         else
+         {
+             ShowUsage();
+         }
 
-        System.out.println("");
-        System.out.print("Press <Return> to finish ...");
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        try{
-            int i = Integer.parseInt(br.readLine());
-        }catch(Exception ex) {
-        }
+         System.out.println("");
+         System.out.print("Press <Return> to finish ...");
+         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+         try{
+             int i = Integer.parseInt(br.readLine());
+         }catch(Exception ex) {
+         }
 
     }
 
@@ -135,7 +134,7 @@ public class SampleCode {
         System.out.println("    GetAnAcceptPaymentPage");
     }
 
-    private static void RunMethod(String methodName) throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException
+    private static void RunMethod(String methodName)
     {
         // These are default transaction keys.
         // You can create your own keys in seconds by signing up for a sandbox account here: https://developer.authorize.net/sandbox/
@@ -166,6 +165,7 @@ public class SampleCode {
 //      System.setProperty("https.proxyUserName", "exampleUsername");
 //      System.setProperty("https.proxyPassword", "examplePassword");
         
+      
         
         switch (methodName) {
             case "DecryptVisaCheckoutData":
@@ -353,5 +353,6 @@ public class SampleCode {
                 ShowUsage();
                 break;
         }
+        
     }
 }

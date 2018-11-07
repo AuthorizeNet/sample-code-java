@@ -18,8 +18,7 @@ import net.authorize.api.controller.base.ApiOperationBase;
 
 public class GetAccountUpdaterJobDetails {
 
-	public static ANetApiResponse run(String apiLoginId, String transactionKey)
-			throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+	public static ANetApiResponse run(String apiLoginId, String transactionKey) {
 
 		// Set the request to operate in either the sandbox or production environment
 		ApiOperationBase.setEnvironment(Environment.SANDBOX);
