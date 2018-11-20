@@ -13,6 +13,8 @@ import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
 import net.authorize.sample.MobileInAppTransactions.*;
 import net.authorize.sample.FraudManagement.*;
+import net.authorize.sample.AcceptSuite.GetAcceptCustomerProfilePage;
+import net.authorize.sample.AcceptSuite.GetAnAcceptPaymentPage;
 /**
  * Created by anetdeveloper on 8/5/15.
  */
