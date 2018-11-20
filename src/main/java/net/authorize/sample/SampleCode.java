@@ -158,7 +158,7 @@ public class SampleCode {
 //      System.setProperty("https.proxyPort", "portNumber");
 //      System.setProperty("https.proxyUserName", "exampleUsername");
 //      System.setProperty("https.proxyPassword", "examplePassword");
-        
+         
         switch (methodName) {
             case "DecryptVisaCheckoutData":
                 DecryptVisaCheckoutData.run(apiLoginId, transactionKey);

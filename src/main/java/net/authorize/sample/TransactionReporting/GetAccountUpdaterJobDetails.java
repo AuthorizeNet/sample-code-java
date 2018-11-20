@@ -33,6 +33,7 @@ public class GetAccountUpdaterJobDetails {
 		Paging paging = new Paging();
 		paging.setLimit(100);
 		paging.setOffset(2);
+		
 
 		// Create the API request and set the parameters for this specific request
 		GetAUJobDetailsRequest apiRequest = new GetAUJobDetailsRequest();
