@@ -222,7 +222,7 @@ public class SampleCode {
                 CreateSubscription.run(apiLoginId, transactionKey, (short)12, amount);
                 break;
             case "CreateSubscriptionFromCustomerProfile":
-            	CreateSubscriptionFromCustomerProfile.run(apiLoginId, transactionKey, (short)12, amount, customerProfileId, customerPaymentProfileId, amount);
+            	CreateSubscriptionFromCustomerProfile.run(apiLoginId, transactionKey, (short)12, amount, customerProfileId, customerPaymentProfileId, customerAddressId);
                 break;                
             case "GetSubscription":
                 GetSubscription.run(apiLoginId, transactionKey, subscriptionId);
