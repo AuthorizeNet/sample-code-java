@@ -13,6 +13,8 @@ import net.authorize.sample.TransactionReporting.*;
 import net.authorize.sample.CustomerProfiles.*;
 import net.authorize.sample.MobileInAppTransactions.*;
 import net.authorize.sample.FraudManagement.*;
+import net.authorize.sample.AcceptSuite.GetAcceptCustomerProfilePage;
+import net.authorize.sample.AcceptSuite.GetAnAcceptPaymentPage;
 /**
  * Created by anetdeveloper on 8/5/15.
  */
@@ -145,9 +147,9 @@ public class SampleCode {
         //Update the transactionId with which you want to run the sample code
         String transactionId 		= "123456";
         
-        String customerProfileId = "37905546";
-        String customerPaymentProfileId = "34461178";
-        String customerAddressId = "1871959249";
+        String customerProfileId = "36596285";
+        String customerPaymentProfileId = "33086593";
+        String customerAddressId = "1873761911";
         
         String emailId = "test@test.com";
         
@@ -220,7 +222,7 @@ public class SampleCode {
                 CreateSubscription.run(apiLoginId, transactionKey, (short)12, amount);
                 break;
             case "CreateSubscriptionFromCustomerProfile":
-            	CreateSubscriptionFromCustomerProfile.run(apiLoginId, transactionKey, (short)12, amount, "123212", "123213", "123213");
+            	CreateSubscriptionFromCustomerProfile.run(apiLoginId, transactionKey, (short)12, amount, customerProfileId, customerPaymentProfileId, customerAddressId);
                 break;                
             case "GetSubscription":
                 GetSubscription.run(apiLoginId, transactionKey, subscriptionId);
