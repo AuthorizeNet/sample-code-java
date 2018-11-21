@@ -33,7 +33,6 @@ public class GetAccountUpdaterJobDetails {
 		Paging paging = new Paging();
 		paging.setLimit(100);
 		paging.setOffset(2);
-		
 
 		// Create the API request and set the parameters for this specific request
 		GetAUJobDetailsRequest apiRequest = new GetAUJobDetailsRequest();
@@ -73,17 +72,17 @@ public class GetAccountUpdaterJobDetails {
 				System.out.println("Update Time UTC:" + details.getUpdateTimeUTC());
 				System.out.println("Reason Code:" + details.getAuReasonCode());
 				System.out.println("Reason Description:" + details.getReasonDescription());
-
-				if (details.getClass().getTypeName().toString().contains("AuUpdateType")) {
-
+				
+				if (details.getClass().getName().toString().contains("AuUpdateType"))
+				{
 					updateTypeList.add((AuUpdateType) details);
 
-				} else if (details.getClass().getTypeName().toString().contains("AuDeleteType")) {
+				} else if (details.getClass().getName().toString().contains("AuDeleteType")) {
 
 					deleteTypeList.add((AuDeleteType) details);
 
 				}
-
+					
 				if (!(updateTypeList.isEmpty())) {
 					for (int i = 0; i < updateTypeList.size(); i++) {
 
@@ -95,7 +94,7 @@ public class GetAccountUpdaterJobDetails {
 						System.out.println("Update Time UTC:" + details.getUpdateTimeUTC());
 						System.out.println("Reason Code:" + details.getAuReasonCode());
 						System.out.println("Reason Description:" + details.getReasonDescription());
-
+						
 						if (updateTypeList.get(i).getNewCreditCard() != null) {
 							CreditCardMaskedType newCreditCard = updateTypeList.get(i).getNewCreditCard();
 							System.out.println("---Fetching New Card Details---");
