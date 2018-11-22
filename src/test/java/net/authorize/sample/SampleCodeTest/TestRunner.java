@@ -39,7 +39,7 @@ import net.authorize.sample.CustomerProfiles.CreateCustomerShippingAddress;
 import net.authorize.sample.CustomerProfiles.DeleteCustomerPaymentProfile;
 import net.authorize.sample.CustomerProfiles.DeleteCustomerProfile;
 import net.authorize.sample.CustomerProfiles.DeleteCustomerShippingAddress;
-import net.authorize.sample.CustomerProfiles.GetAcceptCustomerProfilePage;
+import net.authorize.sample.AcceptSuite.GetAcceptCustomerProfilePage;
 import net.authorize.sample.CustomerProfiles.GetCustomerPaymentProfile;
 import net.authorize.sample.CustomerProfiles.GetCustomerProfile;
 import net.authorize.sample.CustomerProfiles.GetCustomerShippingAddress;
@@ -62,7 +62,7 @@ import net.authorize.sample.PaymentTransactions.ChargeCustomerProfile;
 import net.authorize.sample.PaymentTransactions.ChargeTokenizedCreditCard;
 import net.authorize.sample.PaymentTransactions.CreditBankAccount;
 import net.authorize.sample.PaymentTransactions.DebitBankAccount;
-import net.authorize.sample.PaymentTransactions.GetAnAcceptPaymentPage;
+import net.authorize.sample.AcceptSuite.GetAnAcceptPaymentPage;
 import net.authorize.sample.PaymentTransactions.RefundTransaction;
 import net.authorize.sample.PaymentTransactions.VoidTransaction;
 import net.authorize.sample.RecurringBilling.CancelSubscription;
@@ -74,6 +74,7 @@ import net.authorize.sample.RecurringBilling.UpdateSubscription;
 import net.authorize.sample.TransactionReporting.GetAccountUpdaterJobDetails;
 import net.authorize.sample.TransactionReporting.GetTransactionDetails;
 
+
 public class TestRunner {
 
 	String apiLoginId = Constants.API_LOGIN_ID;
@@ -81,7 +82,6 @@ public class TestRunner {
 	String TransactionID = Constants.TRANSACTION_ID;
 	String payerID = Constants.PAYER_ID;
 
-	
 	static SecureRandom rgenerator = new SecureRandom();
 
 	private static String getEmail()
