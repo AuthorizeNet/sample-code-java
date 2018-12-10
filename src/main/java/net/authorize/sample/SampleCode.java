@@ -344,6 +344,9 @@ public class SampleCode {
             case "GetAnAcceptPaymentPage":
             	GetAnAcceptPaymentPage.run(apiLoginId, transactionKey, amount);
                 break;
+				 case "CreateChasePayTransaction":
+            	CreateChasePayTransaction.run(apiLoginId, transactionKey, amount);
+                break;
             default:
                 ShowUsage();
                 break;
