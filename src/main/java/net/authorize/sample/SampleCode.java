@@ -1,9 +1,7 @@
 package net.authorize.sample;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-
 import net.authorize.sample.VisaCheckout.*;
 import net.authorize.sample.PaymentTransactions.*;
 import net.authorize.sample.PayPalExpressCheckout.*;
@@ -20,30 +18,30 @@ import net.authorize.sample.AcceptSuite.GetAnAcceptPaymentPage;
  */
 public class SampleCode {
 
-    public static void main( String[] args )
+    public static void main( String[] args ) 
     {
 
-        if (args.length == 0)
-        {
-            SelectMethod();
-        }
-        else if (args.length == 1)
-        {
-            RunMethod(args[0]);
-            return;
-        }
-        else
-        {
-            ShowUsage();
-        }
+    	 if (args.length == 0)
+         {
+             SelectMethod();
+         }
+         else if (args.length == 1)
+         {
+             RunMethod(args[0]);
+             return;
+         }
+         else
+         {
+             ShowUsage();
+         }
 
-        System.out.println("");
-        System.out.print("Press <Return> to finish ...");
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        try{
-            int i = Integer.parseInt(br.readLine());
-        }catch(Exception ex) {
-        }
+         System.out.println("");
+         System.out.print("Press <Return> to finish ...");
+         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+         try{
+             int i = Integer.parseInt(br.readLine());
+         }catch(Exception ex) {
+         }
 
     }
 
@@ -55,8 +53,6 @@ public class SampleCode {
         System.out.println("");
         System.out.println("Code Sample Names: ");
         ShowMethods();
-
-
     }
 
     private static void SelectMethod()
@@ -99,6 +95,7 @@ public class SampleCode {
         System.out.println("    CancelSubscription");
         System.out.println("    UpdateSubscription");
         System.out.println("    GetListOfSubscriptions");
+        System.out.println("    GetAccountUpdaterJobDetails");
         System.out.println("    GetBatchStatistics");
         System.out.println("    GetSettledBatchList");
         System.out.println("    GetTransactionList");
@@ -140,7 +137,7 @@ public class SampleCode {
     {
         // These are default transaction keys.
         // You can create your own keys in seconds by signing up for a sandbox account here: https://developer.authorize.net/sandbox/
-        String apiLoginId           = "5KP3u95bQpv";
+    	String apiLoginId           = "5KP3u95bQpv";
         String transactionKey       = "346HZ32z3fP4hTG2";
         //Update the payedId with which you want to run the sample code
         String payerId 				= "6ZSCSYG33VP8Q";
@@ -158,14 +155,13 @@ public class SampleCode {
         Double amount = 123.45;
         
 //      Proxy server settings.
-//      Enable these lines for using Sample Codes behind a proxy server
-      
+//      Enable these lines for using Sample Codes behind a proxy server 
 //      System.setProperty("https.proxyUse", "true");
 //      System.setProperty("https.proxyHost", "example.proxy.server");
 //      System.setProperty("https.proxyPort", "portNumber");
 //      System.setProperty("https.proxyUserName", "exampleUsername");
 //      System.setProperty("https.proxyPassword", "examplePassword");
-
+         
         switch (methodName) {
             case "DecryptVisaCheckoutData":
                 DecryptVisaCheckoutData.run(apiLoginId, transactionKey);
@@ -344,9 +340,13 @@ public class SampleCode {
             case "GetAnAcceptPaymentPage":
             	GetAnAcceptPaymentPage.run(apiLoginId, transactionKey, amount);
                 break;
+            case "GetAccountUpdaterJobDetails":
+            	GetAccountUpdaterJobDetails.run(apiLoginId, transactionKey);
+                break;    
             default:
                 ShowUsage();
                 break;
         }
+        
     }
 }

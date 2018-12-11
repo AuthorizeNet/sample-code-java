@@ -41,6 +41,7 @@ import net.authorize.sample.CustomerProfiles.CreateCustomerShippingAddress;
 import net.authorize.sample.CustomerProfiles.DeleteCustomerPaymentProfile;
 import net.authorize.sample.CustomerProfiles.DeleteCustomerProfile;
 import net.authorize.sample.CustomerProfiles.DeleteCustomerShippingAddress;
+import net.authorize.sample.CustomerProfiles.GetAcceptCustomerProfilePage;
 import net.authorize.sample.CustomerProfiles.GetCustomerPaymentProfile;
 import net.authorize.sample.CustomerProfiles.GetCustomerProfile;
 import net.authorize.sample.CustomerProfiles.GetCustomerShippingAddress;
@@ -48,6 +49,13 @@ import net.authorize.sample.CustomerProfiles.UpdateCustomerPaymentProfile;
 import net.authorize.sample.CustomerProfiles.UpdateCustomerProfile;
 import net.authorize.sample.CustomerProfiles.UpdateCustomerShippingAddress;
 import net.authorize.sample.CustomerProfiles.ValidateCustomerPaymentProfile;
+import net.authorize.sample.PayPalExpressCheckout.AuthorizationAndCapture;
+import net.authorize.sample.PayPalExpressCheckout.AuthorizationAndCaptureContinued;
+import net.authorize.sample.PayPalExpressCheckout.AuthorizationOnly;
+import net.authorize.sample.PayPalExpressCheckout.AuthorizationOnlyContinued;
+import net.authorize.sample.PayPalExpressCheckout.Credit;
+import net.authorize.sample.PayPalExpressCheckout.GetDetails;
+import net.authorize.sample.PayPalExpressCheckout.PriorAuthorizationCapture;
 import net.authorize.sample.PaymentTransactions.AuthorizeCreditCard;
 import net.authorize.sample.PaymentTransactions.CaptureFundsAuthorizedThroughAnotherChannel;
 import net.authorize.sample.PaymentTransactions.CapturePreviouslyAuthorizedAmount;
@@ -56,21 +64,16 @@ import net.authorize.sample.PaymentTransactions.ChargeCustomerProfile;
 import net.authorize.sample.PaymentTransactions.ChargeTokenizedCreditCard;
 import net.authorize.sample.PaymentTransactions.CreditBankAccount;
 import net.authorize.sample.PaymentTransactions.DebitBankAccount;
+import net.authorize.sample.PaymentTransactions.GetAnAcceptPaymentPage;
 import net.authorize.sample.PaymentTransactions.RefundTransaction;
 import net.authorize.sample.PaymentTransactions.VoidTransaction;
-import net.authorize.sample.PayPalExpressCheckout.AuthorizationAndCapture;
-import net.authorize.sample.PayPalExpressCheckout.AuthorizationAndCaptureContinued;
-import net.authorize.sample.PayPalExpressCheckout.AuthorizationOnly;
-import net.authorize.sample.PayPalExpressCheckout.AuthorizationOnlyContinued;
-import net.authorize.sample.PayPalExpressCheckout.Credit;
-import net.authorize.sample.PayPalExpressCheckout.GetDetails;
-import net.authorize.sample.PayPalExpressCheckout.PriorAuthorizationCapture;
 import net.authorize.sample.RecurringBilling.CancelSubscription;
 import net.authorize.sample.RecurringBilling.CreateSubscription;
 import net.authorize.sample.RecurringBilling.CreateSubscriptionFromCustomerProfile;
 import net.authorize.sample.RecurringBilling.GetSubscription;
 import net.authorize.sample.RecurringBilling.GetSubscriptionStatus;
 import net.authorize.sample.RecurringBilling.UpdateSubscription;
+import net.authorize.sample.TransactionReporting.GetAccountUpdaterJobDetails;
 import net.authorize.sample.TransactionReporting.GetTransactionDetails;
 
 public class TestRunner {
@@ -539,4 +542,10 @@ public class TestRunner {
 	{
 		return GetAnAcceptPaymentPage.run(apiLoginId, transactionKey, getAmount());
 	}
+	/*---Added for GetAccountUpdaterJobDetails---*/
+	 public ANetApiResponse TestGetAccountUpdaterJobDetails()
+     {
+         return GetAccountUpdaterJobDetails.run(apiLoginId, transactionKey);
+     }
+	/*---End---*/ 
 }
