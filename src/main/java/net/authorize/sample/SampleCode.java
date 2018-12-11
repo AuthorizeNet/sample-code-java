@@ -134,6 +134,7 @@ public class SampleCode {
         System.out.println("    GetHeldTransactionList");
         System.out.println("    ApproveOrDeclineHeldTransaction");
         System.out.println("    GetAnAcceptPaymentPage");
+		System.out.println("    CreateChasePayTransaction");
     }
 
     private static void RunMethod(String methodName)
