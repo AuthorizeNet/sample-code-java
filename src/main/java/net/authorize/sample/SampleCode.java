@@ -126,6 +126,7 @@ public class SampleCode {
 		System.out.println("    ApproveOrDeclineHeldTransaction");
 		System.out.println("    GetAnAcceptPaymentPage");
 		System.out.println("    CreateChasePayTransaction");
+		System.out.println("    GetCustomerPaymentProfileNounce");
 	}
 
 	private static void RunMethod(String methodName) {
@@ -339,6 +340,10 @@ public class SampleCode {
 			break;
 		case "CreateChasePayTransaction":
 			CreateChasePayTransaction.run(apiLoginId, transactionKey, amount);
+			break;
+		case "GetCustomerPaymentProfileNounce":
+			GetCustomerPaymentProfileNounce.run(apiLoginId, transactionKey, customerProfileId,
+					customerPaymentProfileId);
 			break;
 		default:
 			ShowUsage();
