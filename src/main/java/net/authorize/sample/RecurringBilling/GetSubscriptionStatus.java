@@ -1,9 +1,7 @@
 package net.authorize.sample.RecurringBilling;
 
-import net.authorize.data.arb.*;
 import java.math.BigDecimal;
 import net.authorize.Environment;
-import net.authorize.data.Customer;
 import net.authorize.api.contract.v1.*;
 import net.authorize.api.controller.base.ApiOperationBase;
 import net.authorize.api.controller.ARBGetSubscriptionStatusController;
@@ -12,9 +10,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class GetSubscriptionStatus {
 
 	public static ANetApiResponse run(String apiLoginId, String transactionKey, String subscriptionId) {
-		//Common code to set for all requests
+		// Common code to set for all requests
 		ApiOperationBase.setEnvironment(Environment.SANDBOX);
-		MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
+		MerchantAuthenticationType merchantAuthenticationType = new MerchantAuthenticationType();
 		merchantAuthenticationType.setName(apiLoginId);
 		merchantAuthenticationType.setTransactionKey(transactionKey);
 		ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
@@ -24,16 +22,14 @@ public class GetSubscriptionStatus {
 		ARBGetSubscriptionStatusController controller = new ARBGetSubscriptionStatusController(apiRequest);
 		controller.execute();
 		ARBGetSubscriptionStatusResponse response = controller.getApiResponse();
-		if (response!=null) {
+		if (response != null) {
 
 			if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
 
 				System.out.println(response.getStatus());
 				System.out.println(response.getMessages().getMessage().get(0).getCode());
 				System.out.println(response.getMessages().getMessage().get(0).getText());
-			}
-			else
-			{
+			} else {
 				System.out.println("Failed to update Subscription:  " + response.getMessages().getResultCode());
 			}
 		}
