@@ -4,16 +4,8 @@ import net.authorize.Environment;
 import net.authorize.api.contract.v1.*;
 
 import net.authorize.api.contract.v1.MerchantAuthenticationType;
-import net.authorize.api.controller.base.ApiOperationBase;
-
-import net.authorize.Transaction;
-import net.authorize.api.controller.CreateCustomerProfileController;
-import net.authorize.api.controller.CreateCustomerProfileFromTransactionController;
 import net.authorize.api.controller.CreateCustomerPaymentProfileController;
 import net.authorize.api.controller.base.ApiOperationBase;
-import net.authorize.cim.Result;
-import net.authorize.cim.TransactionType;
-import net.authorize.cim.ValidationModeType;
 
 //author @krgupta
 public class CreateCustomerPaymentProfile {
