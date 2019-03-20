@@ -2,7 +2,6 @@ package net.authorize.sample.MobileInAppTransactions;
 
 import java.math.BigDecimal;
 import net.authorize.Environment;
-import net.authorize.TransactionType;
 import net.authorize.api.contract.v1.*;
 import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;
