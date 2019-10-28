@@ -34,14 +34,14 @@ Running SampleCode without a parameter will give you the list of sample names.
 
 Please set the JAVA environment proxy using a similar code :
 ```
-    System.setProperty("https.proxyUse", "true");
-    System.setProperty("https.proxyHost", "127.0.0.1");
-    System.setProperty("https.proxyPort", "3128");
+    System.setProperty(Constants.HTTPS_USE_PROXY, "true");
+	System.setProperty(Constants.HTTPS_PROXY_HOST, "127.0.0.1");
+	System.setProperty(Constants.HTTPS_PROXY_PORT, "8888");
 ```
 **For using proxy authentication**
 
 Please set the JAVA environment proxy credentials using a similar code :
 ```
-    System.setProperty("https.proxyUserName", "exampleUsername");
-    System.setProperty("https.proxyPassword", "examplePassword");
+    System.setProperty(Constants.HTTPS_PROXY_USERNAME, "exampleUsername");
+    System.setProperty(Constants.HTTPS_PROXY_PASSWORD, "examplePassword");
 ```

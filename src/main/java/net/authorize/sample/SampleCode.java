@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import net.authorize.sample.VisaCheckout.*;
+import net.authorize.util.Constants;
 import net.authorize.sample.PaymentTransactions.*;
 import net.authorize.sample.PayPalExpressCheckout.*;
 import net.authorize.sample.PayPalExpressCheckout.Void;
@@ -152,11 +153,11 @@ public class SampleCode {
 		// Proxy server settings.
 		// Enable these lines for using Sample Codes behind a proxy server
 
-		// System.setProperty("https.proxyUse", "true");
-		// System.setProperty("https.proxyHost", "example.proxy.server");
-		// System.setProperty("https.proxyPort", "portNumber");
-		// System.setProperty("https.proxyUserName", "exampleUsername");
-		// System.setProperty("https.proxyPassword", "examplePassword");
+//		 System.setProperty(Constants.HTTPS_USE_PROXY, "true");
+//		 System.setProperty(Constants.HTTPS_PROXY_HOST , "example.proxy.server");
+//		 System.setProperty(Constants.HTTPS_PROXY_PORT, "portNumber");
+//		 System.setProperty(Constants.HTTPS_PROXY_USERNAME, "exampleUsername");
+//		 System.setProperty(Constants.HTTPS_PROXY_PASSWORD, "examplePassword");
 
 		switch (methodName) {
 		case "DecryptVisaCheckoutData":
