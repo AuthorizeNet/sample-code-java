@@ -20,9 +20,9 @@ import net.authorize.api.controller.CreateTransactionController;
 //
 //   Run this sample by doing mvn package,
 //      then
-//            java -jar target/VisaCheckoutTransaction-jar-with-dependencies.jar
+//            java -jar target/CreateVisaSrcTransaction-jar-with-dependencies.jar
 //
-public class CreateVisaCheckoutTransaction {
+public class CreateVisaSrcTransaction {
 
     public static ANetApiResponse run(String apiLoginId, String transactionKey) {
         
