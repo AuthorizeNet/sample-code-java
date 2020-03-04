@@ -68,8 +68,8 @@ public class SampleCode {
 	}
 
 	private static void ShowMethods() {
-		System.out.println("    DecryptVisaCheckoutData");
-		System.out.println("    CreateVisaCheckoutTransaction");
+		System.out.println("    DecryptVisaSrcData");
+		System.out.println("    CreateVisaSrcTransaction");
 		System.out.println("    ChargeCreditCard");
 		System.out.println("    AuthorizeCreditCard");
 		System.out.println("    RefundTransaction");
@@ -160,11 +160,11 @@ public class SampleCode {
 //		 System.setProperty(Constants.HTTPS_PROXY_PASSWORD, "examplePassword");
 
 		switch (methodName) {
-		case "DecryptVisaCheckoutData":
-			DecryptVisaCheckoutData.run(apiLoginId, transactionKey);
+		case "DecryptVisaSrcData":
+			DecryptVisaSrcData.run(apiLoginId, transactionKey);
 			break;
-		case "CreateVisaCheckoutTransaction":
-			CreateVisaCheckoutTransaction.run(apiLoginId, transactionKey);
+		case "CreateVisaSrcTransaction":
+			CreateVisaSrcTransaction.run(apiLoginId, transactionKey);
 			break;
 		case "ChargeCreditCard":
 			ChargeCreditCard.run(apiLoginId, transactionKey, amount);
