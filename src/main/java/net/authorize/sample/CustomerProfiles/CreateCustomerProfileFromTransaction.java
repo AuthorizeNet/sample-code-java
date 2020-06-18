@@ -25,54 +25,77 @@ public class CreateCustomerProfileFromTransaction {
 
 		ApiOperationBase.setEnvironment(Environment.SANDBOX);
 
-        MerchantAuthenticationType merchantAuthenticationType  = new MerchantAuthenticationType() ;
-        merchantAuthenticationType.setName(apiLoginId);
-        merchantAuthenticationType.setTransactionKey(transactionKey);
-        ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
-		
+		MerchantAuthenticationType merchantAuthenticationType = new MerchantAuthenticationType();
+		merchantAuthenticationType.setName(apiLoginId);
+		merchantAuthenticationType.setTransactionKey(transactionKey);
+		ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
+
 		CreditCardType creditCard = new CreditCardType();
 		creditCard.setCardNumber("4111111111111111");
-	    creditCard.setExpirationDate("0621");
-				
+		creditCard.setExpirationDate("0621");
+
 		PaymentType paymentType = new PaymentType();
 		paymentType.setCreditCard(creditCard);
-				
+
 		TransactionRequestType requestInternal = new TransactionRequestType();
 		requestInternal.setTransactionType("authOnlyTransaction");
 		requestInternal.setPayment(paymentType);
 		requestInternal.setAmount(new BigDecimal(amount).setScale(2, RoundingMode.CEILING));
-		
+
 		CustomerDataType customer = new CustomerDataType();
 		customer.setEmail(email);
 		requestInternal.setCustomer(customer);
-				
+
 		CreateTransactionRequest request = new CreateTransactionRequest();
 		request.setTransactionRequest(requestInternal);
-				
+
 		CreateTransactionController controller = new CreateTransactionController(request);
 		controller.execute();
-				
+
 		CreateTransactionResponse response = controller.getApiResponse();
 
 		CustomerProfileBaseType customerProfile = new CustomerProfileBaseType();
 		customerProfile.setMerchantCustomerId("123213");
 		customerProfile.setEmail("johnsnow@castleblack.com");
-		customerProfile.setDescription("This is a sample customer profile");		
-		
+		customerProfile.setDescription("This is a sample customer profile");
+
 		CreateCustomerProfileFromTransactionRequest transaction_request = new CreateCustomerProfileFromTransactionRequest();
-		transaction_request.setTransId(response.getTransactionResponse().getTransId());
-		// You can either specify the customer information in form of customerProfileBaseType object
+		if (response != null)
+			transaction_request.setTransId(response.getTransactionResponse().getTransId());
+		else {
+			ANetApiResponse errorResponse = controller.getErrorResponse();
+			if (errorResponse != null) {
+				System.out.println("Error: " + errorResponse.getMessages().getMessage().get(0).getCode() + " \n"
+						+ errorResponse.getMessages().getMessage().get(0).getText());
+			} else {
+				System.out.println("Failed to get error response");
+			}
+			return errorResponse;
+
+		}
+
+		// You can either specify the customer information in form of
+		// customerProfileBaseType object
 		transaction_request.setCustomer(customerProfile);
-		//  OR   
+		// OR
 		// You can just provide the customer Profile ID
 		// transaction_request.setCustomerProfileId("1232132");
-		
-		CreateCustomerProfileFromTransactionController createProfileController = new CreateCustomerProfileFromTransactionController(transaction_request);
+
+		CreateCustomerProfileFromTransactionController createProfileController = new CreateCustomerProfileFromTransactionController(
+				transaction_request);
 		createProfileController.execute();
 		CreateCustomerProfileResponse customer_response = createProfileController.getApiResponse();
 
 		if (customer_response != null) {
 			System.out.println(transaction_request.getTransId());
+		} else {
+			ANetApiResponse transerrorResponse = controller.getErrorResponse();
+			if (transerrorResponse != null) {
+				System.out.println("Error: " + transerrorResponse.getMessages().getMessage().get(0).getCode() + " \n"
+						+ transerrorResponse.getMessages().getMessage().get(0).getText());
+			} else {
+				System.out.println("Failed to get error response");
+			}
 		}
 		return customer_response;
 	}
