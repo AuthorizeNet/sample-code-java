@@ -40,7 +40,7 @@ public class CreateSubscriptionFromCustomerProfile {
         try {
           XMLGregorianCalendar startDate = DatatypeFactory.newInstance().newXMLGregorianCalendar();
           startDate.setDay(30);
-          startDate.setMonth(8);
+          startDate.setMonth(12);
           startDate.setYear(2020);
           schedule.setStartDate(startDate); //2020-08-30 
         }
