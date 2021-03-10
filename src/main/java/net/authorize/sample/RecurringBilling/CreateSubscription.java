@@ -42,7 +42,7 @@ public class CreateSubscription {
           XMLGregorianCalendar startDate = DatatypeFactory.newInstance().newXMLGregorianCalendar();
           startDate.setDay(30);
           startDate.setMonth(12);
-          startDate.setYear(2020);
+          startDate.setYear(2021);
           schedule.setStartDate(startDate); //2020-08-30 
         }
         catch(Exception e) {
@@ -56,7 +56,7 @@ public class CreateSubscription {
         PaymentType paymentType = new PaymentType();
         CreditCardType creditCard = new CreditCardType();
         creditCard.setCardNumber("4111111111111111");
-        creditCard.setExpirationDate("1220");
+        creditCard.setExpirationDate("1225");
         paymentType.setCreditCard(creditCard);
 
         ARBSubscriptionType arbSubscriptionType = new ARBSubscriptionType();

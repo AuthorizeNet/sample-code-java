@@ -140,13 +140,13 @@ public class SampleCode {
 		// Update the transactionId with which you want to run the sample code
 		String transactionId = "123456";
 
-		String customerProfileId = "36596285";
-		String customerPaymentProfileId = "33086593";
-		String customerAddressId = "1873761911";
+		String customerProfileId = "1929820324";
+		String customerPaymentProfileId = "1841987457";
+		String customerAddressId = "901056173";
 
-		String emailId = "test@test.com";
+		String emailId = "test@test2021.com";
 
-		String subscriptionId = "2925606";
+		String subscriptionId = "326280";
 
 		Double amount = 123.45;
 

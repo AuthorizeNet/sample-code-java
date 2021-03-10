@@ -35,7 +35,7 @@ public class CaptureFundsAuthorizedThroughAnotherChannel {
         
         CreditCardType cc = new CreditCardType();
         cc.setCardNumber("4111111111111111");
-        cc.setExpirationDate("2020-12");
+        cc.setExpirationDate("2035-12");
         
         PaymentType payment = new PaymentType();
         payment.setCreditCard(cc);

@@ -36,7 +36,7 @@ public class CreateChasePayTransaction {
 		PaymentType paymentType = new PaymentType();
 		CreditCardType creditCard = new CreditCardType();
 		creditCard.setCardNumber("4111111111111111");
-		creditCard.setExpirationDate("2020-12");
+		creditCard.setExpirationDate("2035-12");
 		// Set the token specific info
 		creditCard.setIsPaymentToken(true);
 		creditCard.setCryptogram("EjRWeJASNFZ4kBI0VniQEjRWeJA=");

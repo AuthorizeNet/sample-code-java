@@ -19,7 +19,7 @@ public class UpdateSubscription {
         PaymentType paymentType = new PaymentType();
         CreditCardType creditCard = new CreditCardType();
         creditCard.setCardNumber("4111111111111111");
-        creditCard.setExpirationDate("1220");
+        creditCard.setExpirationDate("1230");
         paymentType.setCreditCard(creditCard);
         
         //set profile information

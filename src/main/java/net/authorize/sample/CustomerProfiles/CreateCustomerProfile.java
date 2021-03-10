@@ -20,7 +20,7 @@ public class CreateCustomerProfile {
         // Populate the payment data
         CreditCardType creditCard = new CreditCardType();
         creditCard.setCardNumber("4111111111111111");
-        creditCard.setExpirationDate("1220");
+        creditCard.setExpirationDate("1225");
         PaymentType paymentType = new PaymentType();
         paymentType.setCreditCard(creditCard);
 

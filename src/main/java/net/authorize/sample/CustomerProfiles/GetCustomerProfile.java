@@ -20,7 +20,7 @@ public class GetCustomerProfile {
         ApiOperationBase.setMerchantAuthentication(merchantAuthenticationType);
 
         GetCustomerProfileRequest apiRequest = new GetCustomerProfileRequest();
-        apiRequest.setCustomerProfileId(customerProfileId);
+        apiRequest.setCustomerProfileId("1929820324"); //customerProfileId);
 
         GetCustomerProfileController controller = new GetCustomerProfileController(apiRequest);
         controller.execute();
