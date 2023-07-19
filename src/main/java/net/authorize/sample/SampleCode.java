@@ -83,6 +83,7 @@ public class SampleCode {
 		System.out.println("    CreateAnApplePayTransaction");
 		System.out.println("    CreateAnAndroidPayTransaction");
 		System.out.println("    CreateAnAcceptTransaction");
+		System.out.println("    CreateGooglePayTransaction");
 		System.out.println("    ChargeCustomerProfile");
 		System.out.println("    CreateSubscription");
 		System.out.println("    CreateSubscriptionFromCustomerProfile");
@@ -205,6 +206,8 @@ public class SampleCode {
 		case "CreateAnAcceptTransaction":
 			CreateAnAcceptTransaction.run(apiLoginId, transactionKey);
 			break;
+		case "CreateGooglePayTransaction":
+			CreateGooglePayTransaction.run(apiLoginId, transactionKey, amount);
 		case "ChargeCustomerProfile":
 			ChargeCustomerProfile.run(apiLoginId, transactionKey, customerProfileId, customerPaymentProfileId, amount);
 			break;
