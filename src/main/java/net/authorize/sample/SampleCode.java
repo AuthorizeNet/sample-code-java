@@ -208,6 +208,7 @@ public class SampleCode {
 			break;
 		case "CreateGooglePayTransaction":
 			CreateGooglePayTransaction.run(apiLoginId, transactionKey, amount);
+			break;
 		case "ChargeCustomerProfile":
 			ChargeCustomerProfile.run(apiLoginId, transactionKey, customerProfileId, customerPaymentProfileId, amount);
 			break;

@@ -62,8 +62,7 @@ public class CreateGooglePayTransaction {
 
         CreateTransactionResponse response = controller.getApiResponse();
 
-        if (response!=null) {
-            // If API Response is ok, go ahead and check the transaction response
+        if (response != null) {
             if (response.getMessages().getResultCode() == MessageTypeEnum.OK) {
                 TransactionResponse result = response.getTransactionResponse();
                 if (result.getMessages() != null) {
