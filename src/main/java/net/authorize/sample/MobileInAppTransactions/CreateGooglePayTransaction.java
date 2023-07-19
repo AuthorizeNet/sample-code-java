@@ -53,6 +53,9 @@ public class CreateGooglePayTransaction {
         transactionRequest.setAmount(BigDecimal.valueOf(amount));
         transactionRequest.setTransactionType(TransactionTypeEnum.AUTH_CAPTURE_TRANSACTION.value());
         transactionRequest.setPayment(paymentType);
+        transactionRequest.setLineItems(lineItems);
+        transactionRequest.setTax(tax);
+        transactionRequest.setUserFields(userFields);
 
         CreateTransactionRequest apiRequest = new CreateTransactionRequest();
         apiRequest.setTransactionRequest(transactionRequest);
