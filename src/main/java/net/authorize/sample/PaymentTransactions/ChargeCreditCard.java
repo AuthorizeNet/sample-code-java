@@ -9,7 +9,9 @@ import net.authorize.api.controller.CreateTransactionController;
 import net.authorize.api.controller.base.ApiOperationBase;
 
 public class ChargeCreditCard {
-
+    public static void main(String[] args) {
+        run("5KP3u95bQpv", "346HZ32z3fP4hTG2", 25.00);
+    }
     //
     // Run this sample from command line with:
     //                 java -jar target/ChargeCreditCard-jar-with-dependencies.jar

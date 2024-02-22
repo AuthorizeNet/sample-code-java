@@ -141,9 +141,9 @@ public class SampleCode {
 		// Update the transactionId with which you want to run the sample code
 		String transactionId = "123456";
 
-		String customerProfileId = "1929820324";
-		String customerPaymentProfileId = "1841987457";
-		String customerAddressId = "901056173";
+		String customerProfileId = "918133235";
+		String customerPaymentProfileId = "917585361";
+		String customerAddressId = "918189891";
 
 		String emailId = "test@test2021.com";
 

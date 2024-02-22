@@ -54,5 +54,5 @@ TransactionReporting.GetMerchantDetails	0	1
 MobileInAppTransactions.CreateAnApplePayTransaction	0	0
 MobileInAppTransactions.CreateAnAndroidPayTransaction	0	0
 MobileInAppTransactions.CreateAnAcceptTransaction	0	0
-VisaCheckout.DecryptVisaSrcData	0	1
+VisaCheckout.DecryptVisaSrcData	0	0
 VisaCheckout.CreateVisaSrcTransaction	0	0

@@ -32,7 +32,7 @@ public class CreateCustomerProfileFromTransaction {
 		
 		CreditCardType creditCard = new CreditCardType();
 		creditCard.setCardNumber("4111111111111111");
-	    creditCard.setExpirationDate("0621");
+	    creditCard.setExpirationDate("0635");
 				
 		PaymentType paymentType = new PaymentType();
 		paymentType.setCreditCard(creditCard);

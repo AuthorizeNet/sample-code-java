@@ -38,7 +38,7 @@ public class CreateCustomerPaymentProfile {
 		//credit card details
 		CreditCardType creditCard = new CreditCardType();
 		creditCard.setCardNumber("4111111111111111");
-		creditCard.setExpirationDate("2023-12");
+		creditCard.setExpirationDate("2035-12");
 		creditCard.setCardCode("122");
 
 		CustomerPaymentProfileType profile = new CustomerPaymentProfileType();
