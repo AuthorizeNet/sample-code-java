@@ -92,7 +92,6 @@ public class TestRunner {
 		double d = (double)(1.05 + (450.0 * rgenerator.nextDouble()));
 		DecimalFormat df = new DecimalFormat("#.##");      
 		d = Double.valueOf(df.format(d));
-		System.out.println("AMOUNT : " + d);
 		return d;
 	}
 
@@ -109,8 +108,6 @@ public class TestRunner {
 		int numRetries = 3;
 
 		BufferedReader reader = null;
-
-		System.out.println(System.getProperty("java.class.path"));
 
 		try {
 			reader = new BufferedReader(new FileReader(fileName));
