@@ -183,7 +183,7 @@ public class TestRunner {
 	{
 		String fqClassName = "net.authorize.sample." + className;
 
-		Class classType = null;
+		Class<?> classType = null;
 		try {
 			classType = Class.forName(fqClassName);
 		} catch (ClassNotFoundException e1) {
@@ -193,28 +193,19 @@ public class TestRunner {
 
 		Method runMethod = null;
 		try {
-			runMethod = classType.getMethod("run",String.class, String.class);
-		} catch (NoSuchMethodException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SecurityException e1) {
+			runMethod = classType.getMethod("run", String.class, String.class);
+		} catch (NoSuchMethodException | SecurityException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
-		try {
+        try {
 			return (ANetApiResponse)runMethod.invoke(null, Constants.API_LOGIN_ID, Constants.TRANSACTION_KEY);
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+        return null;
 	}
 
 	public ANetApiResponse TestValidateCustomerPaymentProfile()
